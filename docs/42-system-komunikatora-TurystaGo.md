@@ -1,4 +1,4 @@
-# 41. System komunikatora TurystaGo
+# 42. System komunikatora TurystaGo
 
 1. **Komunikator grupowy** – TurystaGo będzie umożliwiać uczestnikom wycieczki szybką komunikację między sobą.
 
