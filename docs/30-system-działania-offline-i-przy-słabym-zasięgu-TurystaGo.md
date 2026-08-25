@@ -1,4 +1,4 @@
-# 29. System działania offline i przy słabym zasięgu
+# 30. System działania offline i przy słabym zasięgu
 
 1. **Tryb offline** – TurystaGo powinno umożliwiać korzystanie z wybranych funkcji również bez dostępu do internetu.
 
