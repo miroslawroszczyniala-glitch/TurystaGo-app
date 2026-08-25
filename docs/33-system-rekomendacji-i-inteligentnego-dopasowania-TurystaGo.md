@@ -1,4 +1,4 @@
-# 32. System rekomendacji i inteligentnego dopasowania
+# 33. System rekomendacji i inteligentnego dopasowania
 
 1. **Personalizowane rekomendacje** – TurystaGo będzie proponować użytkownikowi atrakcje dopasowane do jego zainteresowań.
 
