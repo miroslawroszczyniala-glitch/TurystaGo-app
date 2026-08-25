@@ -1,4 +1,4 @@
-# 19. System albumu podróżnika i pamiątki z wycieczki
+# 20. System albumu podróżnika i pamiątki z wycieczki
 
 1. **Album podróżnika** – TurystaGo będzie umożliwiać tworzenie osobistego albumu dokumentującego odwiedzane miejsca.
 
