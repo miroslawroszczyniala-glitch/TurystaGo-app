@@ -1,4 +1,4 @@
-# 40. System zwiedzania grupowego
+# 41. System zwiedzania grupowego
 
 1. **Tworzenie grupy** – użytkownik może utworzyć grupę dla rodziny, znajomych, wycieczki szkolnej, autokarowej lub pielgrzymki.
 
