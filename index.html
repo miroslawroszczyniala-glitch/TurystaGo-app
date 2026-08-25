@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TurystaGo</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f5;
+            color: #222;
+            min-height: 100vh;
+        }
+
+        .app {
+            max-width: 480px;
+            min-height: 100vh;
+            margin: 0 auto;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 25px 20px 15px;
+            text-align: center;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #1677c8;
+        }
+
+        .subtitle {
+            margin-top: 6px;
+            font-size: 15px;
+            color: #666;
+        }
+
+        main {
+            flex: 1;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .welcome {
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            font-size: 17px;
+            line-height: 1.5;
+            color: #555;
+            margin-bottom: 35px;
+        }
+
+        .button {
+            width: 100%;
+            border: none;
+            border-radius: 14px;
+            padding: 17px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .primary {
+            background: #1677c8;
+            color: white;
+        }
+
+        .secondary {
+            background: #eaf3fa;
+            color: #1677c8;
+        }
+
+        .meeting {
+            background: #f1f1f1;
+            color: #333;
+        }
+
+        footer {
+            padding: 15px 20px 25px;
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <header>
+        <div class="logo">TurystaGo</div>
+        <div class="subtitle">Twój osobisty przewodnik</div>
+    </header>
+
+    <main>
+
+        <div class="welcome">
+            Witaj w TurystaGo!
+        </div>
+
+        <div class="description">
+            Pokaż nam, dokąd jedziesz,
+            a my podpowiemy Ci,
+            co warto zobaczyć po drodze.
+        </div>
+
+        <button class="button primary">
+            Uruchom
+        </button>
+
+        <button class="button secondary">
+            Aktywuj mnie
+        </button>
+
+        <button class="button meeting">
+            Uruchom zwiedzanie od tego miejsca
+        </button>
+
+    </main>
+
+    <footer>
+        Odkrywaj. Słuchaj. Zwiedzaj.
+    </footer>
+
+</div>
+
+</body>
+</html>
