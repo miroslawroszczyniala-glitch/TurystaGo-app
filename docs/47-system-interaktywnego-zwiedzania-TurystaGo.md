@@ -1,4 +1,4 @@
-# 46. System interaktywnego zwiedzania
+# 47. System interaktywnego zwiedzania
 
 1. **Aktywne zwiedzanie** – TurystaGo będzie umożliwiać użytkownikowi aktywne uczestniczenie w poznawaniu odwiedzanego miejsca.
 
