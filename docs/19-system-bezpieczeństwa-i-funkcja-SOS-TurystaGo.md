@@ -1,4 +1,4 @@
-# 18. System bezpieczeństwa i funkcja SOS
+# 19. System bezpieczeństwa i funkcja SOS
 
 1. **Przycisk SOS** – TurystaGo będzie posiadać łatwo dostępny przycisk SOS przeznaczony do sytuacji awaryjnych.
 
