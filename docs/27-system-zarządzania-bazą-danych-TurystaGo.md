@@ -1,4 +1,4 @@
-# 26. System zarządzania bazą danych
+# 27. System zarządzania bazą danych
 
 1. **Centralna baza danych** – wszystkie obiekty, atrakcje, trasy, opisy, zdjęcia i materiały przewodnika będą przechowywane w uporządkowanej bazie danych TurystaGo.
 
