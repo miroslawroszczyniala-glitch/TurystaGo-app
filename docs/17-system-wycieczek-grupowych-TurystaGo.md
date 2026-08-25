@@ -1,4 +1,4 @@
-# 16. System wycieczek grupowych
+# 17. System wycieczek grupowych
 
 1. **Tworzenie grupy** – użytkownik będzie mógł utworzyć grupę dla rodziny, znajomych, wycieczki szkolnej, pielgrzymki lub zorganizowanej grupy turystycznej.
 
