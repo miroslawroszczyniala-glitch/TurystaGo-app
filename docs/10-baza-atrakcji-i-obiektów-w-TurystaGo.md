@@ -1,4 +1,4 @@
-# Baza atrakcji i obiektów TurystaGo
+# 10. Baza atrakcji i obiektów TurystaGo
 
 ## 1. Cel bazy
 
