@@ -1,4 +1,4 @@
-# 52. System bezpieczeństwa użytkownika
+# 53. System bezpieczeństwa użytkownika
 
 1. **Przycisk SOS** – TurystaGo będzie posiadać funkcję umożliwiającą szybkie wezwanie pomocy w sytuacji zagrożenia.
 
