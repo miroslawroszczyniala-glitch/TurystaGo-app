@@ -1,4 +1,4 @@
-# 28. System bezpieczeństwa danych i prywatności
+# 29. System bezpieczeństwa danych i prywatności
 
 1. **Ochrona danych użytkownika** – TurystaGo powinno zapewniać odpowiednią ochronę danych osobowych oraz informacji zapisanych przez użytkownika.
 
