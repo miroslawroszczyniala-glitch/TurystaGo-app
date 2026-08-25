@@ -1,4 +1,4 @@
-# 23. System podróży i organizacji wyjazdu
+# 24. System podróży i organizacji wyjazdu
 
 1. **Plan podróży** – użytkownik będzie mógł przygotować kompletny plan wyjazdu, obejmujący trasę, miejsca noclegowe, atrakcje i zaplanowane wydarzenia.
 
