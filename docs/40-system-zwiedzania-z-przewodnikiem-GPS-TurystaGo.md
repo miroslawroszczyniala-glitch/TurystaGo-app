@@ -1,4 +1,4 @@
-# 39. System zwiedzania z przewodnikiem GPS
+# 40. System zwiedzania z przewodnikiem GPS
 
 1. **Automatyczne prowadzenie** – TurystaGo będzie wykorzystywać GPS telefonu do prowadzenia użytkownika po zaplanowanej trasie.
 
