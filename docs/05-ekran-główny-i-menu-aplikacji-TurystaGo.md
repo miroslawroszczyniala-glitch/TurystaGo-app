@@ -1,4 +1,4 @@
-# Ekran główny i menu aplikacji TurystaGo
+# 5. Ekran główny i menu aplikacji TurystaGo
 
 ## 1. Założenie ekranu głównego
 
