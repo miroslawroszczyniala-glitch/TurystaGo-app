@@ -1,4 +1,4 @@
-# 17. System komunikacji i powiadomień
+# 18. System komunikacji i powiadomień
 
 1. **Komunikator TurystaGo** – aplikacja będzie posiadała wewnętrzny system komunikacji umożliwiający przesyłanie wiadomości pomiędzy użytkownikami.
 
