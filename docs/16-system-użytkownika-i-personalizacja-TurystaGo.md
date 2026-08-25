@@ -1,4 +1,4 @@
-# 15. System użytkownika i personalizacja
+# 16. System użytkownika i personalizacja
 
 1. **Profil użytkownika** – każdy użytkownik będzie mógł posiadać własny profil w aplikacji TurystaGo.
 
