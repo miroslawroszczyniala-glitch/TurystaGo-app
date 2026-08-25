@@ -1,4 +1,4 @@
-# 12. System przewodnika audio
+# 13. System przewodnika audio
 
 1. **Automatyczny przewodnik** – TurystaGo może pełnić funkcję osobistego przewodnika, przekazując informacje o odwiedzanych miejscach.
 
