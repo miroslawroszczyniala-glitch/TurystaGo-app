@@ -1,4 +1,4 @@
-# 42. System „Zaplanuj zwiedzanie”
+# 43. System „Zaplanuj zwiedzanie”
 
 1. **Główna funkcja planowania** – „Zaplanuj zwiedzanie” będzie jedną z najważniejszych funkcji TurystaGo i będzie dostępna bezpośrednio z głównego menu.
 
