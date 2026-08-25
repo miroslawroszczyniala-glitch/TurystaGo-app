@@ -1,4 +1,4 @@
-# 45. System automatycznego przewodnika audio
+# 46. System automatycznego przewodnika audio
 
 1. **Automatyczne uruchamianie nagrania** – po zbliżeniu się użytkownika do wybranego obiektu TurystaGo może automatycznie rozpocząć odpowiednią opowieść.
 
