@@ -1,4 +1,4 @@
-# 61. Podsumowanie projektu TurystaGo
+# 60. Podsumowanie projektu TurystaGo
 
 1. TurystaGo – projekt aplikacji ma być nowoczesnym przewodnikiem turystycznym wykorzystującym GPS, mapy, bazę obiektów oraz przewodniki audio.
 
