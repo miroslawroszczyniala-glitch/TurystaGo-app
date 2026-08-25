@@ -1,4 +1,4 @@
-# 21. System wydarzeń i atrakcji czasowych
+# 22. System wydarzeń i atrakcji czasowych
 
 1. **Baza wydarzeń** – TurystaGo będzie umożliwiać wyszukiwanie wydarzeń odbywających się w pobliżu użytkownika.
 
