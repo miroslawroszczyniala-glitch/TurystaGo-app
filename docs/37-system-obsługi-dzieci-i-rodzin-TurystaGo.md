@@ -1,4 +1,4 @@
-# 36. System obsługi dzieci i rodzin
+# 37. System obsługi dzieci i rodzin
 
 1. **Atrakcje rodzinne** – TurystaGo będzie posiadać specjalną kategorię miejsc przeznaczonych dla rodzin z dziećmi.
 
