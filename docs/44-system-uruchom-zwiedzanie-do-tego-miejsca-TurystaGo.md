@@ -1,4 +1,4 @@
-# 43. System „Uruchom zwiedzanie od tego miejsca”
+# 44. System „Uruchom zwiedzanie od tego miejsca”
 
 1. **Uruchomienie z aktualnej lokalizacji** – użytkownik będzie mógł rozpocząć zwiedzanie bez wcześniejszego tworzenia pełnego planu.
 
