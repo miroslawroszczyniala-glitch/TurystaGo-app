@@ -1,4 +1,4 @@
-# 20. System opinii, ocen i rekomendacji użytkowników
+# 21. System opinii, ocen i rekomendacji użytkowników
 
 1. **Ocena obiektu** – po odwiedzeniu miejsca użytkownik będzie mógł wystawić ocenę.
 
