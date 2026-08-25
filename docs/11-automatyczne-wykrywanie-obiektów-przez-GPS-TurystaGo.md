@@ -1,4 +1,4 @@
-# 10. Automatyczne wykrywanie obiektów przez GPS
+# 11. Automatyczne wykrywanie obiektów przez GPS
 
 1. **Lokalizacja użytkownika** – aplikacja wykorzystuje GPS telefonu do określenia aktualnej pozycji turysty.
 
