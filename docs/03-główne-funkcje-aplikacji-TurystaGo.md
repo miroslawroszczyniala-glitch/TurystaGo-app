@@ -1,4 +1,4 @@
-# Główne funkcje aplikacji TurystaGo
+# 3. Główne funkcje aplikacji TurystaGo
 
 ## 1. Uruchomienie zwiedzania od aktualnej lokalizacji
 
