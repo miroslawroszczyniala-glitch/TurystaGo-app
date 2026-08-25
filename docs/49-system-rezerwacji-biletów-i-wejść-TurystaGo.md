@@ -1,4 +1,4 @@
-# 48. System rezerwacji, biletów i wejść
+# 49. System rezerwacji, biletów i wejść
 
 1. **Informacje o biletach** – TurystaGo będzie prezentować informacje o biletach do wybranych atrakcji.
 
