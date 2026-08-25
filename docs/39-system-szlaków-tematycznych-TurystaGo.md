@@ -1,4 +1,4 @@
-# 38. System szlaków tematycznych
+# 39. System szlaków tematycznych
 
 1. **Szlaki tematyczne** – TurystaGo będzie umożliwiać tworzenie tras skupionych wokół konkretnego tematu, wydarzenia, osoby lub rodzaju atrakcji.
 
