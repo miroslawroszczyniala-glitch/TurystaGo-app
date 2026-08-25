@@ -1,4 +1,4 @@
-# 44. System „Co warto zobaczyć w pobliżu?”
+# 45. System „Co warto zobaczyć w pobliżu?”
 
 1. **Automatyczne wyszukiwanie** – TurystaGo będzie mogło automatycznie sprawdzić, jakie interesujące miejsca znajdują się w pobliżu użytkownika.
 
