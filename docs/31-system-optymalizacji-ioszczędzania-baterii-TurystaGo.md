@@ -1,4 +1,4 @@
-# 30. System optymalizacji i oszczędzania baterii
+# 31. System optymalizacji i oszczędzania baterii
 
 1. **Optymalizacja GPS** – TurystaGo powinno ograniczać częstotliwość sprawdzania lokalizacji, gdy dokładna pozycja nie jest potrzebna.
 
