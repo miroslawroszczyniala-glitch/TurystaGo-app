@@ -1,4 +1,4 @@
-# 35. System dostępności i udogodnień dla turystów
+# 36. System dostępności i udogodnień dla turystów
 
 1. **Informacje o dostępności** – TurystaGo będzie prezentować informacje o tym, czy dany obiekt jest łatwo dostępny dla różnych grup turystów.
 
