@@ -1,4 +1,4 @@
-# 24. System języków i obsługi turystów zagranicznych
+# 25. System języków i obsługi turystów zagranicznych
 
 1. **Wybór języka** – użytkownik będzie mógł wybrać język aplikacji podczas pierwszego uruchomienia lub później w ustawieniach.
 
