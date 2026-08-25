@@ -1,4 +1,4 @@
-# 59. System wielojęzyczny TurystaGo
+# 58. System wielojęzyczny TurystaGo
 
 1. Wybór języka – użytkownik będzie mógł wybrać język interfejsu aplikacji.
 
