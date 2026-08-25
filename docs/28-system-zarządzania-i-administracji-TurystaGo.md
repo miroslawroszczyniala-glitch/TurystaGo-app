@@ -1,4 +1,4 @@
-# 27. System administracji i zarządzania TurystaGo
+# 28. System administracji i zarządzania TurystaGo
 
 1. **Panel administracyjny** – TurystaGo będzie posiadać specjalny panel przeznaczony do zarządzania aplikacją i jej bazą danych.
 
