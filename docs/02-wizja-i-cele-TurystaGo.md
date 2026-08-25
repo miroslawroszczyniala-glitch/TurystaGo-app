@@ -1,4 +1,4 @@
-# Wizja i cele projektu TurystaGo
+# 2 Wizja i cele projektu TurystaGo
 
 ## 1. Wizja projektu
 
