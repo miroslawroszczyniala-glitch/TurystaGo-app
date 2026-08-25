@@ -1,4 +1,4 @@
-# 51. Model biznesowy i finansowanie TurystaGo
+# 52. Model biznesowy i finansowanie TurystaGo
 
 1. **Wersja bezpłatna** – podstawowe funkcje TurystaGo mogą być dostępne bez opłat, aby umożliwić jak największej liczbie osób korzystanie z aplikacji.
 
