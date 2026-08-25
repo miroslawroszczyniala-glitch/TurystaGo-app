@@ -1,4 +1,4 @@
-# Użytkownicy i sposób korzystania z aplikacji TurystaGo
+# 4. Użytkownicy i sposób korzystania z aplikacji TurystaGo
 
 ## 1. Założenie
 
