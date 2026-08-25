@@ -1,4 +1,4 @@
-# 22. System informacji praktycznych dla turysty
+# 23. System informacji praktycznych dla turysty
 
 1. **Informacje lokalne** – TurystaGo będzie prezentować praktyczne informacje przydatne podczas podróży i zwiedzania.
 
