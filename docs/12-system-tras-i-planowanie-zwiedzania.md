@@ -1,4 +1,4 @@
-# 11. System tras i planowania zwiedzania
+# 12. System tras i planowania zwiedzania
 
 1. **Planowanie zwiedzania** – użytkownik może samodzielnie wybrać obiekty, które chce odwiedzić.
 
