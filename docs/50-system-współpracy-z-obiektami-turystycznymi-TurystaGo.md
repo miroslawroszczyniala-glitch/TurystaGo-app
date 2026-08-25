@@ -1,4 +1,4 @@
-# 49. System współpracy z obiektami turystycznymi
+# 50. System współpracy z obiektami turystycznymi
 
 1. **Profil obiektu** – właściciel lub administrator atrakcji będzie mógł posiadać własny profil w TurystaGo.
 
