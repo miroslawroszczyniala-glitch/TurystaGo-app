@@ -1,4 +1,4 @@
-# System GPS i automatyczne oprowadzanie TurystaGo
+# 6. System GPS i automatyczne oprowadzanie TurystaGo
 
 ## 1. Cel systemu GPS
 
