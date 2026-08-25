@@ -1,4 +1,4 @@
-# 47. System map i nawigacji TurystaGo
+# 48. System map i nawigacji TurystaGo
 
 1. **Interaktywna mapa** – TurystaGo będzie posiadać mapę stanowiącą jeden z podstawowych elementów aplikacji.
 
