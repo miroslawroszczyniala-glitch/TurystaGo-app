@@ -1,4 +1,4 @@
-# Przewodnik audio i sposób oprowadzania TurystaGo
+# 7. Przewodnik audio i sposób oprowadzania TurystaGo
 
 ## 1. Cel przewodnika audio
 
