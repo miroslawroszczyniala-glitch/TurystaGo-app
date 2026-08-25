@@ -1,4 +1,4 @@
-# 50. System promocji i polecania TurystaGo
+# 51. System promocji i polecania TurystaGo
 
 1. **Poleć znajomemu** – użytkownik będzie mógł łatwo polecić TurystaGo rodzinie, znajomym lub innym turystom.
 
