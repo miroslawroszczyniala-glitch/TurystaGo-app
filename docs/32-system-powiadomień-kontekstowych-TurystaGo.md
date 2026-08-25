@@ -1,4 +1,4 @@
-# 31. System powiadomień kontekstowych
+# 32. System powiadomień kontekstowych
 
 1. **Inteligentne powiadomienia** – TurystaGo będzie przekazywać użytkownikowi informacje zależnie od jego aktualnej lokalizacji, czasu i zaplanowanej trasy.
 
