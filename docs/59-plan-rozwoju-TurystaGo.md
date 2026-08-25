@@ -1,4 +1,4 @@
-# 60. Plan rozwoju TurystaGo
+# 59. Plan rozwoju TurystaGo
 
 1. Etap pierwszy – przygotowanie podstawowej wersji aplikacji umożliwiającej korzystanie z GPS, mapy oraz bazy obiektów turystycznych.
 
