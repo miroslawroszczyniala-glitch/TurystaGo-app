@@ -1,4 +1,4 @@
-# Grupy, komunikator i miejsce zbiórki w TurystaGo
+# 9. Grupy, komunikator i miejsce zbiórki w TurystaGo
 
 ## 1. Cel funkcji grupowych
 
