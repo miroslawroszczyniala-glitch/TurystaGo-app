@@ -1,4 +1,4 @@
-# Planowanie zwiedzania w aplikacji TurystaGo
+# 8. Planowanie zwiedzania w aplikacji TurystaGo
 
 ## 1. Cel funkcji
 
