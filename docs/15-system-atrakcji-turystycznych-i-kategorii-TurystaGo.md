@@ -1,4 +1,4 @@
-# 14. System atrakcji turystycznych i kategorii
+# 15. System atrakcji turystycznych i kategorii
 
 1. **Baza atrakcji** – TurystaGo będzie gromadzić informacje o różnych rodzajach atrakcji turystycznych znajdujących się w Polsce i w przyszłości również za granicą.
 
