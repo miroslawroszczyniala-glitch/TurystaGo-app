@@ -1,4 +1,4 @@
-# 34. System kosztów i budżetu podróży
+# 35. System kosztów i budżetu podróży
 
 1. **Budżet wycieczki** – użytkownik będzie mógł określić kwotę, jaką planuje przeznaczyć na całą podróż.
 
