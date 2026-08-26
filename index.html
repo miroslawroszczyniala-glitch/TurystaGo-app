@@ -1,549 +1,1566 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>TurystaGo – Twój osobisty przewodnik</title>
+<title>TurystaGo – Twój osobisty przewodnik GPS</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f1e8;
-      color: #263238;
-    }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    /* ===== GÓRNA CZĘŚĆ ===== */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #eef3f1;
+    color: #18263d;
+}
 
-    .hero {
-      min-height: 560px;
-      position: relative;
-      overflow: hidden;
-      background:
+/* =========================
+   GŁÓWNY EKRAN
+========================= */
+
+.app {
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    margin: auto;
+    background: #f7faf8;
+    overflow: hidden;
+    position: relative;
+}
+
+/* =========================
+   GÓRNY KRAJOBRAZ
+========================= */
+
+.hero {
+    height: 270px;
+    position: relative;
+    overflow: hidden;
+
+    background:
         linear-gradient(
-          rgba(255,255,255,0.35),
-          rgba(255,255,255,0.15)
+            to bottom,
+            rgba(89,157,203,.15),
+            rgba(255,255,255,.1)
         ),
         linear-gradient(
-          180deg,
-          #b9d9ed 0%,
-          #e7f0ed 55%,
-          #d4c59d 100%
+            135deg,
+            #77b6d8,
+            #d9eee9
         );
+}
+
+/* słońce */
+
+.sun {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    background: #fff3b0;
+
+    right: 35px;
+    top: 30px;
+
+    box-shadow:
+        0 0 40px rgba(255,235,130,.8);
+}
+
+/* góry */
+
+.mountain {
+    position: absolute;
+    bottom: 65px;
+
+    width: 0;
+    height: 0;
+
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 150px solid #6f9d91;
+}
+
+.mountain.one {
+    left: -80px;
+}
+
+.mountain.two {
+    left: 130px;
+    bottom: 55px;
+
+    border-left-width: 180px;
+    border-right-width: 180px;
+    border-bottom-width: 175px;
+
+    border-bottom-color: #547f76;
+}
+
+.mountain.three {
+    right: -100px;
+    bottom: 55px;
+
+    border-left-width: 170px;
+    border-right-width: 170px;
+    border-bottom-width: 155px;
+
+    border-bottom-color: #86aaa0;
+}
+
+/* śnieg */
+
+.snow {
+    position: absolute;
+
+    width: 0;
+    height: 0;
+
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 55px solid #ffffff;
+
+    bottom: 155px;
+    left: 205px;
+
+    opacity: .9;
+}
+
+/* dolina */
+
+.valley {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 85px;
+
+    background:
+        linear-gradient(
+            160deg,
+            #4c8c67,
+            #83b76e
+        );
+
+    border-radius: 50% 50% 0 0;
+}
+
+/* =========================
+   ZAMEK
+========================= */
+
+.castle {
+    position: absolute;
+    bottom: 53px;
+    left: 25px;
+
+    width: 105px;
+    height: 65px;
+
+    background: #b8754f;
+
+    border-radius: 3px;
+}
+
+.castle::before,
+.castle::after {
+    content: "";
+
+    position: absolute;
+
+    width: 27px;
+    height: 85px;
+
+    background: #a85e45;
+
+    bottom: 0;
+}
+
+.castle::before {
+    left: -8px;
+}
+
+.castle::after {
+    right: -8px;
+}
+
+.tower-top {
+    position: absolute;
+
+    width: 35px;
+    height: 35px;
+
+    background: #9d5a43;
+
+    top: -25px;
+    left: 35px;
+}
+
+.roof {
+    position: absolute;
+
+    width: 0;
+    height: 0;
+
+    border-left: 23px solid transparent;
+    border-right: 23px solid transparent;
+    border-bottom: 25px solid #743d35;
+
+    top: -25px;
+    left: -6px;
+}
+
+/* =========================
+   KOŚCIÓŁ
+========================= */
+
+.church {
+    position: absolute;
+    bottom: 51px;
+    right: 30px;
+
+    width: 75px;
+    height: 65px;
+
+    background: #c7a67d;
+}
+
+.church-tower {
+    position: absolute;
+
+    width: 28px;
+    height: 90px;
+
+    background: #a98565;
+
+    right: 15px;
+    bottom: 0;
+}
+
+.church-roof {
+    position: absolute;
+
+    width: 0;
+    height: 0;
+
+    border-left: 22px solid transparent;
+    border-right: 22px solid transparent;
+    border-bottom: 35px solid #694c45;
+
+    right: 7px;
+    top: -35px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    padding: 17px 18px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    z-index: 10;
+}
+
+.menu-button,
+.notification {
+    width: 43px;
+    height: 43px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.92);
+
+    font-size: 21px;
+
+    cursor: pointer;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,.12);
+}
+
+.notification {
+    position: relative;
+}
+
+.notification::after {
+    content: "3";
+
+    position: absolute;
+
+    right: -2px;
+    top: -2px;
+
+    width: 19px;
+    height: 19px;
+
+    border-radius: 50%;
+
+    background: #e63e3e;
+    color: white;
+
+    font-size: 11px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+    position: absolute;
+
+    top: 67px;
+    left: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    z-index: 5;
+}
+
+.logo h1 {
+    font-size: 37px;
+    font-weight: 800;
+
+    color: #18263d;
+
+    letter-spacing: -1px;
+}
+
+.logo h1 span {
+    color: #32a967;
+}
+
+.logo p {
+    margin-top: 2px;
+
+    font-size: 13px;
+
+    color: #ffffff;
+
+    font-weight: bold;
+
+    text-shadow: 0 1px 4px rgba(0,0,0,.4);
+}
+
+/* =========================
+   GŁÓWNY PANEL
+========================= */
+
+.content {
+    position: relative;
+
+    margin-top: -25px;
+
+    padding: 0 15px 25px;
+
+    z-index: 20;
+}
+
+/* =========================
+   ROZPOCZNIJ
+========================= */
+
+.start-button {
+    width: 100%;
+
+    min-height: 78px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: #35b86b;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 12px 17px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 18px rgba(0,0,0,.15);
+}
+
+.start-icon {
+    width: 50px;
+    height: 50px;
+
+    background: rgba(255,255,255,.18);
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+
+    margin-right: 13px;
+}
+
+.start-text {
+    flex: 1;
+    text-align: left;
+}
+
+.start-text strong {
+    display: block;
+
+    font-size: 20px;
+}
+
+.start-text small {
+    display: block;
+
+    margin-top: 4px;
+
+    opacity: .9;
+}
+
+.arrow {
+    font-size: 27px;
+}
+
+/* =========================
+   KAFELKI
+========================= */
+
+.features {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 11px;
+
+    margin-top: 13px;
+}
+
+.feature {
+    min-height: 105px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    border: none;
+
+    padding: 14px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 13px rgba(0,0,0,.08);
+
+    position: relative;
+}
+
+.feature-icon {
+    font-size: 29px;
+
+    margin-bottom: 8px;
+}
+
+.feature strong {
+    display: block;
+
+    font-size: 14px;
+
+    line-height: 1.15;
+}
+
+.feature small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #758094;
+
+    font-size: 11px;
+}
+
+/* kolorowe paski */
+
+.feature::after {
+    content: "";
+
+    position: absolute;
+
+    left: 14px;
+    right: 14px;
+
+    bottom: 9px;
+
+    height: 3px;
+
+    border-radius: 5px;
+
+    background: #35b86b;
+}
+
+.feature:nth-child(2)::after {
+    background: #ef9144;
+}
+
+.feature:nth-child(3)::after {
+    background: #4b9bd2;
+}
+
+.feature:nth-child(4)::after {
+    background: #e33d3d;
+}
+
+.feature:nth-child(5)::after {
+    background: #8259c7;
+}
+
+.feature:nth-child(6)::after {
+    background: #d6539b;
+}
+
+/* =========================
+   ZBIÓRKA
+========================= */
+
+.meeting {
+    margin-top: 13px;
+
+    padding: 17px;
+
+    background: white;
+
+    border-radius: 19px;
+
+    display: flex;
+
+    align-items: center;
+
+    box-shadow:
+        0 4px 13px rgba(0,0,0,.08);
+
+    cursor: pointer;
+}
+
+.meeting-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 14px;
+
+    background: #e4f5ec;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+
+    margin-right: 12px;
+}
+
+.meeting-text {
+    flex: 1;
+}
+
+.meeting-text strong {
+    display: block;
+
+    font-size: 14px;
+}
+
+.meeting-text span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #667286;
+
+    font-size: 12px;
+}
+
+.meeting-arrow {
+    font-size: 24px;
+
+    color: #35b86b;
+}
+
+/* =========================
+   SOS
+========================= */
+
+.sos {
+    margin-top: 12px;
+
+    width: 100%;
+
+    border: none;
+
+    border-radius: 19px;
+
+    padding: 16px;
+
+    background: #df3838;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 14px rgba(0,0,0,.12);
+}
+
+.sos-circle {
+    width: 51px;
+    height: 51px;
+
+    border: 3px solid white;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+
+    margin-right: 13px;
+}
+
+.sos-text {
+    text-align: left;
+    flex: 1;
+}
+
+.sos-text strong {
+    display: block;
+
+    font-size: 20px;
+}
+
+.sos-text span {
+    font-size: 12px;
+}
+
+/* =========================
+   HASŁO
+========================= */
+
+.slogan {
+    margin-top: 14px;
+
+    padding: 15px;
+
+    background: #fffdf5;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    border: 1px solid #f0ead5;
+}
+
+.slogan strong {
+    display: block;
+
+    font-size: 15px;
+
+    color: #b48a22;
+}
+
+.slogan span {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 11px;
+
+    color: #6c7480;
+}
+
+/* =========================
+   DOLNA NAWIGACJA
+========================= */
+
+.bottom-nav {
+    position: sticky;
+
+    bottom: 0;
+
+    width: 100%;
+
+    height: 70px;
+
+    background: white;
+
+    border-top: 1px solid #e5e8eb;
+
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    z-index: 50;
+}
+
+.nav-item {
+    border: none;
+
+    background: transparent;
+
+    color: #7a8390;
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+.nav-item div {
+    font-size: 22px;
+
+    margin-bottom: 3px;
+}
+
+.nav-item.active {
+    color: #35a966;
+
+    font-weight: bold;
+}
+
+/* =========================
+   MENU
+========================= */
+
+.menu-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.45);
+
+    z-index: 100;
+
+    display: none;
+}
+
+.menu-overlay.show {
+    display: block;
+}
+
+.side-menu {
+    width: min(88%, 400px);
+
+    height: 100%;
+
+    background: #17243a;
+
+    padding: 22px 16px;
+
+    overflow-y: auto;
+
+    animation: menuOpen .25s ease;
+}
+
+@keyframes menuOpen {
+
+    from {
+        transform: translateX(-100%);
     }
 
-    /* góry */
-    .mountains {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 260px;
-      background: #708878;
-      clip-path: polygon(
-        0 80%,
-        12% 48%,
-        20% 68%,
-        31% 25%,
-        42% 65%,
-        53% 35%,
-        63% 70%,
-        76% 30%,
-        88% 65%,
-        100% 40%,
-        100% 100%,
-        0 100%
-      );
-      opacity: 0.9;
+    to {
+        transform: translateX(0);
     }
 
-    /* zamki */
-    .castle {
-      position: absolute;
-      bottom: 105px;
-      width: 90px;
-      height: 75px;
-      background: #75614f;
-      border-radius: 3px 3px 0 0;
-      opacity: 0.95;
+}
+
+.menu-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 22px;
+}
+
+.menu-top h2 {
+    color: white;
+
+    font-size: 25px;
+}
+
+.close-menu {
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 30px;
+
+    cursor: pointer;
+}
+
+.menu-item {
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    padding: 14px 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    text-align: left;
+
+    border-bottom: 1px solid rgba(255,255,255,.08);
+
+    cursor: pointer;
+}
+
+.menu-icon {
+    width: 34px;
+
+    font-size: 21px;
+
+    margin-right: 8px;
+}
+
+.menu-item span:nth-child(2) {
+    flex: 1;
+}
+
+.menu-arrow {
+    color: #9aa8ba;
+}
+
+/* premium */
+
+.premium {
+    margin: 12px 0;
+
+    background: #6d4fc2;
+
+    border-radius: 13px;
+
+    padding: 15px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (min-width: 700px) {
+
+    .app {
+        margin-top: 20px;
+
+        border-radius: 25px;
+
+        box-shadow:
+            0 10px 40px rgba(0,0,0,.15);
     }
 
-    .castle::before,
-    .castle::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      width: 25px;
-      height: 110px;
-      background: #675545;
-    }
+}
 
-    .castle::before {
-      left: -12px;
-    }
-
-    .castle::after {
-      right: -12px;
-    }
-
-    .castle-one {
-      left: 8%;
-    }
-
-    .castle-two {
-      right: 10%;
-      transform: scale(0.8);
-    }
-
-    /* ===== MENU ===== */
-
-    .topbar {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      padding: 18px 6%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 30px;
-      font-weight: 800;
-      color: #173f55;
-      letter-spacing: -1px;
-    }
-
-    .logo span {
-      color: #c47a32;
-    }
-
-    .menu {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .menu a {
-      text-decoration: none;
-      color: #294756;
-      background: rgba(255,255,255,0.75);
-      padding: 10px 15px;
-      border-radius: 22px;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    /* ===== TREŚĆ HERO ===== */
-
-    .hero-content {
-      position: relative;
-      z-index: 5;
-      text-align: center;
-      max-width: 850px;
-      margin: 55px auto 0;
-      padding: 0 20px;
-    }
-
-    .hero-content h1 {
-      font-size: clamp(38px, 7vw, 72px);
-      color: #173f55;
-      line-height: 1.05;
-      margin-bottom: 18px;
-    }
-
-    .hero-content h1 span {
-      color: #c47a32;
-    }
-
-    .hero-content p {
-      font-size: clamp(18px, 3vw, 25px);
-      line-height: 1.5;
-      color: #263f4b;
-      max-width: 720px;
-      margin: auto;
-    }
-
-    .buttons {
-      margin-top: 30px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-block;
-      text-decoration: none;
-      padding: 16px 27px;
-      border-radius: 30px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-    }
-
-    .btn-main {
-      background: #d17d2e;
-      color: white;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.18);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.88);
-      color: #244a5d;
-    }
-
-    /* ===== SEKCJA FUNKCJI ===== */
-
-    .features {
-      padding: 55px 7%;
-      background: #f8f5ee;
-      text-align: center;
-    }
-
-    .features h2 {
-      color: #244a5d;
-      font-size: 34px;
-      margin-bottom: 12px;
-    }
-
-    .features-intro {
-      max-width: 700px;
-      margin: 0 auto 35px;
-      font-size: 18px;
-      line-height: 1.5;
-      color: #56656b;
-    }
-
-    .feature-grid {
-      max-width: 1100px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .feature {
-      background: white;
-      border-radius: 20px;
-      padding: 28px 20px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-    }
-
-    .feature-icon {
-      font-size: 42px;
-      margin-bottom: 15px;
-    }
-
-    .feature h3 {
-      color: #244a5d;
-      margin-bottom: 10px;
-      font-size: 21px;
-    }
-
-    .feature p {
-      color: #657277;
-      line-height: 1.5;
-    }
-
-    /* ===== JAK TO DZIAŁA ===== */
-
-    .how {
-      padding: 55px 7%;
-      background: #e9dfca;
-      text-align: center;
-    }
-
-    .how h2 {
-      color: #244a5d;
-      font-size: 34px;
-      margin-bottom: 35px;
-    }
-
-    .steps {
-      max-width: 1000px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .step {
-      background: rgba(255,255,255,0.8);
-      padding: 25px;
-      border-radius: 18px;
-    }
-
-    .number {
-      width: 45px;
-      height: 45px;
-      margin: 0 auto 15px;
-      border-radius: 50%;
-      background: #c47a32;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 21px;
-      font-weight: bold;
-    }
-
-    .step h3 {
-      color: #244a5d;
-      margin-bottom: 8px;
-    }
-
-    /* ===== STOPKA ===== */
-
-    footer {
-      background: #244a5d;
-      color: white;
-      text-align: center;
-      padding: 30px 20px;
-    }
-
-    footer strong {
-      font-size: 22px;
-    }
-
-    footer p {
-      margin-top: 8px;
-      opacity: 0.85;
-    }
-
-    /* ===== TELEFON ===== */
-
-    @media (max-width: 700px) {
-
-      .hero {
-        min-height: 620px;
-      }
-
-      .topbar {
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      .menu {
-        justify-content: center;
-      }
-
-      .hero-content {
-        margin-top: 30px;
-      }
-
-      .feature-grid,
-      .steps {
-        grid-template-columns: 1fr;
-      }
-
-      .mountains {
-        height: 210px;
-      }
-
-      .castle {
-        transform: scale(0.7);
-      }
-
-      .castle-two {
-        transform: scale(0.55);
-      }
-    }
-  </style>
+</style>
 </head>
+
 
 <body>
 
-  <!-- ===== START ===== -->
+<div class="app">
 
-  <section class="hero">
+    <!-- =====================
+         GÓRNY KRAJOBRAZ
+    ====================== -->
 
-    <div class="topbar">
+    <section class="hero">
 
-      <div class="logo">
-        Turysta<span>Go</span>
-      </div>
+        <div class="sun"></div>
 
-      <nav class="menu">
-        <a href="#jak-dziala">Jak działa?</a>
-        <a href="#funkcje">Funkcje</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
+        <div class="mountain one"></div>
+        <div class="mountain two"></div>
+        <div class="mountain three"></div>
 
-    </div>
+        <div class="snow"></div>
 
-    <div class="hero-content">
+        <div class="castle">
+            <div class="tower-top">
+                <div class="roof"></div>
+            </div>
+        </div>
 
-      <h1>
-        Zwiedzaj.<br>
-        <span>TurystaGo opowie.</span>
-      </h1>
+        <div class="church">
+            <div class="church-tower">
+                <div class="church-roof"></div>
+            </div>
+        </div>
 
-      <p>
-        Twój osobisty przewodnik, który wie, gdzie jesteś,
-        podpowiada co warto zobaczyć i może opowiedzieć Ci
-        o mijanych miejscach.
-      </p>
-
-      <div class="buttons">
-        <a href="#" class="btn btn-main">
-          ▶ Uruchom TurystaGo
-        </a>
-
-        <a href="#jak-dziala" class="btn btn-secondary">
-          Dowiedz się więcej
-        </a>
-      </div>
-
-    </div>
-
-    <div class="castle castle-one"></div>
-    <div class="castle castle-two"></div>
-    <div class="mountains"></div>
-
-  </section>
+        <div class="valley"></div>
 
 
-  <!-- ===== FUNKCJE ===== -->
+        <!-- HEADER -->
 
-  <section class="features" id="funkcje">
+        <div class="header">
 
-    <h2>TurystaGo jest z Tobą w drodze</h2>
+            <button
+                class="menu-button"
+                onclick="openMenu()"
+            >
+                ☰
+            </button>
 
-    <p class="features-intro">
-      Nie musisz cały czas szukać informacji.
-      Zwiedzaj, patrz i słuchaj – TurystaGo pomaga odkrywać
-      miejsca znajdujące się wokół Ciebie.
-    </p>
+            <button class="notification">
+                🔔
+            </button>
 
-    <div class="feature-grid">
-
-      <div class="feature">
-        <div class="feature-icon">📍</div>
-        <h3>GPS wie, gdzie jesteś</h3>
-        <p>
-          Aplikacja wykorzystuje Twoją lokalizację,
-          aby wskazywać interesujące miejsca w pobliżu.
-        </p>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">🎧</div>
-        <h3>Przewodnik audio</h3>
-        <p>
-          Gdy zbliżasz się do wybranego obiektu,
-          możesz usłyszeć jego historię, ciekawostki
-          i opowieść przewodnika.
-        </p>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">🗺️</div>
-        <h3>Zaplanuj zwiedzanie</h3>
-        <p>
-          Wybierz miejsca, które chcesz zobaczyć,
-          określ czas i rozpocznij własną trasę.
-        </p>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">🔎</div>
-        <h3>Odkrywaj ślady</h3>
-        <p>
-          Podejdź bliżej i odkrywaj szczegóły,
-          których możesz nie zauważyć podczas zwykłego
-          zwiedzania.
-        </p>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">👨‍👩‍👧‍👦</div>
-        <h3>Dla każdego turysty</h3>
-        <p>
-          Zwiedzanie indywidualne, rodzinne,
-          wycieczki szkolne, grupy i wyjazdy autokarowe.
-        </p>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">🚨</div>
-        <h3>Bezpieczeństwo</h3>
-        <p>
-          Funkcje pomocne podczas podróży, informacje
-          alarmowe oraz przydatne wskazówki.
-        </p>
-      </div>
-
-    </div>
-
-  </section>
+        </div>
 
 
-  <!-- ===== JAK DZIAŁA ===== -->
+        <!-- LOGO -->
 
-  <section class="how" id="jak-dziala">
+        <div class="logo">
 
-    <h2>Jak działa TurystaGo?</h2>
+            <h1>
+                Turysta<span>Go</span>
+            </h1>
 
-    <div class="steps">
+            <p>
+                Twój osobisty przewodnik GPS
+            </p>
 
-      <div class="step">
-        <div class="number">1</div>
-        <h3>Wybierz miejsce</h3>
-        <p>
-          Powiedz TurystaGo, dokąd jedziesz
-          albo rozpocznij zwiedzanie w miejscu,
-          w którym właśnie jesteś.
-        </p>
-      </div>
+        </div>
 
-      <div class="step">
-        <div class="number">2</div>
-        <h3>Ruszaj w drogę</h3>
-        <p>
-          Aplikacja wykorzystuje GPS i pomaga
-          Ci odkrywać interesujące miejsca
-          znajdujące się na Twojej trasie.
-        </p>
-      </div>
-
-      <div class="step">
-        <div class="number">3</div>
-        <h3>Słuchaj i odkrywaj</h3>
-        <p>
-          Zbliżasz się do atrakcji –
-          TurystaGo może rozpocząć opowieść
-          i pokazać Ci, co warto zobaczyć.
-        </p>
-      </div>
-
-    </div>
-
-  </section>
+    </section>
 
 
-  <!-- ===== STOPKA ===== -->
+    <!-- =====================
+         TREŚĆ
+    ====================== -->
 
-  <footer id="kontakt">
+    <main class="content">
 
-    <strong>TurystaGo</strong>
 
-    <p>
-      Twój osobisty przewodnik w podróży.
-    </p>
+        <!-- START -->
 
-    <p>
-      © 2026 TurystaGo
-    </p>
+        <button
+            class="start-button"
+            onclick="startTour()"
+        >
 
-  </footer>
+            <div class="start-icon">
+                ➤
+            </div>
+
+            <div class="start-text">
+
+                <strong>
+                    ROZPOCZNIJ ZWIEDZANIE
+                </strong>
+
+                <small>
+                    od Twojej lokalizacji
+                </small>
+
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        </button>
+
+
+        <!-- FUNKCJE -->
+
+        <div class="features">
+
+
+            <button
+                class="feature"
+                onclick="showMessage('Planowanie zwiedzania')"
+            >
+
+                <div class="feature-icon">
+                    🗺️
+                </div>
+
+                <strong>
+                    ZAPLANUJ
+                    ZWIEDZANIE
+                </strong>
+
+                <small>
+                    Stwórz własną trasę
+                </small>
+
+            </button>
+
+
+            <button
+                class="feature"
+                onclick="showMessage('Zabytki i atrakcje')"
+            >
+
+                <div class="feature-icon">
+                    🏰
+                </div>
+
+                <strong>
+                    ZABYTKI
+                    I ATRAKCJE
+                </strong>
+
+                <small>
+                    Odkryj ciekawe miejsca
+                </small>
+
+            </button>
+
+
+            <button
+                class="feature"
+                onclick="showMessage('Przewodnik audio')"
+            >
+
+                <div class="feature-icon">
+                    🎧
+                </div>
+
+                <strong>
+                    PRZEWODNIK
+                    AUDIO
+                </strong>
+
+                <small>
+                    Słuchaj historii miejsc
+                </small>
+
+            </button>
+
+
+            <button
+                class="feature"
+                onclick="showMessage('SOS')"
+            >
+
+                <div class="feature-icon">
+                    🆘
+                </div>
+
+                <strong>
+                    SOS
+                    POMOC
+                </strong>
+
+                <small>
+                    Szybka pomoc
+                </small>
+
+            </button>
+
+
+            <button
+                class="feature"
+                onclick="showMessage('Grupy i komunikator')"
+            >
+
+                <div class="feature-icon">
+                    👥
+                </div>
+
+                <strong>
+                    GRUPY
+                    I KOMUNIKATOR
+                </strong>
+
+                <small>
+                    Podróżuj razem
+                </small>
+
+            </button>
+
+
+            <button
+                class="feature"
+                onclick="showMessage('Album podróży')"
+            >
+
+                <div class="feature-icon">
+                    📸
+                </div>
+
+                <strong>
+                    ALBUM
+                    PODRÓŻY
+                </strong>
+
+                <small>
+                    Twoje wspomnienia
+                </small>
+
+            </button>
+
+        </div>
+
+
+        <!-- ZBIÓRKA -->
+
+        <button
+            class="meeting"
+            onclick="openMeeting()"
+        >
+
+            <div class="meeting-icon">
+                👥
+            </div>
+
+            <div class="meeting-text">
+
+                <strong>
+                    MIEJSCE I CZAS ZBIÓRKI
+                </strong>
+
+                <span id="meetingInfo">
+                    Ustal punkt startu wycieczki
+                </span>
+
+            </div>
+
+            <div class="meeting-arrow">
+                ›
+            </div>
+
+        </button>
+
+
+        <!-- SOS -->
+
+        <button
+            class="sos"
+            onclick="openSOS()"
+        >
+
+            <div class="sos-circle">
+                SOS
+            </div>
+
+            <div class="sos-text">
+
+                <strong>
+                    SZYBKA POMOC
+                </strong>
+
+                <span>
+                    W nagłych sytuacjach
+                </span>
+
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        </button>
+
+
+        <!-- SLOGAN -->
+
+        <div class="slogan">
+
+            <strong>
+                👑 ODKRYWAJ, POZNAWAJ, PRZEŻYWAJ!
+            </strong>
+
+            <span>
+                Twój przewodnik • Twoja podróż • Twoje wspomnienia
+            </span>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================
+         DOLNE MENU
+    ====================== -->
+
+    <nav class="bottom-nav">
+
+        <button class="nav-item active">
+            <div>⌂</div>
+            Home
+        </button>
+
+        <button class="nav-item">
+            <div>🗺️</div>
+            Mapa
+        </button>
+
+        <button class="nav-item">
+            <div>♥</div>
+            Ulubione
+        </button>
+
+        <button class="nav-item">
+            <div>🛣️</div>
+            Trasy
+        </button>
+
+        <button class="nav-item">
+            <div>👤</div>
+            Profil
+        </button>
+
+    </nav>
+
+</div>
+
+
+<!-- =========================
+     MENU BOCZNE
+========================= -->
+
+<div
+    id="menuOverlay"
+    class="menu-overlay"
+    onclick="closeMenu(event)"
+>
+
+    <aside class="side-menu">
+
+
+        <div class="menu-top">
+
+            <h2>
+                MENU
+            </h2>
+
+            <button
+                class="close-menu"
+                onclick="closeMenu()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <button class="menu-item">
+            <span class="menu-icon">🗺️</span>
+            <span>
+                ZAPLANUJ ZWIEDZANIE
+            </span>
+            <span class="menu-arrow">›</span>
+        </button>
+
+
+        <button class="menu-item">
+            <span class="menu-icon">🏛️</span>
+            <span>Zabytki</span>
+            <span class="menu-arrow">›</span>
+        </button>
+
+
+        <button class="menu-item">
+            <span class="menu-icon">⛪</span>
+            <span>Kościoły</span>
+            <span class="menu-arrow">›</span>
+        </button>
+
+
+        <button class="menu-item">
+            <span class="menu-icon">🏰</span>
+            <span>Zamki i pałace</span>
+            <span class="menu-arrow">›</span>
+        </button>
+
+
+        <button class="menu-item">
+            <span class="menu-icon">🖼️</span>
+            <span>Muzea</span>
+            <span class="menu-arrow">›</span>
+        </button>
+
+
+        <button class="menu-item">
+            <span class="menu-icon">📍</span>
+            <span>Najbliższe miejsca</span>
+            <span class="menu-arrow">›</span>
+        </button>
+
+
+        <button class="menu-item">
+            <span class="menu-icon">⭐</span>
+            <span>Sławni mieszkańcy</span>
+            <span class="menu-arrow">›</span>
+        </button>
+
+
+        <button class="menu-item">
+            <span class="menu-icon">🎧</span>
+            <span>Audio przewodnik</span>
+            <span class="menu-arrow">›</span>
+        </button>
+
+
+        <button class="menu-item">
+            <span class="menu-icon">🚌</span>
+            <span>Tryb wycieczki / autokaru</span>
+            <span class="menu-arrow">›</span>
+        </button>
+
+
+        <button class="menu-item">
+            <span class="menu-icon">🚶</span>
+            <span>Zwiedzanie piesze</span>
+            <span class="menu-arrow">›</span>
+        </button>
+
+
+        <button
+            class="menu-item"
+            onclick="openMeeting()"
+        >
+            <span class="menu-icon">👥</span>
+            <span>Miejsce i czas zbiórki</span>
+            <span class="menu-arrow">›</span>
+        </button>
+
+
+        <button class="menu-item">
+            <span class="menu-icon">⚠️</span>
+            <span>Zagrożenia i utrudnienia</span>
+            <span class="menu-arrow">›</span>
+        </button>
+
+
+        <button
+            class="menu-item"
+            onclick="openSOS()"
+        >
+            <span class="menu-icon">🆘</span>
+            <span>SOS</span>
+            <span class="menu-arrow">›</span>
+        </button>
+
+
+        <div class="premium">
+
+            ⭐ <strong>
+                PREMIUM
+            </strong>
+
+        </div>
+
+
+        <button class="menu-item">
+
+            <span class="menu-icon">
+                🎁
+            </span>
+
+            <span>
+                Poleć znajomemu
+                <small>
+                    24 h Premium GRATIS
+                </small>
+            </span>
+
+            <span class="menu-arrow">
+                ›
+            </span>
+
+        </button>
+
+
+        <button class="menu-item">
+
+            <span class="menu-icon">
+                🌐
+            </span>
+
+            <span>
+                Język
+            </span>
+
+            <span class="menu-arrow">
+                ›
+            </span>
+
+        </button>
+
+
+        <button class="menu-item">
+
+            <span class="menu-icon">
+                ⚙️
+            </span>
+
+            <span>
+                Ustawienia
+            </span>
+
+            <span class="menu-arrow">
+                ›
+            </span>
+
+        </button>
+
+
+        <button class="menu-item">
+
+            <span class="menu-icon">
+                ❓
+            </span>
+
+            <span>
+                Pomoc / O aplikacji
+            </span>
+
+            <span class="menu-arrow">
+                ›
+            </span>
+
+        </button>
+
+    </aside>
+
+</div>
+
+
+<script>
+
+/* =========================
+   MENU
+========================= */
+
+function openMenu() {
+
+    document
+        .getElementById("menuOverlay")
+        .classList.add("show");
+
+}
+
+
+function closeMenu(event) {
+
+    if (
+        !event ||
+        event.target.id === "menuOverlay"
+    ) {
+
+        document
+            .getElementById("menuOverlay")
+            .classList.remove("show");
+
+    }
+
+}
+
+
+/* =========================
+   START ZWIEDZANIA
+========================= */
+
+function startTour() {
+
+    alert(
+        "TurystaGo rozpoczyna zwiedzanie od Twojej lokalizacji."
+    );
+
+}
+
+
+/* =========================
+   ZBIÓRKA
+========================= */
+
+function openMeeting() {
+
+    const place = prompt(
+        "Podaj miejsce zbiórki:",
+        "Plac Zamkowy"
+    );
+
+    if (!place) return;
+
+    const time = prompt(
+        "Podaj godzinę zbiórki:",
+        "17:30"
+    );
+
+    if (!time) return;
+
+    document.getElementById(
+        "meetingInfo"
+    ).textContent =
+        place + " • " + time;
+
+}
+
+
+/* =========================
+   SOS
+========================= */
+
+function openSOS() {
+
+    alert(
+        "SOS – tutaj będzie szybki dostęp do pomocy i numerów alarmowych."
+    );
+
+}
+
+
+/* =========================
+   INFORMACJE
+========================= */
+
+function showMessage(message) {
+
+    alert(
+        "TurystaGo\n\n" + message
+    );
+
+}
+
+</script>
 
 </body>
 </html>
