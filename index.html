@@ -6,98 +6,161 @@
 
     <title>TurystaGo</title>
 
+    <meta name="theme-color" content="#1e7a46">
+
     <style>
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
         }
 
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
             background: #f4f7f5;
-            color: #222;
-            min-height: 100vh;
+            color: #173524;
         }
 
         .app {
             max-width: 480px;
             min-height: 100vh;
-            margin: 0 auto;
+            margin: auto;
             background: white;
-            display: flex;
-            flex-direction: column;
+            position: relative;
         }
 
-        header {
-            background: #ffffff;
-            padding: 25px 20px 15px;
+        .top {
+            background: #1e7a46;
+            color: white;
+            padding: 24px 20px 28px;
             text-align: center;
-            border-bottom: 1px solid #e5e5e5;
         }
 
         .logo {
-            font-size: 32px;
+            font-size: 34px;
             font-weight: bold;
-            color: #1677c8;
+            letter-spacing: 1px;
         }
 
-        .subtitle {
-            margin-top: 6px;
+        .slogan {
+            margin-top: 8px;
             font-size: 15px;
-            color: #666;
-        }
-
-        main {
-            flex: 1;
-            padding: 30px 20px;
-            text-align: center;
+            opacity: 0.95;
         }
 
         .welcome {
+            padding: 22px 20px 10px;
+            text-align: center;
+        }
+
+        .welcome h1 {
+            margin: 0 0 10px;
             font-size: 25px;
-            font-weight: bold;
-            margin-bottom: 15px;
         }
 
-        .description {
-            font-size: 17px;
+        .welcome p {
+            margin: 0;
+            color: #607064;
             line-height: 1.5;
-            color: #555;
-            margin-bottom: 35px;
         }
 
-        .button {
+        .buttons {
+            padding: 18px 20px 30px;
+        }
+
+        button {
             width: 100%;
             border: none;
             border-radius: 14px;
-            padding: 17px;
-            margin-bottom: 15px;
-            font-size: 18px;
+            padding: 17px 15px;
+            margin-bottom: 12px;
+            font-size: 17px;
             font-weight: bold;
             cursor: pointer;
         }
 
         .primary {
-            background: #1677c8;
+            background: #1e7a46;
             color: white;
         }
 
         .secondary {
-            background: #eaf3fa;
-            color: #1677c8;
+            background: #e8f2ec;
+            color: #1e7a46;
         }
 
         .meeting {
-            background: #f1f1f1;
-            color: #333;
+            background: #fff1c7;
+            color: #795d00;
         }
 
-        footer {
-            padding: 15px 20px 25px;
+        .sos {
+            background: #d92d20;
+            color: white;
+        }
+
+        .info {
+            margin: 0 20px 25px;
+            padding: 16px;
+            border-radius: 14px;
+            background: #f1f5f2;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .menu {
+            border-top: 1px solid #e5e9e6;
+            padding: 15px 20px 30px;
+        }
+
+        .menu h2 {
+            font-size: 19px;
+            margin: 5px 0 15px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #edf0ee;
+            font-size: 16px;
+        }
+
+        .icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: #e8f2ec;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 13px;
+            font-size: 22px;
+        }
+
+        .footer {
             text-align: center;
-            font-size: 13px;
-            color: #888;
+            color: #8a948d;
+            font-size: 12px;
+            padding: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .screen {
+            padding: 25px 20px;
+        }
+
+        .back {
+            background: #e8f2ec;
+            color: #1e7a46;
+            margin-bottom: 20px;
+        }
+
+        .screen h2 {
+            font-size: 25px;
+            margin-top: 0;
         }
     </style>
 </head>
@@ -106,42 +169,182 @@
 
 <div class="app">
 
-    <header>
+    <header class="top">
         <div class="logo">TurystaGo</div>
-        <div class="subtitle">Twój osobisty przewodnik</div>
+        <div class="slogan">Twój osobisty przewodnik w podróży</div>
     </header>
 
-    <main>
+    <main id="home">
 
-        <div class="welcome">
-            Witaj w TurystaGo!
+        <section class="welcome">
+            <h1>Witaj w TurystaGo!</h1>
+
+            <p>
+                Pokaż nam, dokąd jedziesz,
+                a my podpowiemy, co warto zobaczyć po drodze.
+            </p>
+        </section>
+
+        <section class="buttons">
+
+            <button class="primary" onclick="startTour()">
+                ▶ Uruchom zwiedzanie
+            </button>
+
+            <button class="secondary" onclick="planTour()">
+                🗺 Zaplanuj zwiedzanie
+            </button>
+
+            <button class="secondary" onclick="startHere()">
+                📍 Uruchom zwiedzanie od tego miejsca
+            </button>
+
+            <button class="meeting" onclick="meetingPoint()">
+                📅 Miejsce i czas zbiórki
+            </button>
+
+            <button class="sos" onclick="sos()">
+                🆘 SOS
+            </button>
+
+        </section>
+
+        <div class="info">
+            <strong>TurystaGo działa z Tobą w drodze.</strong><br>
+            GPS może wykrywać interesujące miejsca w pobliżu
+            i uruchamiać odpowiednie informacje oraz opowieści audio.
         </div>
 
-        <div class="description">
-            Pokaż nam, dokąd jedziesz,
-            a my podpowiemy Ci,
-            co warto zobaczyć po drodze.
+        <section class="menu">
+
+            <h2>Menu TurystaGo</h2>
+
+            <div class="menu-item" onclick="showMessage('Atrakcje')">
+                <div class="icon">🏛️</div>
+                <div>Atrakcje i ciekawe miejsca</div>
+            </div>
+
+            <div class="menu-item" onclick="showMessage('Przewodnik audio')">
+                <div class="icon">🎧</div>
+                <div>Przewodnik audio</div>
+            </div>
+
+            <div class="menu-item" onclick="showMessage('Mapa')">
+                <div class="icon">🗺️</div>
+                <div>Mapa i moja lokalizacja</div>
+            </div>
+
+            <div class="menu-item" onclick="showMessage('Sławni mieszkańcy')">
+                <div class="icon">⭐</div>
+                <div>Sławni mieszkańcy</div>
+            </div>
+
+            <div class="menu-item" onclick="showMessage('Ślady przodków')">
+                <div class="icon">🌳</div>
+                <div>Ślady przodków</div>
+            </div>
+
+            <div class="menu-item" onclick="showMessage('Odkryj ślad')">
+                <div class="icon">🔎</div>
+                <div>Podejdź bliżej / Odkryj ślad</div>
+            </div>
+
+            <div class="menu-item" onclick="showMessage('Grupy')">
+                <div class="icon">👥</div>
+                <div>Grupy i komunikator</div>
+            </div>
+
+        </section>
+
+        <div class="footer">
+            TurystaGo • Twój przewodnik w podróży
         </div>
-
-        <button class="button primary">
-            Uruchom
-        </button>
-
-        <button class="button secondary">
-            Aktywuj mnie
-        </button>
-
-        <button class="button meeting">
-            Uruchom zwiedzanie od tego miejsca
-        </button>
 
     </main>
 
-    <footer>
-        Odkrywaj. Słuchaj. Zwiedzaj.
-    </footer>
+
+    <section id="screen" class="screen hidden">
+
+        <button class="back" onclick="goHome()">
+            ← Wróć
+        </button>
+
+        <h2 id="screenTitle">TurystaGo</h2>
+
+        <p id="screenText">
+            Funkcja TurystaGo zostanie tutaj uruchomiona.
+        </p>
+
+    </section>
 
 </div>
+
+
+<script>
+
+    function showScreen(title, text) {
+        document.getElementById("home").classList.add("hidden");
+        document.getElementById("screen").classList.remove("hidden");
+
+        document.getElementById("screenTitle").textContent = title;
+        document.getElementById("screenText").textContent = text;
+    }
+
+
+    function goHome() {
+        document.getElementById("screen").classList.add("hidden");
+        document.getElementById("home").classList.remove("hidden");
+    }
+
+
+    function startTour() {
+        showScreen(
+            "Uruchom zwiedzanie",
+            "TurystaGo przygotuje zwiedzanie na podstawie Twojej lokalizacji GPS."
+        );
+    }
+
+
+    function planTour() {
+        showScreen(
+            "Zaplanuj zwiedzanie",
+            "Tutaj pojawi się planowanie trasy, czas zwiedzania, budżet oraz wybór atrakcji."
+        );
+    }
+
+
+    function startHere() {
+        showScreen(
+            "Zwiedzanie od tego miejsca",
+            "TurystaGo może rozpocząć zwiedzanie od Twojej aktualnej lokalizacji."
+        );
+    }
+
+
+    function meetingPoint() {
+        showScreen(
+            "Miejsce i czas zbiórki",
+            "Tutaj ustawimy miejsce oraz godzinę zbiórki. W przyszłości aplikacja będzie przypominać o konieczności powrotu."
+        );
+    }
+
+
+    function sos() {
+        showScreen(
+            "SOS",
+            "Tutaj znajdzie się szybki dostęp do numerów alarmowych oraz najważniejszych komunikatów bezpieczeństwa."
+        );
+    }
+
+
+    function showMessage(name) {
+        showScreen(
+            name,
+            "Moduł „" + name + "” będziemy teraz wspólnie budować."
+        );
+    }
+
+</script>
 
 </body>
 </html>
