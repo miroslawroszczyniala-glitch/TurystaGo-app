@@ -1,350 +1,549 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>TurystaGo</title>
+  <title>TurystaGo – Twój osobisty przewodnik</title>
 
-    <meta name="theme-color" content="#1e7a46">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f1e8;
+      color: #263238;
+    }
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f7f5;
-            color: #173524;
-        }
+    /* ===== GÓRNA CZĘŚĆ ===== */
 
-        .app {
-            max-width: 480px;
-            min-height: 100vh;
-            margin: auto;
-            background: white;
-            position: relative;
-        }
+    .hero {
+      min-height: 560px;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(
+          rgba(255,255,255,0.35),
+          rgba(255,255,255,0.15)
+        ),
+        linear-gradient(
+          180deg,
+          #b9d9ed 0%,
+          #e7f0ed 55%,
+          #d4c59d 100%
+        );
+    }
 
-        .top {
-            background: #1e7a46;
-            color: white;
-            padding: 24px 20px 28px;
-            text-align: center;
-        }
+    /* góry */
+    .mountains {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 260px;
+      background: #708878;
+      clip-path: polygon(
+        0 80%,
+        12% 48%,
+        20% 68%,
+        31% 25%,
+        42% 65%,
+        53% 35%,
+        63% 70%,
+        76% 30%,
+        88% 65%,
+        100% 40%,
+        100% 100%,
+        0 100%
+      );
+      opacity: 0.9;
+    }
 
-        .logo {
-            font-size: 34px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
+    /* zamki */
+    .castle {
+      position: absolute;
+      bottom: 105px;
+      width: 90px;
+      height: 75px;
+      background: #75614f;
+      border-radius: 3px 3px 0 0;
+      opacity: 0.95;
+    }
 
-        .slogan {
-            margin-top: 8px;
-            font-size: 15px;
-            opacity: 0.95;
-        }
+    .castle::before,
+    .castle::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      width: 25px;
+      height: 110px;
+      background: #675545;
+    }
 
-        .welcome {
-            padding: 22px 20px 10px;
-            text-align: center;
-        }
+    .castle::before {
+      left: -12px;
+    }
 
-        .welcome h1 {
-            margin: 0 0 10px;
-            font-size: 25px;
-        }
+    .castle::after {
+      right: -12px;
+    }
 
-        .welcome p {
-            margin: 0;
-            color: #607064;
-            line-height: 1.5;
-        }
+    .castle-one {
+      left: 8%;
+    }
 
-        .buttons {
-            padding: 18px 20px 30px;
-        }
+    .castle-two {
+      right: 10%;
+      transform: scale(0.8);
+    }
 
-        button {
-            width: 100%;
-            border: none;
-            border-radius: 14px;
-            padding: 17px 15px;
-            margin-bottom: 12px;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+    /* ===== MENU ===== */
 
-        .primary {
-            background: #1e7a46;
-            color: white;
-        }
+    .topbar {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .secondary {
-            background: #e8f2ec;
-            color: #1e7a46;
-        }
+    .logo {
+      font-size: 30px;
+      font-weight: 800;
+      color: #173f55;
+      letter-spacing: -1px;
+    }
 
-        .meeting {
-            background: #fff1c7;
-            color: #795d00;
-        }
+    .logo span {
+      color: #c47a32;
+    }
 
-        .sos {
-            background: #d92d20;
-            color: white;
-        }
+    .menu {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
-        .info {
-            margin: 0 20px 25px;
-            padding: 16px;
-            border-radius: 14px;
-            background: #f1f5f2;
-            font-size: 14px;
-            line-height: 1.5;
-        }
+    .menu a {
+      text-decoration: none;
+      color: #294756;
+      background: rgba(255,255,255,0.75);
+      padding: 10px 15px;
+      border-radius: 22px;
+      font-weight: bold;
+      font-size: 14px;
+    }
 
-        .menu {
-            border-top: 1px solid #e5e9e6;
-            padding: 15px 20px 30px;
-        }
+    /* ===== TREŚĆ HERO ===== */
 
-        .menu h2 {
-            font-size: 19px;
-            margin: 5px 0 15px;
-        }
+    .hero-content {
+      position: relative;
+      z-index: 5;
+      text-align: center;
+      max-width: 850px;
+      margin: 55px auto 0;
+      padding: 0 20px;
+    }
 
-        .menu-item {
-            display: flex;
-            align-items: center;
-            padding: 14px 0;
-            border-bottom: 1px solid #edf0ee;
-            font-size: 16px;
-        }
+    .hero-content h1 {
+      font-size: clamp(38px, 7vw, 72px);
+      color: #173f55;
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
 
-        .icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: #e8f2ec;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 13px;
-            font-size: 22px;
-        }
+    .hero-content h1 span {
+      color: #c47a32;
+    }
 
-        .footer {
-            text-align: center;
-            color: #8a948d;
-            font-size: 12px;
-            padding: 20px;
-        }
+    .hero-content p {
+      font-size: clamp(18px, 3vw, 25px);
+      line-height: 1.5;
+      color: #263f4b;
+      max-width: 720px;
+      margin: auto;
+    }
 
-        .hidden {
-            display: none;
-        }
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
 
-        .screen {
-            padding: 25px 20px;
-        }
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 16px 27px;
+      border-radius: 30px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+    }
 
-        .back {
-            background: #e8f2ec;
-            color: #1e7a46;
-            margin-bottom: 20px;
-        }
+    .btn-main {
+      background: #d17d2e;
+      color: white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.18);
+    }
 
-        .screen h2 {
-            font-size: 25px;
-            margin-top: 0;
-        }
-    </style>
+    .btn-secondary {
+      background: rgba(255,255,255,0.88);
+      color: #244a5d;
+    }
+
+    /* ===== SEKCJA FUNKCJI ===== */
+
+    .features {
+      padding: 55px 7%;
+      background: #f8f5ee;
+      text-align: center;
+    }
+
+    .features h2 {
+      color: #244a5d;
+      font-size: 34px;
+      margin-bottom: 12px;
+    }
+
+    .features-intro {
+      max-width: 700px;
+      margin: 0 auto 35px;
+      font-size: 18px;
+      line-height: 1.5;
+      color: #56656b;
+    }
+
+    .feature-grid {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature {
+      background: white;
+      border-radius: 20px;
+      padding: 28px 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    .feature-icon {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .feature h3 {
+      color: #244a5d;
+      margin-bottom: 10px;
+      font-size: 21px;
+    }
+
+    .feature p {
+      color: #657277;
+      line-height: 1.5;
+    }
+
+    /* ===== JAK TO DZIAŁA ===== */
+
+    .how {
+      padding: 55px 7%;
+      background: #e9dfca;
+      text-align: center;
+    }
+
+    .how h2 {
+      color: #244a5d;
+      font-size: 34px;
+      margin-bottom: 35px;
+    }
+
+    .steps {
+      max-width: 1000px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .step {
+      background: rgba(255,255,255,0.8);
+      padding: 25px;
+      border-radius: 18px;
+    }
+
+    .number {
+      width: 45px;
+      height: 45px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      background: #c47a32;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .step h3 {
+      color: #244a5d;
+      margin-bottom: 8px;
+    }
+
+    /* ===== STOPKA ===== */
+
+    footer {
+      background: #244a5d;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    footer strong {
+      font-size: 22px;
+    }
+
+    footer p {
+      margin-top: 8px;
+      opacity: 0.85;
+    }
+
+    /* ===== TELEFON ===== */
+
+    @media (max-width: 700px) {
+
+      .hero {
+        min-height: 620px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .menu {
+        justify-content: center;
+      }
+
+      .hero-content {
+        margin-top: 30px;
+      }
+
+      .feature-grid,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .mountains {
+        height: 210px;
+      }
+
+      .castle {
+        transform: scale(0.7);
+      }
+
+      .castle-two {
+        transform: scale(0.55);
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="app">
+  <!-- ===== START ===== -->
 
-    <header class="top">
-        <div class="logo">TurystaGo</div>
-        <div class="slogan">Twój osobisty przewodnik w podróży</div>
-    </header>
+  <section class="hero">
 
-    <main id="home">
+    <div class="topbar">
 
-        <section class="welcome">
-            <h1>Witaj w TurystaGo!</h1>
+      <div class="logo">
+        Turysta<span>Go</span>
+      </div>
 
-            <p>
-                Pokaż nam, dokąd jedziesz,
-                a my podpowiemy, co warto zobaczyć po drodze.
-            </p>
-        </section>
+      <nav class="menu">
+        <a href="#jak-dziala">Jak działa?</a>
+        <a href="#funkcje">Funkcje</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
 
-        <section class="buttons">
+    </div>
 
-            <button class="primary" onclick="startTour()">
-                ▶ Uruchom zwiedzanie
-            </button>
+    <div class="hero-content">
 
-            <button class="secondary" onclick="planTour()">
-                🗺 Zaplanuj zwiedzanie
-            </button>
+      <h1>
+        Zwiedzaj.<br>
+        <span>TurystaGo opowie.</span>
+      </h1>
 
-            <button class="secondary" onclick="startHere()">
-                📍 Uruchom zwiedzanie od tego miejsca
-            </button>
+      <p>
+        Twój osobisty przewodnik, który wie, gdzie jesteś,
+        podpowiada co warto zobaczyć i może opowiedzieć Ci
+        o mijanych miejscach.
+      </p>
 
-            <button class="meeting" onclick="meetingPoint()">
-                📅 Miejsce i czas zbiórki
-            </button>
+      <div class="buttons">
+        <a href="#" class="btn btn-main">
+          ▶ Uruchom TurystaGo
+        </a>
 
-            <button class="sos" onclick="sos()">
-                🆘 SOS
-            </button>
+        <a href="#jak-dziala" class="btn btn-secondary">
+          Dowiedz się więcej
+        </a>
+      </div>
 
-        </section>
+    </div>
 
-        <div class="info">
-            <strong>TurystaGo działa z Tobą w drodze.</strong><br>
-            GPS może wykrywać interesujące miejsca w pobliżu
-            i uruchamiać odpowiednie informacje oraz opowieści audio.
-        </div>
+    <div class="castle castle-one"></div>
+    <div class="castle castle-two"></div>
+    <div class="mountains"></div>
 
-        <section class="menu">
-
-            <h2>Menu TurystaGo</h2>
-
-            <div class="menu-item" onclick="showMessage('Atrakcje')">
-                <div class="icon">🏛️</div>
-                <div>Atrakcje i ciekawe miejsca</div>
-            </div>
-
-            <div class="menu-item" onclick="showMessage('Przewodnik audio')">
-                <div class="icon">🎧</div>
-                <div>Przewodnik audio</div>
-            </div>
-
-            <div class="menu-item" onclick="showMessage('Mapa')">
-                <div class="icon">🗺️</div>
-                <div>Mapa i moja lokalizacja</div>
-            </div>
-
-            <div class="menu-item" onclick="showMessage('Sławni mieszkańcy')">
-                <div class="icon">⭐</div>
-                <div>Sławni mieszkańcy</div>
-            </div>
-
-            <div class="menu-item" onclick="showMessage('Ślady przodków')">
-                <div class="icon">🌳</div>
-                <div>Ślady przodków</div>
-            </div>
-
-            <div class="menu-item" onclick="showMessage('Odkryj ślad')">
-                <div class="icon">🔎</div>
-                <div>Podejdź bliżej / Odkryj ślad</div>
-            </div>
-
-            <div class="menu-item" onclick="showMessage('Grupy')">
-                <div class="icon">👥</div>
-                <div>Grupy i komunikator</div>
-            </div>
-
-        </section>
-
-        <div class="footer">
-            TurystaGo • Twój przewodnik w podróży
-        </div>
-
-    </main>
+  </section>
 
 
-    <section id="screen" class="screen hidden">
+  <!-- ===== FUNKCJE ===== -->
 
-        <button class="back" onclick="goHome()">
-            ← Wróć
-        </button>
+  <section class="features" id="funkcje">
 
-        <h2 id="screenTitle">TurystaGo</h2>
+    <h2>TurystaGo jest z Tobą w drodze</h2>
 
-        <p id="screenText">
-            Funkcja TurystaGo zostanie tutaj uruchomiona.
+    <p class="features-intro">
+      Nie musisz cały czas szukać informacji.
+      Zwiedzaj, patrz i słuchaj – TurystaGo pomaga odkrywać
+      miejsca znajdujące się wokół Ciebie.
+    </p>
+
+    <div class="feature-grid">
+
+      <div class="feature">
+        <div class="feature-icon">📍</div>
+        <h3>GPS wie, gdzie jesteś</h3>
+        <p>
+          Aplikacja wykorzystuje Twoją lokalizację,
+          aby wskazywać interesujące miejsca w pobliżu.
         </p>
+      </div>
 
-    </section>
+      <div class="feature">
+        <div class="feature-icon">🎧</div>
+        <h3>Przewodnik audio</h3>
+        <p>
+          Gdy zbliżasz się do wybranego obiektu,
+          możesz usłyszeć jego historię, ciekawostki
+          i opowieść przewodnika.
+        </p>
+      </div>
 
-</div>
+      <div class="feature">
+        <div class="feature-icon">🗺️</div>
+        <h3>Zaplanuj zwiedzanie</h3>
+        <p>
+          Wybierz miejsca, które chcesz zobaczyć,
+          określ czas i rozpocznij własną trasę.
+        </p>
+      </div>
 
+      <div class="feature">
+        <div class="feature-icon">🔎</div>
+        <h3>Odkrywaj ślady</h3>
+        <p>
+          Podejdź bliżej i odkrywaj szczegóły,
+          których możesz nie zauważyć podczas zwykłego
+          zwiedzania.
+        </p>
+      </div>
 
-<script>
+      <div class="feature">
+        <div class="feature-icon">👨‍👩‍👧‍👦</div>
+        <h3>Dla każdego turysty</h3>
+        <p>
+          Zwiedzanie indywidualne, rodzinne,
+          wycieczki szkolne, grupy i wyjazdy autokarowe.
+        </p>
+      </div>
 
-    function showScreen(title, text) {
-        document.getElementById("home").classList.add("hidden");
-        document.getElementById("screen").classList.remove("hidden");
+      <div class="feature">
+        <div class="feature-icon">🚨</div>
+        <h3>Bezpieczeństwo</h3>
+        <p>
+          Funkcje pomocne podczas podróży, informacje
+          alarmowe oraz przydatne wskazówki.
+        </p>
+      </div>
 
-        document.getElementById("screenTitle").textContent = title;
-        document.getElementById("screenText").textContent = text;
-    }
+    </div>
 
-
-    function goHome() {
-        document.getElementById("screen").classList.add("hidden");
-        document.getElementById("home").classList.remove("hidden");
-    }
-
-
-    function startTour() {
-        showScreen(
-            "Uruchom zwiedzanie",
-            "TurystaGo przygotuje zwiedzanie na podstawie Twojej lokalizacji GPS."
-        );
-    }
-
-
-    function planTour() {
-        showScreen(
-            "Zaplanuj zwiedzanie",
-            "Tutaj pojawi się planowanie trasy, czas zwiedzania, budżet oraz wybór atrakcji."
-        );
-    }
-
-
-    function startHere() {
-        showScreen(
-            "Zwiedzanie od tego miejsca",
-            "TurystaGo może rozpocząć zwiedzanie od Twojej aktualnej lokalizacji."
-        );
-    }
-
-
-    function meetingPoint() {
-        showScreen(
-            "Miejsce i czas zbiórki",
-            "Tutaj ustawimy miejsce oraz godzinę zbiórki. W przyszłości aplikacja będzie przypominać o konieczności powrotu."
-        );
-    }
-
-
-    function sos() {
-        showScreen(
-            "SOS",
-            "Tutaj znajdzie się szybki dostęp do numerów alarmowych oraz najważniejszych komunikatów bezpieczeństwa."
-        );
-    }
+  </section>
 
 
-    function showMessage(name) {
-        showScreen(
-            name,
-            "Moduł „" + name + "” będziemy teraz wspólnie budować."
-        );
-    }
+  <!-- ===== JAK DZIAŁA ===== -->
 
-</script>
+  <section class="how" id="jak-dziala">
+
+    <h2>Jak działa TurystaGo?</h2>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="number">1</div>
+        <h3>Wybierz miejsce</h3>
+        <p>
+          Powiedz TurystaGo, dokąd jedziesz
+          albo rozpocznij zwiedzanie w miejscu,
+          w którym właśnie jesteś.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="number">2</div>
+        <h3>Ruszaj w drogę</h3>
+        <p>
+          Aplikacja wykorzystuje GPS i pomaga
+          Ci odkrywać interesujące miejsca
+          znajdujące się na Twojej trasie.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="number">3</div>
+        <h3>Słuchaj i odkrywaj</h3>
+        <p>
+          Zbliżasz się do atrakcji –
+          TurystaGo może rozpocząć opowieść
+          i pokazać Ci, co warto zobaczyć.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===== STOPKA ===== -->
+
+  <footer id="kontakt">
+
+    <strong>TurystaGo</strong>
+
+    <p>
+      Twój osobisty przewodnik w podróży.
+    </p>
+
+    <p>
+      © 2026 TurystaGo
+    </p>
+
+  </footer>
 
 </body>
 </html>
