@@ -1,115 +1,1447 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#ffffff">
-<title>TurystaGo — Start 1:1</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>TurystaGo</title>
+
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;background:#111;font-family:Arial,sans-serif}
-body{display:flex;justify-content:center;align-items:flex-start}
-.app{
-  position:relative;
-  width:min(100vw,430px);
-  aspect-ratio:719/1536;
-  max-height:100vh;
-  overflow:hidden;
-  background:#fff;
-}
-.screen{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  display:block;
-  object-fit:fill;
+
+* {
+    box-sizing: border-box;
 }
 
-/* Przezroczyste pola aktywne — wygląd pozostaje dokładnie jak na projekcie. */
-.hotspot{
-  position:absolute;
-  border:0;
-  background:transparent;
-  cursor:pointer;
-  padding:0;
-}
-.hotspot:focus-visible{
-  outline:3px solid #63c20b;
-  outline-offset:-3px;
-  border-radius:20px;
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: #111;
+    font-family: Arial, sans-serif;
 }
 
-/* Górne elementy */
-.menu{left:4%;top:6.4%;width:9%;height:5%}
-.notifications{right:4%;top:6%;width:9%;height:5%}
-
-/* Główny przycisk */
-.start-tour{left:4.5%;top:38.1%;width:91%;height:7.5%}
-
-/* 8 kafelków */
-.plan{left:4.5%;top:46.3%;width:21.5%;height:11.2%}
-.attractions{left:27.3%;top:46.3%;width:21.5%;height:11.2%}
-.audio{left:50.3%;top:46.3%;width:21.5%;height:11.2%}
-.sos{left:73%;top:46.3%;width:22%;height:11.2%}
-
-.groups{left:4.5%;top:58.2%;width:21.5%;height:11.2%}
-.album{left:27.3%;top:58.2%;width:21.5%;height:11.2%}
-.recommend{left:50.3%;top:58.2%;width:21.5%;height:11.2%}
-.more{left:73%;top:58.2%;width:22%;height:11.2%}
-
-/* Najbliższy obiekt i zbiórka */
-.nearest{left:4.5%;top:71%;width:91%;height:11%}
-.meeting{left:4.5%;top:83.3%;width:91%;height:7%}
-
-/* Dolna nawigacja */
-.nav-start{left:2%;bottom:0;width:18%;height:9.5%}
-.nav-map{left:21%;bottom:0;width:18%;height:9.5%}
-.nav-navigate{left:39%;bottom:0;width:22%;height:11%}
-.nav-favourites{left:62%;bottom:0;width:18%;height:9.5%}
-.nav-profile{right:2%;bottom:0;width:18%;height:9.5%}
-
-@media(min-height:900px) and (min-width:431px){
-  .app{height:100vh;width:auto}
+body {
+    display: flex;
+    justify-content: center;
 }
+
+/* GŁÓWNA APLIKACJA */
+
+.app {
+    position: relative;
+    width: min(100vw, 430px);
+    height: 100vh;
+    max-height: 920px;
+    overflow: hidden;
+    background: white;
+}
+
+/* ORYGINALNA GRAFIKA STARTOWA */
+
+.start-image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: fill;
+
+    z-index: 1;
+}
+
+/* PRZEZROCZYSTE PRZYCISKI */
+
+.button {
+    position: absolute;
+
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+
+    z-index: 5;
+}
+
+/* kliknięcie */
+
+.button:active {
+    background: rgba(99,194,11,0.15);
+    border-radius: 20px;
+}
+
+/* GÓRA */
+
+.menu {
+    left: 3%;
+    top: 6%;
+    width: 11%;
+    height: 6%;
+}
+
+.notifications {
+    right: 3%;
+    top: 6%;
+    width: 11%;
+    height: 6%;
+}
+
+/* ROZPOCZNIJ */
+
+.start {
+    left: 4%;
+    top: 37.5%;
+    width: 92%;
+    height: 8%;
+}
+
+/* KAFELKI */
+
+.plan {
+    left: 4%;
+    top: 46%;
+    width: 22%;
+    height: 11.5%;
+}
+
+.attractions {
+    left: 27%;
+    top: 46%;
+    width: 22%;
+    height: 11.5%;
+}
+
+.audio {
+    left: 50%;
+    top: 46%;
+    width: 22%;
+    height: 11.5%;
+}
+
+.sos {
+    left: 73%;
+    top: 46%;
+    width: 23%;
+    height: 11.5%;
+}
+
+.groups {
+    left: 4%;
+    top: 58%;
+    width: 22%;
+    height: 11.5%;
+}
+
+.album {
+    left: 27%;
+    top: 58%;
+    width: 22%;
+    height: 11.5%;
+}
+
+.recommend {
+    left: 50%;
+    top: 58%;
+    width: 22%;
+    height: 11.5%;
+}
+
+.more {
+    left: 73%;
+    top: 58%;
+    width: 23%;
+    height: 11.5%;
+}
+
+/* DALSZE ELEMENTY */
+
+.nearest {
+    left: 4%;
+    top: 70.5%;
+    width: 92%;
+    height: 11%;
+}
+
+.meeting {
+    left: 4%;
+    top: 83%;
+    width: 92%;
+    height: 7%;
+}
+
+/* DOLNE MENU */
+
+.nav-start {
+    left: 0;
+    bottom: 0;
+    width: 20%;
+    height: 10%;
+}
+
+.nav-map {
+    left: 20%;
+    bottom: 0;
+    width: 20%;
+    height: 10%;
+}
+
+.nav-navigate {
+    left: 39%;
+    bottom: 0;
+    width: 22%;
+    height: 12%;
+}
+
+.nav-favourites {
+    left: 60%;
+    bottom: 0;
+    width: 20%;
+    height: 10%;
+}
+
+.nav-profile {
+    right: 0;
+    bottom: 0;
+    width: 20%;
+    height: 10%;
+}
+
+
+/* ========================= */
+/* EKRANY FUNKCJI */
+/* ========================= */
+
+.screen {
+    display: none;
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 20;
+
+    background: #f7fafb;
+
+    overflow-y: auto;
+}
+
+
+/* nagłówek */
+
+.screen-header {
+
+    height: 82px;
+
+    background: white;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 15px;
+
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 10;
+}
+
+
+.back {
+
+    border: none;
+
+    background: none;
+
+    font-size: 40px;
+
+    width: 50px;
+
+    cursor: pointer;
+
+    color: #10233e;
+}
+
+
+.screen-title {
+
+    font-size: 21px;
+
+    font-weight: bold;
+}
+
+
+/* zawartość */
+
+.screen-content {
+
+    padding: 20px;
+}
+
+
+.card {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 18px;
+
+    margin-bottom: 15px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,0.12);
+}
+
+
+.card h2 {
+
+    margin-top: 0;
+
+    color: #4d9e10;
+}
+
+
+.card p {
+
+    line-height: 1.5;
+}
+
+
+/* zielone przyciski */
+
+.action {
+
+    width: 100%;
+
+    padding: 15px;
+
+    margin-top: 10px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: #63c20b;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* mapa */
+
+.map {
+
+    height: 300px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #d7ecc7,
+            #f1e9c9
+        );
+
+    position: relative;
+}
+
+
+.map-pin {
+
+    position: absolute;
+
+    left: 46%;
+
+    top: 40%;
+
+    font-size: 50px;
+}
+
+
+/* status GPS */
+
+.gps-status {
+
+    padding: 14px;
+
+    background: #eaf7df;
+
+    color: #43870a;
+
+    border-radius: 12px;
+
+    font-weight: bold;
+}
+
 </style>
 </head>
+
+
 <body>
-<main class="app" aria-label="TurystaGo — ekran startowy">
-  <img class="screen" src="turystago-start.png" alt="TurystaGo — ekran startowy">
 
-  <button class="hotspot menu" aria-label="Menu" onclick="openModule('Menu')"></button>
-  <button class="hotspot notifications" aria-label="Powiadomienia" onclick="openModule('Powiadomienia')"></button>
 
-  <button class="hotspot start-tour" aria-label="Rozpocznij zwiedzanie" onclick="startTour()"></button>
+<div class="app">
 
-  <button class="hotspot plan" aria-label="Zaplanuj zwiedzanie" onclick="openModule('Zaplanuj zwiedzanie')"></button>
-  <button class="hotspot attractions" aria-label="Zabytki i atrakcje" onclick="openModule('Zabytki i atrakcje')"></button>
-  <button class="hotspot audio" aria-label="Przewodnik audio" onclick="openModule('Przewodnik audio')"></button>
-  <button class="hotspot sos" aria-label="SOS pomoc" onclick="openModule('SOS pomoc')"></button>
 
-  <button class="hotspot groups" aria-label="Grupy i komunikator" onclick="openModule('Grupy i komunikator')"></button>
-  <button class="hotspot album" aria-label="Album podróży" onclick="openModule('Album podróży')"></button>
-  <button class="hotspot recommend" aria-label="Poleć znajomemu" onclick="openModule('Poleć znajomemu')"></button>
-  <button class="hotspot more" aria-label="Więcej" onclick="openModule('Więcej')"></button>
+<!-- ================================= -->
+<!-- STRONA STARTOWA -->
+<!-- ================================= -->
 
-  <button class="hotspot nearest" aria-label="Najbliższy obiekt" onclick="openModule('Najbliższy obiekt')"></button>
-  <button class="hotspot meeting" aria-label="Miejsce i godzina zbiórki" onclick="openModule('Zbiórka')"></button>
+<img
+    src="turystago-start.png"
+    class="start-image"
+    alt="TurystaGo"
+>
 
-  <button class="hotspot nav-start" aria-label="Start" onclick="openModule('Start')"></button>
-  <button class="hotspot nav-map" aria-label="Mapa" onclick="openModule('Mapa')"></button>
-  <button class="hotspot nav-navigate" aria-label="Nawiguj" onclick="startTour()"></button>
-  <button class="hotspot nav-favourites" aria-label="Ulubione" onclick="openModule('Ulubione')"></button>
-  <button class="hotspot nav-profile" aria-label="Profil" onclick="openModule('Profil')"></button>
-</main>
+
+<!-- MENU -->
+
+<button
+    class="button menu"
+    onclick="openScreen('menu')">
+</button>
+
+
+<!-- POWIADOMIENIA -->
+
+<button
+    class="button notifications"
+    onclick="openScreen('notifications')">
+</button>
+
+
+<!-- ROZPOCZNIJ ZWIEDZANIE -->
+
+<button
+    class="button start"
+    onclick="openScreen('tour')">
+</button>
+
+
+<!-- KAFELKI -->
+
+<button
+    class="button plan"
+    onclick="openScreen('plan')">
+</button>
+
+
+<button
+    class="button attractions"
+    onclick="openScreen('attractions')">
+</button>
+
+
+<button
+    class="button audio"
+    onclick="openScreen('audio')">
+</button>
+
+
+<button
+    class="button sos"
+    onclick="openScreen('sos')">
+</button>
+
+
+<button
+    class="button groups"
+    onclick="openScreen('groups')">
+</button>
+
+
+<button
+    class="button album"
+    onclick="openScreen('album')">
+</button>
+
+
+<button
+    class="button recommend"
+    onclick="openScreen('recommend')">
+</button>
+
+
+<button
+    class="button more"
+    onclick="openScreen('more')">
+</button>
+
+
+<!-- NAJBLIŻSZY OBIEKT -->
+
+<button
+    class="button nearest"
+    onclick="openScreen('nearest')">
+</button>
+
+
+<!-- ZBIÓRKA -->
+
+<button
+    class="button meeting"
+    onclick="openScreen('meeting')">
+</button>
+
+
+<!-- DOLNE MENU -->
+
+<button
+    class="button nav-start"
+    onclick="closeScreens()">
+</button>
+
+
+<button
+    class="button nav-map"
+    onclick="openScreen('map')">
+</button>
+
+
+<button
+    class="button nav-navigate"
+    onclick="openScreen('tour')">
+</button>
+
+
+<button
+    class="button nav-favourites"
+    onclick="openScreen('favourites')">
+</button>
+
+
+<button
+    class="button nav-profile"
+    onclick="openScreen('profile')">
+</button>
+
+
+
+<!-- ================================= -->
+<!-- EKRANY -->
+<!-- ================================= -->
+
+
+<!-- MENU -->
+
+<section
+    id="menu"
+    class="screen">
+
+    <header class="screen-header">
+
+        <button
+            class="back"
+            onclick="closeScreens()">
+            ‹
+        </button>
+
+        <div class="screen-title">
+            Menu TurystaGo
+        </div>
+
+    </header>
+
+
+    <div class="screen-content">
+
+        <div class="card">
+
+            <h2>
+                Menu główne
+            </h2>
+
+            <p>
+                Wybierz funkcję TurystaGo.
+            </p>
+
+
+            <button
+                class="action"
+                onclick="openScreen('plan')">
+
+                ZAPLANUJ ZWIEDZANIE
+
+            </button>
+
+
+            <button
+                class="action"
+                onclick="openScreen('attractions')">
+
+                ZABYTKI I ATRAKCJE
+
+            </button>
+
+
+            <button
+                class="action"
+                onclick="openScreen('audio')">
+
+                PRZEWODNIK AUDIO
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ROZPOCZĘCIE -->
+
+<section
+    id="tour"
+    class="screen">
+
+    <header class="screen-header">
+
+        <button
+            class="back"
+            onclick="closeScreens()">
+            ‹
+        </button>
+
+        <div class="screen-title">
+            Rozpocznij zwiedzanie
+        </div>
+
+    </header>
+
+
+    <div class="screen-content">
+
+        <div class="card">
+
+            <h2>
+                Gotowy do zwiedzania?
+            </h2>
+
+            <p>
+                TurystaGo rozpocznie prowadzenie
+                od Twojej aktualnej lokalizacji.
+            </p>
+
+
+            <div class="gps-status">
+
+                GPS — przygotowany
+
+            </div>
+
+
+            <button
+                class="action"
+                onclick="startGPS()">
+
+                URUCHOM ZWIEDZANIE
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- PLANOWANIE -->
+
+<section
+    id="plan"
+    class="screen">
+
+    <header class="screen-header">
+
+        <button
+            class="back"
+            onclick="closeScreens()">
+            ‹
+        </button>
+
+        <div class="screen-title">
+            Zaplanuj zwiedzanie
+        </div>
+
+    </header>
+
+
+    <div class="screen-content">
+
+        <div class="card">
+
+            <h2>
+                Planowanie zwiedzania
+            </h2>
+
+            <p>
+                Tutaj wybierzesz czas,
+                budżet oraz interesujące
+                Cię miejsca.
+            </p>
+
+
+            <button class="action">
+                DODAJ PUNKT
+            </button>
+
+
+            <button class="action">
+                UTWÓRZ TRASĘ
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ATRAKCJE -->
+
+<section
+    id="attractions"
+    class="screen">
+
+    <header class="screen-header">
+
+        <button
+            class="back"
+            onclick="closeScreens()">
+            ‹
+        </button>
+
+        <div class="screen-title">
+            Zabytki i atrakcje
+        </div>
+
+    </header>
+
+
+    <div class="screen-content">
+
+        <div class="card">
+
+            <h2>
+                Zabytki i atrakcje
+            </h2>
+
+            <p>
+                Lista miejsc znajdujących
+                się w pobliżu.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>
+                Katedra Wniebowzięcia NMP
+            </h2>
+
+            <p>
+                Włocławek
+            </p>
+
+            <p>
+                📍 120 m
+            </p>
+
+
+            <button
+                class="action"
+                onclick="openScreen('audio')">
+
+                POSŁUCHAJ OPOWIEŚCI
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- AUDIO -->
+
+<section
+    id="audio"
+    class="screen">
+
+    <header class="screen-header">
+
+        <button
+            class="back"
+            onclick="closeScreens()">
+            ‹
+        </button>
+
+        <div class="screen-title">
+            Przewodnik audio
+        </div>
+
+    </header>
+
+
+    <div class="screen-content">
+
+        <div class="card">
+
+            <h2>
+                Przewodnik audio
+            </h2>
+
+            <p>
+                Opowieści uruchamiane podczas
+                zwiedzania.
+            </p>
+
+
+            <button
+                class="action"
+                onclick="playAudio()">
+
+                ▶ ODTWÓRZ
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- SOS -->
+
+<section
+    id="sos"
+    class="screen">
+
+    <header class="screen-header">
+
+        <button
+            class="back"
+            onclick="closeScreens()">
+            ‹
+        </button>
+
+        <div class="screen-title">
+            SOS — pomoc
+        </div>
+
+    </header>
+
+
+    <div class="screen-content">
+
+        <div class="card">
+
+            <h2>
+                Pomoc
+            </h2>
+
+            <p>
+                W sytuacji zagrożenia
+                wybierz odpowiednią pomoc.
+            </p>
+
+
+            <button class="action">
+                112 — NUMER ALARMOWY
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- GRUPY -->
+
+<section
+    id="groups"
+    class="screen">
+
+    <header class="screen-header">
+
+        <button
+            class="back"
+            onclick="closeScreens()">
+            ‹
+        </button>
+
+        <div class="screen-title">
+            Grupy i komunikator
+        </div>
+
+    </header>
+
+
+    <div class="screen-content">
+
+        <div class="card">
+
+            <h2>
+                Grupy
+            </h2>
+
+            <p>
+                Twórz grupę i komunikuj
+                się z uczestnikami.
+            </p>
+
+
+            <button class="action">
+                UTWÓRZ GRUPĘ
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ALBUM -->
+
+<section
+    id="album"
+    class="screen">
+
+    <header class="screen-header">
+
+        <button
+            class="back"
+            onclick="closeScreens()">
+            ‹
+        </button>
+
+        <div class="screen-title">
+            Album podróży
+        </div>
+
+    </header>
+
+
+    <div class="screen-content">
+
+        <div class="card">
+
+            <h2>
+                Album podróży
+            </h2>
+
+            <p>
+                Twoje zdjęcia i pamiątki
+                z podróży.
+            </p>
+
+
+            <button class="action">
+                DODAJ ZDJĘCIE
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- POLEĆ -->
+
+<section
+    id="recommend"
+    class="screen">
+
+    <header class="screen-header">
+
+        <button
+            class="back"
+            onclick="closeScreens()">
+            ‹
+        </button>
+
+        <div class="screen-title">
+            Poleć znajomemu
+        </div>
+
+    </header>
+
+
+    <div class="screen-content">
+
+        <div class="card">
+
+            <h2>
+                Poleć TurystaGo
+            </h2>
+
+            <p>
+                Udostępnij aplikację
+                swoim znajomym.
+            </p>
+
+
+            <button
+                class="action"
+                onclick="shareApp()">
+
+                UDOSTĘPNIJ
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- WIĘCEJ -->
+
+<section
+    id="more"
+    class="screen">
+
+    <header class="screen-header">
+
+        <button
+            class="back"
+            onclick="closeScreens()">
+            ‹
+        </button>
+
+        <div class="screen-title">
+            Więcej
+        </div>
+
+    </header>
+
+
+    <div class="screen-content">
+
+        <div class="card">
+
+            <h2>
+                Więcej funkcji
+            </h2>
+
+            <p>
+                Ustawienia, język
+                i pozostałe funkcje aplikacji.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- NAJBLIŻSZY OBIEKT -->
+
+<section
+    id="nearest"
+    class="screen">
+
+    <header class="screen-header">
+
+        <button
+            class="back"
+            onclick="closeScreens()">
+            ‹
+        </button>
+
+        <div class="screen-title">
+            Najbliższy obiekt
+        </div>
+
+    </header>
+
+
+    <div class="screen-content">
+
+        <div class="card">
+
+            <h2>
+                Katedra Wniebowzięcia NMP
+                we Włocławku
+            </h2>
+
+            <p>
+                📍 Odległość: 120 m
+            </p>
+
+
+            <button
+                class="action"
+                onclick="openScreen('audio')">
+
+                POSŁUCHAJ OPOWIEŚCI
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ZBIÓRKA -->
+
+<section
+    id="meeting"
+    class="screen">
+
+    <header class="screen-header">
+
+        <button
+            class="back"
+            onclick="closeScreens()">
+            ‹
+        </button>
+
+        <div class="screen-title">
+            Miejsce zbiórki
+        </div>
+
+    </header>
+
+
+    <div class="screen-content">
+
+        <div class="card">
+
+            <h2>
+                Rynek Główny
+            </h2>
+
+            <p>
+                Godzina zbiórki:
+                <strong>10:00</strong>
+            </p>
+
+            <div class="gps-status">
+
+                Przypomnienie o zbiórce
+                zostanie połączone z GPS.
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- MAPA -->
+
+<section
+    id="map"
+    class="screen">
+
+    <header class="screen-header">
+
+        <button
+            class="back"
+            onclick="closeScreens()">
+            ‹
+        </button>
+
+        <div class="screen-title">
+            Mapa
+        </div>
+
+    </header>
+
+
+    <div class="screen-content">
+
+        <div class="card">
+
+            <h2>
+                Mapa TurystaGo
+            </h2>
+
+
+            <div class="map">
+
+                <div class="map-pin">
+                    📍
+                </div>
+
+            </div>
+
+
+            <button class="action">
+
+                POKAŻ ATRAKCJE W POBLIŻU
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ULUBIONE -->
+
+<section
+    id="favourites"
+    class="screen">
+
+    <header class="screen-header">
+
+        <button
+            class="back"
+            onclick="closeScreens()">
+            ‹
+        </button>
+
+        <div class="screen-title">
+            Ulubione
+        </div>
+
+    </header>
+
+
+    <div class="screen-content">
+
+        <div class="card">
+
+            <h2>
+                Ulubione
+            </h2>
+
+            <p>
+                Nie masz jeszcze zapisanych miejsc.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- PROFIL -->
+
+<section
+    id="profile"
+    class="screen">
+
+    <header class="screen-header">
+
+        <button
+            class="back"
+            onclick="closeScreens()">
+            ‹
+        </button>
+
+        <div class="screen-title">
+            Profil
+        </div>
+
+    </header>
+
+
+    <div class="screen-content">
+
+        <div class="card">
+
+            <h2>
+                Twój profil
+            </h2>
+
+            <p>
+                Tutaj znajdą się ustawienia
+                użytkownika, języka i konta.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</div>
+
 
 <script>
-function openModule(name){
-  console.log("TurystaGo:", name);
-  // Tutaj będziemy kolejno podłączać prawdziwe moduły aplikacji.
+
+
+/* ========================= */
+/* OTWIERANIE EKRANU */
+/* ========================= */
+
+function openScreen(name) {
+
+    document
+        .querySelectorAll('.screen')
+        .forEach(function(screen) {
+
+            screen.style.display = 'none';
+
+        });
+
+
+    const screen =
+        document.getElementById(name);
+
+
+    if (screen) {
+
+        screen.style.display = 'block';
+
+    }
+
 }
-function startTour(){
-  console.log("TurystaGo: rozpoczęto zwiedzanie od bieżącej lokalizacji");
-  // Tutaj później podłączymy GPS i właściwy moduł zwiedzania.
+
+
+/* ========================= */
+/* POWRÓT NA START */
+/* ========================= */
+
+function closeScreens() {
+
+    document
+        .querySelectorAll('.screen')
+        .forEach(function(screen) {
+
+            screen.style.display = 'none';
+
+        });
+
 }
+
+
+/* ========================= */
+/* GPS */
+/* ========================= */
+
+function startGPS() {
+
+    if (!navigator.geolocation) {
+
+        alert(
+            'Twoje urządzenie nie obsługuje GPS.'
+        );
+
+        return;
+
+    }
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            alert(
+                'GPS działa!\n\n' +
+                'Szerokość: ' +
+                position.coords.latitude +
+                '\nDługość: ' +
+                position.coords.longitude
+            );
+
+        },
+
+        function() {
+
+            alert(
+                'Nie udało się pobrać lokalizacji. ' +
+                'Sprawdź, czy GPS jest włączony.'
+            );
+
+        }
+
+    );
+
+}
+
+
+/* ========================= */
+/* AUDIO */
+/* ========================= */
+
+function playAudio() {
+
+    alert(
+        'Przewodnik audio.\n\n' +
+        'W następnym etapie podłączymy tutaj ' +
+        'prawdziwe nagrania TurystaGo.'
+    );
+
+}
+
+
+/* ========================= */
+/* UDOSTĘPNIANIE */
+/* ========================= */
+
+function shareApp() {
+
+    if (navigator.share) {
+
+        navigator.share({
+
+            title: 'TurystaGo',
+
+            text:
+                'Poznaj TurystaGo — ' +
+                'Twojego osobistego przewodnika GPS.'
+
+        });
+
+    } else {
+
+        alert(
+            'Funkcja udostępniania jest gotowa. ' +
+            'Po podłączeniu właściwej domeny ' +
+            'dodamy docelowy link TurystaGo.'
+        );
+
+    }
+
+}
+
 </script>
+
 </body>
 </html>
