@@ -1,13 +1,32 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>TurystaGo</title>
 
+<!-- =========================================
+     LEAFLET – MAPA
+     ========================================= -->
+
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+
 <style>
+
+/* =========================================
+   PODSTAWOWE
+   ========================================= */
 
 * {
     box-sizing: border-box;
@@ -26,21 +45,35 @@ body {
     justify-content: center;
 }
 
-/* GŁÓWNA APLIKACJA */
+
+/* =========================================
+   GŁÓWNA APLIKACJA
+   ========================================= */
 
 .app {
+
     position: relative;
+
     width: min(100vw, 430px);
+
     height: 100vh;
+
     max-height: 920px;
+
     overflow: hidden;
+
     background: white;
 }
 
-/* ORYGINALNA GRAFIKA STARTOWA */
+
+/* =========================================
+   ORYGINALNA STRONA STARTOWA
+   ========================================= */
 
 .start-image {
+
     position: absolute;
+
     inset: 0;
 
     width: 100%;
@@ -51,12 +84,17 @@ body {
     z-index: 1;
 }
 
-/* PRZEZROCZYSTE PRZYCISKI */
+
+/* =========================================
+   PRZEZROCZYSTE PRZYCISKI
+   ========================================= */
 
 .button {
+
     position: absolute;
 
     border: none;
+
     background: transparent;
 
     cursor: pointer;
@@ -64,155 +102,209 @@ body {
     z-index: 5;
 }
 
-/* kliknięcie */
-
 .button:active {
-    background: rgba(99,194,11,0.15);
+
+    background:
+        rgba(99,194,11,0.15);
+
     border-radius: 20px;
 }
 
-/* GÓRA */
+
+/* =========================================
+   GÓRNE PRZYCISKI
+   ========================================= */
 
 .menu {
+
     left: 3%;
     top: 6%;
+
     width: 11%;
     height: 6%;
 }
 
 .notifications {
+
     right: 3%;
     top: 6%;
+
     width: 11%;
     height: 6%;
 }
 
-/* ROZPOCZNIJ */
+
+/* =========================================
+   ROZPOCZNIJ
+   ========================================= */
 
 .start {
+
     left: 4%;
     top: 37.5%;
+
     width: 92%;
     height: 8%;
 }
 
-/* KAFELKI */
+
+/* =========================================
+   KAFELKI
+   ========================================= */
 
 .plan {
+
     left: 4%;
     top: 46%;
+
     width: 22%;
     height: 11.5%;
 }
 
 .attractions {
+
     left: 27%;
     top: 46%;
+
     width: 22%;
     height: 11.5%;
 }
 
 .audio {
+
     left: 50%;
     top: 46%;
+
     width: 22%;
     height: 11.5%;
 }
 
 .sos {
+
     left: 73%;
     top: 46%;
+
     width: 23%;
     height: 11.5%;
 }
 
+
 .groups {
+
     left: 4%;
     top: 58%;
+
     width: 22%;
     height: 11.5%;
 }
 
 .album {
+
     left: 27%;
     top: 58%;
+
     width: 22%;
     height: 11.5%;
 }
 
 .recommend {
+
     left: 50%;
     top: 58%;
+
     width: 22%;
     height: 11.5%;
 }
 
 .more {
+
     left: 73%;
     top: 58%;
+
     width: 23%;
     height: 11.5%;
 }
 
-/* DALSZE ELEMENTY */
+
+/* =========================================
+   DALSZE ELEMENTY
+   ========================================= */
 
 .nearest {
+
     left: 4%;
     top: 70.5%;
+
     width: 92%;
     height: 11%;
 }
 
 .meeting {
+
     left: 4%;
     top: 83%;
+
     width: 92%;
     height: 7%;
 }
 
-/* DOLNE MENU */
+
+/* =========================================
+   DOLNE MENU
+   ========================================= */
 
 .nav-start {
+
     left: 0;
     bottom: 0;
+
     width: 20%;
     height: 10%;
 }
 
 .nav-map {
+
     left: 20%;
     bottom: 0;
+
     width: 20%;
     height: 10%;
 }
 
 .nav-navigate {
+
     left: 39%;
     bottom: 0;
+
     width: 22%;
     height: 12%;
 }
 
 .nav-favourites {
+
     left: 60%;
     bottom: 0;
+
     width: 20%;
     height: 10%;
 }
 
 .nav-profile {
+
     right: 0;
     bottom: 0;
+
     width: 20%;
     height: 10%;
 }
 
 
-/* ========================= */
-/* EKRANY FUNKCJI */
-/* ========================= */
+/* =========================================
+   EKRANY
+   ========================================= */
 
 .screen {
+
     display: none;
 
     position: absolute;
@@ -227,7 +319,9 @@ body {
 }
 
 
-/* nagłówek */
+/* =========================================
+   NAGŁÓWEK EKRANU
+   ========================================= */
 
 .screen-header {
 
@@ -241,7 +335,8 @@ body {
 
     padding: 0 15px;
 
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    box-shadow:
+        0 2px 10px rgba(0,0,0,0.15);
 
     position: sticky;
 
@@ -249,7 +344,6 @@ body {
 
     z-index: 10;
 }
-
 
 .back {
 
@@ -266,7 +360,6 @@ body {
     color: #10233e;
 }
 
-
 .screen-title {
 
     font-size: 21px;
@@ -275,13 +368,14 @@ body {
 }
 
 
-/* zawartość */
+/* =========================================
+   TREŚĆ
+   ========================================= */
 
 .screen-content {
 
     padding: 20px;
 }
-
 
 .card {
 
@@ -297,7 +391,6 @@ body {
         0 3px 12px rgba(0,0,0,0.12);
 }
 
-
 .card h2 {
 
     margin-top: 0;
@@ -305,14 +398,15 @@ body {
     color: #4d9e10;
 }
 
-
 .card p {
 
     line-height: 1.5;
 }
 
 
-/* zielone przyciski */
+/* =========================================
+   PRZYCISKI
+   ========================================= */
 
 .action {
 
@@ -338,38 +432,135 @@ body {
 }
 
 
-/* mapa */
+/* =========================================
+   EKRAN PLANU
+   ========================================= */
 
-.map {
+#plan-screen {
 
-    height: 300px;
-
-    border-radius: 20px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #d7ecc7,
-            #f1e9c9
-        );
-
-    position: relative;
+    background: #f7fbff;
 }
 
 
-.map-pin {
+/* =========================================
+   EKRAN MAPY
+   ========================================= */
 
-    position: absolute;
+#map-screen {
 
-    left: 46%;
+    background: #f7fafb;
+}
 
-    top: 40%;
+#tourist-map {
 
-    font-size: 50px;
+    width: 100%;
+
+    height: 55vh;
+
+    min-height: 350px;
+}
+
+.route-information {
+
+    padding: 18px;
+
+    background: white;
+}
+
+.route-information h3 {
+
+    margin-top: 0;
+
+    color: #176b87;
+}
+
+.route-information li {
+
+    padding: 7px 0;
+}
+
+.tourist-button {
+
+    width: 100%;
+
+    border: none;
+
+    border-radius: 14px;
+
+    padding: 15px;
+
+    margin-top: 10px;
+
+    background: #249447;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.map-back {
+
+    border: none;
+
+    background: white;
+
+    color: #176b87;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    padding: 10px 15px;
+
+    cursor: pointer;
 }
 
 
-/* status GPS */
+/* =========================================
+   MAPA – NAGŁÓWEK
+   ========================================= */
+
+.map-header {
+
+    height: 65px;
+
+    background: white;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 10px;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.12);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+}
+
+.map-header h2 {
+
+    margin: 0;
+
+    font-size: 19px;
+
+    color: #176b87;
+}
+
+
+/* =========================================
+   STATUS GPS
+   ========================================= */
 
 .gps-status {
 
@@ -385,6 +576,7 @@ body {
 }
 
 </style>
+
 </head>
 
 
@@ -394,9 +586,9 @@ body {
 <div class="app">
 
 
-<!-- ================================= -->
-<!-- STRONA STARTOWA -->
-<!-- ================================= -->
+<!-- =========================================
+     STRONA STARTOWA
+     ========================================= -->
 
 <img
     src="turystago-start.png"
@@ -429,13 +621,15 @@ body {
 </button>
 
 
-<!-- KAFELKI -->
+<!-- PLANOWANIE -->
 
 <button
     class="button plan"
-    onclick="openScreen('plan')">
+    onclick="openPlanPage()">
 </button>
 
+
+<!-- ATRAKCJE -->
 
 <button
     class="button attractions"
@@ -443,11 +637,15 @@ body {
 </button>
 
 
+<!-- AUDIO -->
+
 <button
     class="button audio"
     onclick="openScreen('audio')">
 </button>
 
+
+<!-- SOS -->
 
 <button
     class="button sos"
@@ -455,11 +653,15 @@ body {
 </button>
 
 
+<!-- GRUPY -->
+
 <button
     class="button groups"
     onclick="openScreen('groups')">
 </button>
 
+
+<!-- ALBUM -->
 
 <button
     class="button album"
@@ -467,11 +669,15 @@ body {
 </button>
 
 
+<!-- POLEĆ -->
+
 <button
     class="button recommend"
     onclick="openScreen('recommend')">
 </button>
 
+
+<!-- WIĘCEJ -->
 
 <button
     class="button more"
@@ -527,13 +733,135 @@ body {
 </button>
 
 
+<!-- =========================================
+     EKRAN PLANOWANIA
+     ========================================= -->
 
-<!-- ================================= -->
-<!-- EKRANY -->
-<!-- ================================= -->
+<section
+    id="plan-screen"
+    class="screen">
 
 
-<!-- MENU -->
+    <header class="screen-header">
+
+        <button
+            class="back"
+            onclick="closeScreens()">
+
+            ‹
+
+        </button>
+
+        <div class="screen-title">
+
+            Zaplanuj zwiedzanie
+
+        </div>
+
+    </header>
+
+
+    <div class="screen-content">
+
+
+        <div class="card">
+
+            <h2>
+                🗺️ Zaplanuj swoje zwiedzanie
+            </h2>
+
+            <p>
+
+                Wybierz miejsce rozpoczęcia,
+                czas oraz atrakcje.
+
+            </p>
+
+
+            <button
+                class="action"
+                onclick="openMojPlan()">
+
+                OTWÓRZ PLANOWANIE
+
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>
+                ⭐ Mój plan
+            </h2>
+
+            <p>
+                Tutaj przejdziemy do przygotowanego
+                planu i trasy.
+            </p>
+
+
+            <button
+                class="action"
+                onclick="openMojPlan()">
+
+                MÓJ PLAN ZWIEDZANIA
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     EKRAN FAKTYCZNEJ MAPY TRASY
+     ========================================= -->
+
+<section
+    id="map-screen"
+    class="screen">
+
+
+    <div class="map-header">
+
+
+        <button
+            class="map-back"
+            onclick="backToPlan()">
+
+            ← Wróć
+
+        </button>
+
+
+        <h2>
+            Twój plan zwiedzania
+        </h2>
+
+
+    </div>
+
+
+    <div id="tourist-map"></div>
+
+
+    <div
+        id="route-information"
+        class="route-information">
+
+    </div>
+
+
+</section>
+
+
+<!-- =========================================
+     MENU
+     ========================================= -->
 
 <section
     id="menu"
@@ -544,7 +872,9 @@ body {
         <button
             class="back"
             onclick="closeScreens()">
+
             ‹
+
         </button>
 
         <div class="screen-title">
@@ -559,39 +889,12 @@ body {
         <div class="card">
 
             <h2>
-                Menu główne
+                TurystaGo
             </h2>
 
             <p>
-                Wybierz funkcję TurystaGo.
+                Twój osobisty przewodnik GPS.
             </p>
-
-
-            <button
-                class="action"
-                onclick="openScreen('plan')">
-
-                ZAPLANUJ ZWIEDZANIE
-
-            </button>
-
-
-            <button
-                class="action"
-                onclick="openScreen('attractions')">
-
-                ZABYTKI I ATRAKCJE
-
-            </button>
-
-
-            <button
-                class="action"
-                onclick="openScreen('audio')">
-
-                PRZEWODNIK AUDIO
-
-            </button>
 
         </div>
 
@@ -600,8 +903,51 @@ body {
 </section>
 
 
+<!-- =========================================
+     POWIADOMIENIA
+     ========================================= -->
 
-<!-- ROZPOCZĘCIE -->
+<section
+    id="notifications"
+    class="screen">
+
+    <header class="screen-header">
+
+        <button
+            class="back"
+            onclick="closeScreens()">
+            ‹
+        </button>
+
+        <div class="screen-title">
+            Powiadomienia
+        </div>
+
+    </header>
+
+
+    <div class="screen-content">
+
+        <div class="card">
+
+            <h2>
+                🔔 Powiadomienia
+            </h2>
+
+            <p>
+                Tutaj pojawią się komunikaty TurystaGo.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     ROZPOCZNIJ ZWIEDZANIE
+     ========================================= -->
 
 <section
     id="tour"
@@ -627,27 +973,19 @@ body {
         <div class="card">
 
             <h2>
-                Gotowy do zwiedzania?
+                🚶 Rozpocznij zwiedzanie
             </h2>
 
             <p>
-                TurystaGo rozpocznie prowadzenie
-                od Twojej aktualnej lokalizacji.
+                TurystaGo może wykorzystać GPS
+                do prowadzenia po przygotowanej trasie.
             </p>
-
-
-            <div class="gps-status">
-
-                GPS — przygotowany
-
-            </div>
-
 
             <button
                 class="action"
                 onclick="startGPS()">
 
-                URUCHOM ZWIEDZANIE
+                URUCHOM GPS
 
             </button>
 
@@ -658,61 +996,9 @@ body {
 </section>
 
 
-
-<!-- PLANOWANIE -->
-
-<section
-    id="plan"
-    class="screen">
-
-    <header class="screen-header">
-
-        <button
-            class="back"
-            onclick="closeScreens()">
-            ‹
-        </button>
-
-        <div class="screen-title">
-            Zaplanuj zwiedzanie
-        </div>
-
-    </header>
-
-
-    <div class="screen-content">
-
-        <div class="card">
-
-            <h2>
-                Planowanie zwiedzania
-            </h2>
-
-            <p>
-                Tutaj wybierzesz czas,
-                budżet oraz interesujące
-                Cię miejsca.
-            </p>
-
-
-            <button class="action">
-                DODAJ PUNKT
-            </button>
-
-
-            <button class="action">
-                UTWÓRZ TRASĘ
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- ATRAKCJE -->
+<!-- =========================================
+     ATRAKCJE
+     ========================================= -->
 
 <section
     id="attractions"
@@ -727,7 +1013,7 @@ body {
         </button>
 
         <div class="screen-title">
-            Zabytki i atrakcje
+            Atrakcje
         </div>
 
     </header>
@@ -738,39 +1024,13 @@ body {
         <div class="card">
 
             <h2>
-                Zabytki i atrakcje
+                🏰 Atrakcje w pobliżu
             </h2>
 
             <p>
-                Lista miejsc znajdujących
-                się w pobliżu.
+                TurystaGo będzie wyszukiwał
+                interesujące miejsca w pobliżu.
             </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <h2>
-                Katedra Wniebowzięcia NMP
-            </h2>
-
-            <p>
-                Włocławek
-            </p>
-
-            <p>
-                📍 120 m
-            </p>
-
-
-            <button
-                class="action"
-                onclick="openScreen('audio')">
-
-                POSŁUCHAJ OPOWIEŚCI
-
-            </button>
 
         </div>
 
@@ -779,8 +1039,9 @@ body {
 </section>
 
 
-
-<!-- AUDIO -->
+<!-- =========================================
+     AUDIO
+     ========================================= -->
 
 <section
     id="audio"
@@ -806,20 +1067,19 @@ body {
         <div class="card">
 
             <h2>
-                Przewodnik audio
+                🎧 Przewodnik audio
             </h2>
 
             <p>
-                Opowieści uruchamiane podczas
-                zwiedzania.
+                Tutaj będą odtwarzane opowieści
+                i efekty dźwiękowe TurystaGo.
             </p>
-
 
             <button
                 class="action"
                 onclick="playAudio()">
 
-                ▶ ODTWÓRZ
+                POSŁUCHAJ
 
             </button>
 
@@ -830,8 +1090,9 @@ body {
 </section>
 
 
-
-<!-- SOS -->
+<!-- =========================================
+     SOS
+     ========================================= -->
 
 <section
     id="sos"
@@ -846,7 +1107,7 @@ body {
         </button>
 
         <div class="screen-title">
-            SOS — pomoc
+            SOS
         </div>
 
     </header>
@@ -857,18 +1118,14 @@ body {
         <div class="card">
 
             <h2>
-                Pomoc
+                🆘 Pomoc
             </h2>
 
             <p>
-                W sytuacji zagrożenia
-                wybierz odpowiednią pomoc.
+                W przyszłości tutaj znajdą się
+                najważniejsze numery alarmowe
+                i funkcje bezpieczeństwa.
             </p>
-
-
-            <button class="action">
-                112 — NUMER ALARMOWY
-            </button>
 
         </div>
 
@@ -877,8 +1134,9 @@ body {
 </section>
 
 
-
-<!-- GRUPY -->
+<!-- =========================================
+     GRUPY
+     ========================================= -->
 
 <section
     id="groups"
@@ -893,7 +1151,7 @@ body {
         </button>
 
         <div class="screen-title">
-            Grupy i komunikator
+            Grupy
         </div>
 
     </header>
@@ -904,18 +1162,13 @@ body {
         <div class="card">
 
             <h2>
-                Grupy
+                👥 Grupy i komunikator
             </h2>
 
             <p>
-                Twórz grupę i komunikuj
-                się z uczestnikami.
+                Funkcja grup turystycznych
+                będzie rozwijana w kolejnym etapie.
             </p>
-
-
-            <button class="action">
-                UTWÓRZ GRUPĘ
-            </button>
 
         </div>
 
@@ -924,8 +1177,9 @@ body {
 </section>
 
 
-
-<!-- ALBUM -->
+<!-- =========================================
+     ALBUM
+     ========================================= -->
 
 <section
     id="album"
@@ -940,7 +1194,7 @@ body {
         </button>
 
         <div class="screen-title">
-            Album podróży
+            Album
         </div>
 
     </header>
@@ -951,18 +1205,13 @@ body {
         <div class="card">
 
             <h2>
-                Album podróży
+                📸 Album podróży
             </h2>
 
             <p>
-                Twoje zdjęcia i pamiątki
-                z podróży.
+                Tutaj będą zapisywane
+                pamiątki z podróży.
             </p>
-
-
-            <button class="action">
-                DODAJ ZDJĘCIE
-            </button>
 
         </div>
 
@@ -971,8 +1220,9 @@ body {
 </section>
 
 
-
-<!-- POLEĆ -->
+<!-- =========================================
+     POLEĆ
+     ========================================= -->
 
 <section
     id="recommend"
@@ -987,7 +1237,7 @@ body {
         </button>
 
         <div class="screen-title">
-            Poleć znajomemu
+            Poleć TurystaGo
         </div>
 
     </header>
@@ -998,20 +1248,18 @@ body {
         <div class="card">
 
             <h2>
-                Poleć TurystaGo
+                📤 Poleć znajomemu
             </h2>
 
             <p>
-                Udostępnij aplikację
-                swoim znajomym.
+                Udostępnij TurystaGo znajomym.
             </p>
-
 
             <button
                 class="action"
                 onclick="shareApp()">
 
-                UDOSTĘPNIJ
+                POLEĆ TURYSTAGO
 
             </button>
 
@@ -1022,8 +1270,9 @@ body {
 </section>
 
 
-
-<!-- WIĘCEJ -->
+<!-- =========================================
+     WIĘCEJ
+     ========================================= -->
 
 <section
     id="more"
@@ -1053,8 +1302,8 @@ body {
             </h2>
 
             <p>
-                Ustawienia, język
-                i pozostałe funkcje aplikacji.
+                Kolejne funkcje TurystaGo
+                będą dodawane tutaj.
             </p>
 
         </div>
@@ -1064,8 +1313,9 @@ body {
 </section>
 
 
-
-<!-- NAJBLIŻSZY OBIEKT -->
+<!-- =========================================
+     NAJBLIŻSZY OBIEKT
+     ========================================= -->
 
 <section
     id="nearest"
@@ -1091,14 +1341,13 @@ body {
         <div class="card">
 
             <h2>
-                Katedra Wniebowzięcia NMP
-                we Włocławku
+                Najbliższa atrakcja
             </h2>
 
             <p>
-                📍 Odległość: 120 m
+                📍 TurystaGo będzie wykorzystywać
+                GPS do określania najbliższych obiektów.
             </p>
-
 
             <button
                 class="action"
@@ -1115,8 +1364,9 @@ body {
 </section>
 
 
-
-<!-- ZBIÓRKA -->
+<!-- =========================================
+     ZBIÓRKA
+     ========================================= -->
 
 <section
     id="meeting"
@@ -1142,7 +1392,7 @@ body {
         <div class="card">
 
             <h2>
-                Rynek Główny
+                📍 Miejsce zbiórki
             </h2>
 
             <p>
@@ -1164,8 +1414,9 @@ body {
 </section>
 
 
-
-<!-- MAPA -->
+<!-- =========================================
+     MAPA GŁÓWNA
+     ========================================= -->
 
 <section
     id="map"
@@ -1191,22 +1442,18 @@ body {
         <div class="card">
 
             <h2>
-                Mapa TurystaGo
+                🗺️ Mapa TurystaGo
             </h2>
 
+            <p>
+                Mapa główna aplikacji.
+            </p>
 
-            <div class="map">
+            <button
+                class="action"
+                onclick="openPlanMap()">
 
-                <div class="map-pin">
-                    📍
-                </div>
-
-            </div>
-
-
-            <button class="action">
-
-                POKAŻ ATRAKCJE W POBLIŻU
+                OTWÓRZ MAPĘ TRASY
 
             </button>
 
@@ -1217,8 +1464,9 @@ body {
 </section>
 
 
-
-<!-- ULUBIONE -->
+<!-- =========================================
+     ULUBIONE
+     ========================================= -->
 
 <section
     id="favourites"
@@ -1244,7 +1492,7 @@ body {
         <div class="card">
 
             <h2>
-                Ulubione
+                ⭐ Ulubione
             </h2>
 
             <p>
@@ -1258,8 +1506,9 @@ body {
 </section>
 
 
-
-<!-- PROFIL -->
+<!-- =========================================
+     PROFIL
+     ========================================= -->
 
 <section
     id="profile"
@@ -1285,7 +1534,7 @@ body {
         <div class="card">
 
             <h2>
-                Twój profil
+                👤 Twój profil
             </h2>
 
             <p>
@@ -1303,20 +1552,28 @@ body {
 </div>
 
 
+<!-- =========================================
+     LEAFLET
+     ========================================= -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<!-- =========================================
+     PODSTAWOWE FUNKCJE INDEX
+     ========================================= -->
+
 <script>
-
-
-/* ========================= */
-/* OTWIERANIE EKRANU */
-/* ========================= */
 
 function openScreen(name) {
 
     document
-        .querySelectorAll('.screen')
+        .querySelectorAll(".screen")
         .forEach(function(screen) {
 
-            screen.style.display = 'none';
+            screen.style.display = "none";
 
         });
 
@@ -1327,40 +1584,56 @@ function openScreen(name) {
 
     if (screen) {
 
-        screen.style.display = 'block';
+        screen.style.display = "block";
 
     }
 
 }
 
 
-/* ========================= */
 /* POWRÓT NA START */
-/* ========================= */
 
 function closeScreens() {
 
     document
-        .querySelectorAll('.screen')
+        .querySelectorAll(".screen")
         .forEach(function(screen) {
 
-            screen.style.display = 'none';
+            screen.style.display = "none";
 
         });
 
 }
 
 
-/* ========================= */
+/* OTWÓRZ PLANOWANIE */
+
+function openPlanPage() {
+
+    window.location.href =
+        "moj-plan.html";
+
+}
+
+
+/* OTWÓRZ MÓJ PLAN */
+
+function openMojPlan() {
+
+    window.location.href =
+        "moj-plan.html";
+
+}
+
+
 /* GPS */
-/* ========================= */
 
 function startGPS() {
 
     if (!navigator.geolocation) {
 
         alert(
-            'Twoje urządzenie nie obsługuje GPS.'
+            "Twoje urządzenie nie obsługuje GPS."
         );
 
         return;
@@ -1373,11 +1646,17 @@ function startGPS() {
         function(position) {
 
             alert(
-                'GPS działa!\n\n' +
-                'Szerokość: ' +
+
+                "GPS działa!\n\n" +
+
+                "Szerokość: " +
+
                 position.coords.latitude +
-                '\nDługość: ' +
+
+                "\nDługość: " +
+
                 position.coords.longitude
+
             );
 
         },
@@ -1385,8 +1664,11 @@ function startGPS() {
         function() {
 
             alert(
-                'Nie udało się pobrać lokalizacji. ' +
-                'Sprawdź, czy GPS jest włączony.'
+
+                "Nie udało się pobrać lokalizacji. " +
+
+                "Sprawdź, czy GPS jest włączony."
+
             );
 
         }
@@ -1396,24 +1678,24 @@ function startGPS() {
 }
 
 
-/* ========================= */
 /* AUDIO */
-/* ========================= */
 
 function playAudio() {
 
     alert(
-        'Przewodnik audio.\n\n' +
-        'W następnym etapie podłączymy tutaj ' +
-        'prawdziwe nagrania TurystaGo.'
+
+        "Przewodnik audio.\n\n" +
+
+        "Tutaj podłączymy prawdziwe " +
+
+        "nagrania TurystaGo."
+
     );
 
 }
 
 
-/* ========================= */
 /* UDOSTĘPNIANIE */
-/* ========================= */
 
 function shareApp() {
 
@@ -1421,20 +1703,20 @@ function shareApp() {
 
         navigator.share({
 
-            title: 'TurystaGo',
+            title: "TurystaGo",
 
             text:
-                'Poznaj TurystaGo — ' +
-                'Twojego osobistego przewodnika GPS.'
+                "Poznaj TurystaGo — " +
+                "Twojego osobistego przewodnika GPS."
 
         });
 
     } else {
 
         alert(
-            'Funkcja udostępniania jest gotowa. ' +
-            'Po podłączeniu właściwej domeny ' +
-            'dodamy docelowy link TurystaGo.'
+
+            "Funkcja udostępniania jest gotowa."
+
         );
 
     }
@@ -1442,6 +1724,21 @@ function shareApp() {
 }
 
 </script>
+
+
+<!-- =========================================
+     PLAN.JS
+     ========================================= -->
+
 <script src="plan.js"></script>
+
+
+<!-- =========================================
+     PLAN-MAP.JS
+     ========================================= -->
+
+<script src="plan-map.js"></script>
+
+
 </body>
 </html>
