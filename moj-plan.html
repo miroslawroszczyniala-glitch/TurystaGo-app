@@ -1,536 +1,423 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+// ============================================
+// TURYSTAGO
+// PLAN MAP – RZECZYWISTY PLAN UŻYTKOWNIKA
+// ============================================
 
-<title>TurystaGo – Mój plan zwiedzania</title>
+let touristMap = null;
+let touristRoute = null;
+let touristMarkers = [];
 
-<style>
-* {
-    box-sizing: border-box;
-}
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f7fbff;
-    color: #243746;
-}
+// ============================================
+// ODCZYT PLANU Z moj-plan.html
+// ============================================
 
-/* GÓRA */
-.header {
-    position: relative;
-    height: 180px;
-    overflow: hidden;
-    background: linear-gradient(#dff3ff, #ffffff);
-}
+function getSavedPlan() {
 
-/* góry */
-.mountains {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 100px;
-}
+    const saved =
+        localStorage.getItem("turystagoPlan");
 
-.mountain1,
-.mountain2,
-.mountain3 {
-    position: absolute;
-    bottom: -45px;
-    width: 180px;
-    height: 180px;
-    background: #9bc7d9;
-    transform: rotate(45deg);
-}
+    if (!saved) {
+        return null;
+    }
 
-.mountain1 {
-    left: -50px;
-}
+    try {
+        return JSON.parse(saved);
+    } catch (error) {
 
-.mountain2 {
-    left: 100px;
-    background: #b8d9e5;
-}
+        console.error(
+            "Błąd odczytu planu:",
+            error
+        );
 
-.mountain3 {
-    right: -50px;
-    background: #8fbfd3;
-}
-
-/* zamki */
-.castle {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 52px;
-    z-index: 5;
-}
-
-/* LOGO */
-.logo {
-    position: absolute;
-    top: 18px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 30px;
-    font-weight: bold;
-    color: #176b87;
-    z-index: 10;
-}
-
-/* TREŚĆ */
-.container {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-}
-
-h1 {
-    text-align: center;
-    color: #176b87;
-    margin-top: 5px;
-}
-
-.section {
-    background: white;
-    border-radius: 15px;
-    padding: 18px;
-    margin-bottom: 18px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-}
-
-.section h2 {
-    margin-top: 0;
-    color: #176b87;
-    font-size: 20px;
-}
-
-/* PRZYCISKI */
-button {
-    width: 100%;
-    border: none;
-    border-radius: 12px;
-    padding: 14px;
-    margin-top: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    background: #e6f4f9;
-    color: #176b87;
-}
-
-button:hover {
-    background: #d4edf5;
-}
-
-button.selected {
-    background: #176b87;
-    color: white;
-}
-
-/* ATRAKCJE */
-.attraction {
-    border: 1px solid #dceaf0;
-    border-radius: 12px;
-    padding: 14px;
-    margin-top: 12px;
-    background: #fbfeff;
-}
-
-.attraction-title {
-    font-size: 18px;
-    font-weight: bold;
-    color: #176b87;
-}
-
-.info {
-    margin-top: 6px;
-    font-size: 14px;
-    color: #5d6d75;
-}
-
-.add-button {
-    background: #176b87;
-    color: white;
-}
-
-.remove-button {
-    background: #f3dddd;
-    color: #a33b3b;
-}
-
-/* PODSUMOWANIE */
-.summary {
-    background: #eef8fb;
-    border-radius: 12px;
-    padding: 15px;
-    line-height: 1.7;
-}
-
-/* GŁÓWNY PRZYCISK */
-.start-button {
-    background: #249447;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 17px;
-}
-
-.start-button:hover {
-    background: #1c7c3b;
-}
-
-/* POWRÓT */
-.back-button {
-    background: #ffffff;
-    border: 1px solid #176b87;
-    color: #176b87;
-}
-</style>
-</head>
-
-<body>
-
-<header class="header">
-
-    <div class="logo">TurystaGo</div>
-
-    <div class="mountains">
-        <div class="mountain1"></div>
-        <div class="mountain2"></div>
-        <div class="mountain3"></div>
-    </div>
-
-    <div class="castle">🏰</div>
-
-</header>
-
-
-<main class="container">
-
-<h1>🗺️ Mój plan zwiedzania</h1>
-
-
-<!-- START -->
-<section class="section">
-
-<h2>📍 Skąd zaczynamy?</h2>
-
-<button id="locationButton" onclick="chooseLocation()">
-    📍 Moja aktualna lokalizacja
-</button>
-
-<p id="locationInfo"></p>
-
-</section>
-
-
-<!-- CZAS -->
-<section class="section">
-
-<h2>⏱️ Ile masz czasu?</h2>
-
-<button onclick="selectTime(this, '2 godziny')">2 godziny</button>
-<button onclick="selectTime(this, '4 godziny')">4 godziny</button>
-<button onclick="selectTime(this, '6 godzin')">6 godzin</button>
-<button onclick="selectTime(this, 'Cały dzień')">Cały dzień</button>
-
-<p id="timeInfo"></p>
-
-</section>
-
-
-<!-- KATEGORIE -->
-<section class="section">
-
-<h2>🔎 Co chcesz zobaczyć?</h2>
-
-<button onclick="toggleCategory(this)">🏰 Zamki i pałace</button>
-<button onclick="toggleCategory(this)">⛪ Kościoły i katedry</button>
-<button onclick="toggleCategory(this)">🏛️ Muzea</button>
-<button onclick="toggleCategory(this)">🌳 Przyroda</button>
-<button onclick="toggleCategory(this)">👨‍👩‍👧 Atrakcje dla dzieci</button>
-<button onclick="toggleCategory(this)">👀 Punkty widokowe</button>
-<button onclick="toggleCategory(this)">🍴 Gastronomia</button>
-<button onclick="toggleCategory(this)">📸 Ciekawe miejsca</button>
-
-</section>
-
-
-<!-- ATRAKCJE -->
-<section class="section">
-
-<h2>📋 Dostępne atrakcje</h2>
-
-<div class="attraction">
-
-<div class="attraction-title">
-🏰 Zamek
-</div>
-
-<div class="info">
-📍 650 m od rozpoczęcia<br>
-⏱️ Zwiedzanie: 45 min<br>
-🎧 Audio-przewodnik dostępny
-</div>
-
-<button class="add-button"
-onclick="addPlace('Zamek', '45 min', '650 m')">
-➕ Dodaj do mojego planu
-</button>
-
-</div>
-
-
-<div class="attraction">
-
-<div class="attraction-title">
-⛪ Katedra
-</div>
-
-<div class="info">
-📍 1,2 km<br>
-⏱️ Zwiedzanie: 30 min<br>
-🎧 Audio-przewodnik dostępny
-</div>
-
-<button class="add-button"
-onclick="addPlace('Katedra', '30 min', '1,2 km')">
-➕ Dodaj do mojego planu
-</button>
-
-</div>
-
-
-<div class="attraction">
-
-<div class="attraction-title">
-🏛️ Muzeum
-</div>
-
-<div class="info">
-📍 1,8 km<br>
-⏱️ Zwiedzanie: 60 min<br>
-🎧 Audio-przewodnik dostępny
-</div>
-
-<button class="add-button"
-onclick="addPlace('Muzeum', '60 min', '1,8 km')">
-➕ Dodaj do mojego planu
-</button>
-
-</div>
-
-</section>
-
-
-<!-- MÓJ PLAN -->
-<section class="section">
-
-<h2>⭐ Wybrane miejsca</h2>
-
-<div id="myPlan">
-
-<p>
-Twój plan jest jeszcze pusty.
-</p>
-
-</div>
-
-<div class="summary">
-
-<strong>Podsumowanie:</strong>
-
-<div id="summary">
-Wybrano 0 miejsc
-</div>
-
-</div>
-
-<button class="start-button"
-onclick="createPlan()">
-
-🟢 UTWÓRZ MÓJ PLAN
-
-</button>
-
-</section>
-
-
-<button class="back-button"
-onclick="goBack()">
-
-← Wróć
-
-</button>
-
-</main>
-
-
-<script>
-
-let selectedPlaces = [];
-
-
-/* LOKALIZACJA */
-
-function chooseLocation() {
-
-    document.getElementById("locationInfo").innerHTML =
-        "📍 Wybrano: Twoja aktualna lokalizacja.";
-
-    document.getElementById("locationButton").classList.add("selected");
+        return null;
+    }
 }
 
 
-/* CZAS */
+// ============================================
+// OTWARCIE MAPY
+// ============================================
 
-function selectTime(button, time) {
+function openPlanMap() {
 
-    document.querySelectorAll(".section:nth-of-type(2) button")
-        .forEach(btn => btn.classList.remove("selected"));
+    const planScreen =
+        document.getElementById("plan-screen");
 
-    button.classList.add("selected");
-
-    document.getElementById("timeInfo").innerHTML =
-        "Wybrany czas: <strong>" + time + "</strong>";
-}
-
-
-/* KATEGORIE */
-
-function toggleCategory(button) {
-
-    button.classList.toggle("selected");
-
-}
+    const mapScreen =
+        document.getElementById("map-screen");
 
 
-/* DODAWANIE ATRAKCJI */
+    if (planScreen) {
 
-function addPlace(name, time, distance) {
-
-    selectedPlaces.push({
-        name: name,
-        time: time,
-        distance: distance
-    });
-
-    showPlan();
-
-}
-
-
-/* POKAZANIE PLANU */
-
-function showPlan() {
-
-    const plan = document.getElementById("myPlan");
-
-    plan.innerHTML = "";
-
-    selectedPlaces.forEach((place, index) => {
-
-        const div = document.createElement("div");
-
-        div.className = "attraction";
-
-        div.innerHTML = `
-
-        <div class="attraction-title">
-        ${index + 1}. ${place.name}
-        </div>
-
-        <div class="info">
-
-        📍 ${place.distance}<br>
-        ⏱️ ${place.time}
-
-        </div>
-
-        <button class="remove-button"
-        onclick="removePlace(${index})">
-
-        🗑️ Usuń z planu
-
-        </button>
-
-        `;
-
-        plan.appendChild(div);
-
-    });
-
-
-    if(selectedPlaces.length === 0) {
-
-        plan.innerHTML =
-            "<p>Twój plan jest jeszcze pusty.</p>";
+        planScreen.style.display = "none";
 
     }
 
 
-    document.getElementById("summary").innerHTML =
-        "Wybrano <strong>" +
-        selectedPlaces.length +
-        "</strong> miejsc";
+    if (mapScreen) {
 
+        mapScreen.style.display = "block";
+
+    }
+
+
+    createTouristMap();
 }
 
 
-/* USUWANIE */
+// ============================================
+// UTWORZENIE MAPY
+// ============================================
 
-function removePlace(index) {
+function createTouristMap() {
 
-    selectedPlaces.splice(index, 1);
-
-    showPlan();
-
-}
-
-
-/* UTWORZENIE PLANU */
-
-function createPlan() {
-
-    if(selectedPlaces.length === 0) {
+    if (typeof L === "undefined") {
 
         alert(
-            "Najpierw dodaj przynajmniej jedną atrakcję do planu."
+            "Nie udało się załadować mapy."
         );
 
         return;
-
     }
 
 
-    alert(
-        "Twój plan zwiedzania został utworzony!\n\n" +
-        "Liczba miejsc: " +
-        selectedPlaces.length
+    const savedPlan =
+        getSavedPlan();
+
+
+    if (!savedPlan) {
+
+        alert(
+            "Nie znaleziono przygotowanego planu."
+        );
+
+        return;
+    }
+
+
+    if (
+        !savedPlan.places ||
+        savedPlan.places.length === 0
+    ) {
+
+        alert(
+            "Twój plan nie zawiera jeszcze atrakcji."
+        );
+
+        return;
+    }
+
+
+    if (touristMap) {
+
+        touristMap.remove();
+
+        touristMap = null;
+    }
+
+
+    touristMap =
+        L.map("tourist-map");
+
+
+    L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+            maxZoom: 19,
+            attribution:
+                "&copy; OpenStreetMap"
+        }
+    ).addTo(touristMap);
+
+
+    createRoute(
+        savedPlan.places
+    );
+}
+
+
+// ============================================
+// TWORZENIE TRASY
+// ============================================
+
+function createRoute(places) {
+
+    if (
+        !touristMap ||
+        !places ||
+        places.length === 0
+    ) {
+
+        return;
+    }
+
+
+    touristMarkers.forEach(
+        function(marker) {
+
+            touristMap.removeLayer(marker);
+
+        }
     );
 
 
+    touristMarkers = [];
+
+
+    if (touristRoute) {
+
+        touristMap.removeLayer(
+            touristRoute
+        );
+
+        touristRoute = null;
+    }
+
+
+    const coordinates = [];
+
+
+    places.forEach(
+        function(place, index) {
+
+            /*
+             * Jeżeli atrakcja ma współrzędne,
+             * używamy ich.
+             *
+             * Jeżeli jeszcze ich nie ma,
+             * nie pokazujemy jej jako fałszywego
+             * punktu na mapie.
+             */
+
+            if (
+                typeof place.lat !== "number" ||
+                typeof place.lng !== "number"
+            ) {
+
+                return;
+            }
+
+
+            const position = [
+                place.lat,
+                place.lng
+            ];
+
+
+            coordinates.push(position);
+
+
+            const marker =
+                L.marker(position)
+                    .addTo(touristMap)
+                    .bindPopup(
+                        "<strong>" +
+                        (index + 1) +
+                        ". " +
+                        place.name +
+                        "</strong>"
+                    );
+
+
+            touristMarkers.push(
+                marker
+            );
+
+        }
+    );
+
+
+    if (coordinates.length === 0) {
+
+        showRouteInformation(
+            places
+        );
+
+        return;
+    }
+
+
     /*
-       W następnym etapie tutaj
-       podłączymy ekran MAPY
-       i prawdziwą trasę GPS.
-    */
+     * Na tym etapie pokazujemy trasę
+     * pomiędzy punktami.
+     *
+     * Następnie podłączymy prawdziwe
+     * wyznaczanie trasy drogowej.
+     */
 
+    touristRoute =
+        L.polyline(
+            coordinates,
+            {
+                weight: 6,
+                opacity: 0.85
+            }
+        ).addTo(touristMap);
+
+
+    touristMap.fitBounds(
+        touristRoute.getBounds(),
+        {
+            padding: [30, 30]
+        }
+    );
+
+
+    showRouteInformation(
+        places
+    );
 }
 
 
-/* POWRÓT */
+// ============================================
+// INFORMACJE O TRASIE
+// ============================================
 
-function goBack() {
+function showRouteInformation(
+    places
+) {
 
-    window.location.href = "index.html";
+    const routeInfo =
+        document.getElementById(
+            "route-information"
+        );
 
+
+    if (!routeInfo) {
+        return;
+    }
+
+
+    const savedPlan =
+        getSavedPlan();
+
+
+    let html = `
+
+        <h3>
+            🗺️ Twój plan zwiedzania
+        </h3>
+
+    `;
+
+
+    if (savedPlan) {
+
+        if (savedPlan.start) {
+
+            html += `
+                <p>
+                    📍 <strong>Start:</strong>
+                    ${savedPlan.start}
+                </p>
+            `;
+        }
+
+
+        if (savedPlan.time) {
+
+            html += `
+                <p>
+                    ⏱️ <strong>Czas:</strong>
+                    ${savedPlan.time}
+                </p>
+            `;
+        }
+    }
+
+
+    html += `
+        <ol>
+    `;
+
+
+    places.forEach(
+        function(place) {
+
+            html += `
+                <li>
+                    <strong>
+                        ${place.name}
+                    </strong>
+            `;
+
+
+            if (place.time) {
+
+                html += `
+                    <br>
+                    ⏱️ ${place.time}
+                `;
+            }
+
+
+            if (place.distance) {
+
+                html += `
+                    <br>
+                    📍 ${place.distance}
+                `;
+            }
+
+
+            html += `
+                </li>
+            `;
+        }
+    );
+
+
+    html += `
+        </ol>
+
+        <button
+            class="tourist-button"
+            onclick="startTour()">
+
+            ▶ Rozpocznij zwiedzanie
+
+        </button>
+    `;
+
+
+    routeInfo.innerHTML =
+        html;
 }
 
-</script>
 
-</body>
-</html>
+// ============================================
+// ROZPOCZĘCIE ZWIEDZANIA
+// ============================================
+
+function startTour() {
+
+    alert(
+        "TurystaGo rozpoczyna zwiedzanie.\n\n" +
+        "Następny etap: prowadzenie GPS " +
+        "od punktu do punktu."
+    );
+}
+
+
+// ============================================
+// POWRÓT DO PLANU
+// ============================================
+
+function backToPlan() {
+
+    const mapScreen =
+        document.getElementById(
+            "map-screen"
+        );
+
+    if (mapScreen) {
+
+        mapScreen.style.display =
+            "none";
+    }
+
+
+    window.location.href =
+        "moj-plan.html";
+}
