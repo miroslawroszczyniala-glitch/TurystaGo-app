@@ -1,1530 +1,795 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TurystaGo – Mój plan</title>
 
-
 <style>
-
-/* =====================================================
-   TURYSTAGO – MÓJ PLAN
-   STYL ZGODNY ZE STRONĄ GŁÓWNĄ
-   ===================================================== */
-
 * {
     box-sizing: border-box;
 }
 
-html,
 body {
     margin: 0;
-    padding: 0;
-}
-
-body {
-
     font-family: Arial, sans-serif;
-
-    background:
-        #eef5f7;
-
-    color: #263746;
+    background: #f4f8f7;
+    color: #234044;
 }
 
-
-/* =====================================================
-   GŁÓWNY KONTENER
-   ===================================================== */
-
-.app {
-
-    width: 100%;
-
-    max-width: 430px;
-
-    min-height: 100vh;
-
-    margin: 0 auto;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #eaf5f8 0%,
-            #f7fafb 40%,
-            #ffffff 100%
-        );
-
-    overflow-x: hidden;
-}
-
-
-/* =====================================================
-   NAGŁÓWEK
-   WYKORZYSTUJE GRAFIKĘ STRONY STARTOWEJ
-   ===================================================== */
+/* ===== GÓRNA GRAFIKA ===== */
 
 .hero {
-
+    height: 185px;
     position: relative;
-
-    height: 205px;
-
     overflow: hidden;
-
     background:
-        #dceff5;
+        linear-gradient(rgba(230,246,244,.45), rgba(244,248,247,.95)),
+        linear-gradient(135deg, #8bc9c1, #d9eee9);
 }
 
-
-/*
-   Ta sama grafika, która jest używana
-   na stronie głównej TurystaGo.
-*/
-
-.hero-image {
-
+/* góry */
+.mountains {
     position: absolute;
-
-    left: 0;
-    top: 0;
-
+    bottom: 0;
     width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    object-position: top center;
-
-    opacity: 0.95;
+    height: 105px;
 }
 
-
-/*
-   Delikatne rozjaśnienie,
-   aby tekst był czytelny.
-*/
-
-.hero-overlay {
-
+.mountain1,
+.mountain2,
+.mountain3 {
     position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(255,255,255,0.10),
-            rgba(255,255,255,0.55)
-        );
+    bottom: -45px;
+    width: 230px;
+    height: 150px;
+    background: #74aaa4;
+    transform: rotate(45deg);
+    border-radius: 15px;
 }
 
+.mountain1 {
+    left: -50px;
+}
 
-/* =====================================================
-   LOGO
-   ===================================================== */
+.mountain2 {
+    left: 30%;
+    background: #659994;
+}
 
-.hero-content {
+.mountain3 {
+    right: -50px;
+    background: #82bdb6;
+}
 
-    position: relative;
+/* zamki */
+.castle {
+    position: absolute;
+    bottom: 43px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 115px;
+    height: 68px;
+    background: #f5eee0;
+    border: 3px solid #806c55;
+    border-bottom: none;
+}
 
-    z-index: 3;
+.castle:before,
+.castle:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 25px;
+    height: 92px;
+    background: #e9ddc8;
+    border: 3px solid #806c55;
+}
 
+.castle:before {
+    left: -20px;
+}
+
+.castle:after {
+    right: -20px;
+}
+
+.castle-roof {
+    position: absolute;
+    top: -32px;
+    left: -24px;
+    width: 30px;
+    height: 32px;
+    background: #a64f42;
+    clip-path: polygon(50% 0,100% 100%,0 100%);
+}
+
+.castle-roof.right {
+    left: auto;
+    right: -24px;
+}
+
+.hero-title {
+    position: absolute;
+    top: 22px;
+    width: 100%;
     text-align: center;
-
-    padding-top: 18px;
-}
-
-
-.logo {
-
-    margin: 0;
-
-    font-size: 31px;
-
-    font-weight: 800;
-
-    color: #315d70;
-
-    text-shadow:
-        0 1px 2px
-        rgba(255,255,255,0.9);
-}
-
-
-.logo-subtitle {
-
-    margin-top: 3px;
-
-    font-size: 14px;
-
-    color: #315d70;
-
-    font-weight: 600;
-}
-
-
-/* =====================================================
-   PRZYCISK POWROTNY
-   ===================================================== */
-
-.back-button {
-
-    position: absolute;
-
-    left: 12px;
-    top: 16px;
-
     z-index: 5;
-
-    width: 43px;
-    height: 43px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,255,255,0.88);
-
-    color: #315d70;
-
-    font-size: 29px;
-
-    line-height: 40px;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 2px 8px
-        rgba(0,0,0,0.15);
 }
 
+.hero-title h1 {
+    margin: 0;
+    font-size: 31px;
+    color: #28545a;
+    text-shadow: 0 2px 3px rgba(255,255,255,.8);
+}
 
-/* =====================================================
-   TYTUŁ
-   ===================================================== */
+.hero-title p {
+    margin: 7px 0;
+    font-size: 15px;
+    color: #42676b;
+}
 
-.page-title {
+/* ===== GŁÓWNA CZĘŚĆ ===== */
 
+.container {
+    width: 94%;
+    max-width: 650px;
+    margin: -8px auto 30px;
     position: relative;
-
-    z-index: 4;
-
-    margin-top: -34px;
-
-    margin-left: 15px;
-    margin-right: 15px;
-
-    padding: 16px 15px;
-
-    background:
-        rgba(255,255,255,0.96);
-
-    border-radius:
-        18px 18px 0 0;
-
-    text-align: center;
-
-    color: #315d70;
-
-    font-size: 23px;
-
-    box-shadow:
-        0 -2px 10px
-        rgba(0,0,0,0.06);
+    z-index: 10;
 }
-
-
-.description {
-
-    margin:
-        0 15px 16px;
-
-    padding:
-        12px 16px;
-
-    background: white;
-
-    text-align: center;
-
-    font-size: 14px;
-
-    line-height: 1.45;
-
-    color: #566873;
-
-    border-radius:
-        0 0 16px 16px;
-}
-
-
-/* =====================================================
-   KARTY
-   ===================================================== */
 
 .card {
-
-    margin:
-        0 15px 16px;
-
-    padding: 17px;
-
-    background:
-        rgba(255,255,255,0.97);
-
-    border-radius: 17px;
-
-    box-shadow:
-        0 3px 12px
-        rgba(49,93,112,0.12);
-
-    border:
-        1px solid
-        rgba(49,93,112,0.08);
-}
-
-
-.card-title {
-
-    margin:
-        0 0 13px;
-
-    color: #315d70;
-
-    font-size: 18px;
-}
-
-
-/* =====================================================
-   START / GPS
-   ===================================================== */
-
-.location-box {
-
-    background:
-        #eef7f9;
-
-    border:
-        1px solid #cfe3e8;
-
-    border-radius: 13px;
-
-    padding: 13px;
-
-    margin-bottom: 11px;
-
-    font-size: 14px;
-
-    line-height: 1.45;
-}
-
-
-.primary-button {
-
-    width: 100%;
-
-    padding: 14px;
-
-    border: none;
-
-    border-radius: 13px;
-
-    background:
-        #3c8b65;
-
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 3px 7px
-        rgba(60,139,101,0.22);
-}
-
-
-.primary-button:active {
-
-    transform:
-        translateY(1px);
-}
-
-
-/* =====================================================
-   CZAS
-   ===================================================== */
-
-.time-buttons {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 8px;
-}
-
-
-.time-button {
-
-    min-height: 45px;
-
-    border:
-        1px solid #cbdde1;
-
-    border-radius: 11px;
-
-    background:
-        #f5fafb;
-
-    color: #315d70;
-
-    font-weight: 600;
-
-    cursor: pointer;
-}
-
-
-.time-button.selected {
-
-    background:
-        #4b9270;
-
-    border-color:
-        #4b9270;
-
-    color: white;
-
-    box-shadow:
-        0 2px 6px
-        rgba(75,146,112,0.25);
-}
-
-
-.selected-time {
-
-    margin:
-        12px 0 0;
-
-    padding: 9px;
-
-    text-align: center;
-
-    border-radius: 9px;
-
-    background:
-        #edf6ef;
-
-    color: #397052;
-
-    font-size: 14px;
-}
-
-
-/* =====================================================
-   TYTUŁ ATRAKCJI
-   ===================================================== */
-
-.section-title {
-
-    margin:
-        23px 15px 12px;
-
-    color: #315d70;
-
-    font-size: 21px;
-
-    text-align: left;
-}
-
-
-/* =====================================================
-   ATRAKCJA
-   ===================================================== */
-
-.attraction {
-
-    margin:
-        0 15px 15px;
-
     background: white;
-
-    border-radius: 17px;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 3px 12px
-        rgba(49,93,112,0.13);
-
-    border:
-        1px solid
-        rgba(49,93,112,0.08);
+    border-radius: 18px;
+    margin-bottom: 16px;
+    padding: 17px;
+    box-shadow: 0 4px 15px rgba(40,80,80,.12);
 }
 
+/* ===== PLAN ===== */
 
-.attraction-picture {
-
-    height: 115px;
-
+.plan-header {
     display: flex;
-
+    justify-content: space-between;
     align-items: center;
-
-    justify-content: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #dceff5,
-            #c7dfd1
-        );
-
-    font-size: 54px;
 }
 
-
-.attraction-content {
-
-    padding: 15px;
+.plan-header h2 {
+    margin: 0;
+    color: #28545a;
 }
 
-
-.attraction-content h3 {
-
-    margin:
-        0 0 7px;
-
-    color: #315d70;
-
-    font-size: 18px;
-}
-
-
-.attraction-content p {
-
-    margin:
-        6px 0;
-
-    font-size: 14px;
-
-    line-height: 1.4;
-}
-
-
-.details {
-
-    color: #667780;
-}
-
-
-.add-button {
-
-    width: 100%;
-
-    margin-top: 10px;
-
-    padding: 12px;
-
-    border: none;
-
-    border-radius: 11px;
-
-    background:
-        #5b8e70;
-
-    color: white;
-
+.badge {
+    background: #e1f2ed;
+    color: #39756d;
+    padding: 7px 11px;
+    border-radius: 20px;
+    font-size: 12px;
     font-weight: bold;
-
-    cursor: pointer;
 }
-
-
-.add-button.added {
-
-    background:
-        #c15a4e;
-}
-
-
-/* =====================================================
-   PODSUMOWANIE
-   ===================================================== */
 
 .summary {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 8px;
+    margin-top: 15px;
+}
 
-    margin:
-        20px 15px 30px;
-
-    padding: 19px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #f1f8f4
-        );
-
-    border-radius: 18px;
-
-    box-shadow:
-        0 4px 14px
-        rgba(49,93,112,0.14);
-
-    border:
-        1px solid #dce9e4;
-
+.summary div {
+    background: #f0f7f5;
+    border-radius: 12px;
+    padding: 10px 5px;
     text-align: center;
 }
 
-
-.summary h2 {
-
-    margin-top: 0;
-
-    color: #315d70;
-}
-
-
-.summary-count {
-
-    font-size: 15px;
-
-    margin-bottom: 10px;
-}
-
-
-#liczba {
-
-    color: #3c8b65;
-
-    font-size: 20px;
-}
-
-
-#lista {
-
+.summary strong {
     display: block;
-
-    margin:
-        10px 0 15px;
-
-    color: #596a72;
-
-    font-size: 14px;
-
-    line-height: 1.5;
+    font-size: 17px;
+    color: #285b60;
 }
 
+.summary span {
+    font-size: 11px;
+    color: #698083;
+}
 
-/* =====================================================
-   WYCZYŚĆ
-   ===================================================== */
+/* ===== USTAWIENIA ===== */
 
-.clear-button {
+.section-title {
+    margin: 0 0 13px;
+    color: #28545a;
+}
 
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 10px 0 5px;
+}
+
+select,
+input {
     width: 100%;
-
-    margin-top: 9px;
-
-    padding: 10px;
-
-    border:
-        1px solid #c15a4e;
-
+    padding: 11px;
+    border: 1px solid #cbdedb;
     border-radius: 10px;
+    background: #fbfdfc;
+    color: #294b4f;
+}
 
-    background: white;
+/* ===== ATRAKCJA ===== */
 
-    color: #b34e44;
+.attraction {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #e4eeee;
+}
 
+.attraction:last-child {
+    border-bottom: none;
+}
+
+.photo {
+    width: 82px;
+    height: 82px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    background: linear-gradient(135deg,#d9eee9,#b8dcd6);
+}
+
+.info {
+    flex: 1;
+}
+
+.info h3 {
+    margin: 0 0 5px;
+    font-size: 16px;
+    color: #28545a;
+}
+
+.info p {
+    margin: 3px 0;
+    font-size: 12px;
+    line-height: 1.35;
+    color: #60777a;
+}
+
+.tags {
+    margin-top: 7px;
+}
+
+.tag {
+    display: inline-block;
+    background: #edf6f4;
+    color: #47746f;
+    padding: 4px 7px;
+    border-radius: 8px;
+    margin-right: 3px;
+    font-size: 10px;
+}
+
+.add-btn {
+    margin-top: 7px;
+    border: none;
+    border-radius: 9px;
+    background: #5b9e96;
+    color: white;
+    padding: 8px 11px;
+    font-weight: bold;
     cursor: pointer;
 }
 
-
-/* =====================================================
-   INFORMACJA
-   ===================================================== */
-
-.info-box {
-
-    margin-top: 10px;
-
-    padding: 11px;
-
-    background:
-        #f1f7ee;
-
-    border-left:
-        4px solid #6c9b59;
-
-    border-radius: 8px;
-
-    color: #536b4d;
-
-    font-size: 13px;
-
-    line-height: 1.4;
+.add-btn:hover {
+    background: #477f79;
 }
 
+/* ===== WYBRANE ===== */
 
+.route-item {
+    position: relative;
+    padding: 12px 8px 12px 38px;
+    border-left: 3px solid #83bcb5;
+}
+
+.route-item:before {
+    content: "";
+    position: absolute;
+    left: -9px;
+    top: 15px;
+    width: 13px;
+    height: 13px;
+    background: #5b9e96;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+.route-item h3 {
+    margin: 0;
+    font-size: 15px;
+}
+
+.route-item p {
+    margin: 4px 0;
+    font-size: 12px;
+    color: #6b7d7e;
+}
+
+.remove {
+    float: right;
+    border: none;
+    background: #f6e7e4;
+    color: #9b5349;
+    border-radius: 7px;
+    padding: 5px 7px;
+}
+
+/* ===== PRZYCISKI ===== */
+
+.main-button {
+    width: 100%;
+    border: none;
+    padding: 14px;
+    margin-top: 8px;
+    border-radius: 13px;
+    background: #397e78;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(50,100,95,.2);
+}
+
+.main-button.secondary {
+    background: #e4f1ee;
+    color: #39736d;
+}
+
+.main-button:hover {
+    opacity: .9;
+}
+
+.empty {
+    text-align: center;
+    padding: 15px;
+    color: #718183;
+    font-size: 13px;
+}
+
+.footer {
+    text-align: center;
+    color: #78908f;
+    font-size: 11px;
+    padding: 10px;
+}
 </style>
-
 </head>
-
 
 <body>
 
+<!-- ===== GRAFIKA GÓRNA ===== -->
 
-<div class="app">
+<div class="hero">
 
+    <div class="hero-title">
+        <h1>TurystaGo</h1>
+        <p>Twój plan zwiedzania</p>
+    </div>
 
-<!-- =================================================
-     GRAFIKA Z GŁÓWNEJ STRONY
-     ================================================= -->
+    <div class="mountains">
+        <div class="mountain1"></div>
+        <div class="mountain2"></div>
+        <div class="mountain3"></div>
+    </div>
 
-<header class="hero">
+    <div class="castle">
+        <div class="castle-roof"></div>
+        <div class="castle-roof right"></div>
+    </div>
 
-
-    <img
-        src="turystago-start.png"
-        class="hero-image"
-        alt="TurystaGo"
-    >
-
-
-    <div class="hero-overlay"></div>
-
-
-    <button
-        class="back-button"
-        onclick="goBack()"
-        aria-label="Wróć">
-
-        ‹
-
-    </button>
+</div>
 
 
-    <div class="hero-content">
+<div class="container">
 
-        <h1 class="logo">
-            TurystaGo
-        </h1>
+    <!-- ===== PODSUMOWANIE ===== -->
 
-        <div class="logo-subtitle">
-            Twój osobisty przewodnik GPS
+    <div class="card">
+
+        <div class="plan-header">
+            <h2>Mój plan</h2>
+            <span class="badge">WŁOCŁAWEK</span>
+        </div>
+
+        <div class="summary">
+
+            <div>
+                <strong id="count">0</strong>
+                <span>atrakcji</span>
+            </div>
+
+            <div>
+                <strong id="time">0 min</strong>
+                <span>zwiedzania</span>
+            </div>
+
+            <div>
+                <strong id="cost">0 zł</strong>
+                <span>budżet</span>
+            </div>
+
         </div>
 
     </div>
 
 
-</header>
+    <!-- ===== USTAWIENIA PLANU ===== -->
+
+    <div class="card">
+
+        <h2 class="section-title">Zaplanuj zwiedzanie</h2>
+
+        <label>Jak długo chcesz zwiedzać?</label>
+
+        <select id="duration">
+            <option value="120">2 godziny</option>
+            <option value="180">3 godziny</option>
+            <option value="240" selected>4 godziny</option>
+            <option value="300">5 godzin</option>
+            <option value="360">6 godzin</option>
+            <option value="480">Cały dzień</option>
+        </select>
 
 
-<!-- =================================================
-     TYTUŁ
-     ================================================= -->
+        <label>Wiek uczestników</label>
 
-<h2 class="page-title">
-
-    🗺️ Mój plan zwiedzania
-
-</h2>
-
-
-<p class="description">
-
-    Wybierz miejsce rozpoczęcia,
-    czas oraz atrakcje,
-    które chcesz odwiedzić.
-
-</p>
+        <select id="age">
+            <option value="all">Dorośli i dzieci</option>
+            <option value="children">Dzieci</option>
+            <option value="teen">Młodzież</option>
+            <option value="adult">Dorośli</option>
+            <option value="senior">Seniorzy</option>
+        </select>
 
 
-<!-- =================================================
-     MIEJSCE STARTU
-     ================================================= -->
+        <label>Budżet na osobę</label>
 
-<div class="card">
-
-    <h3 class="card-title">
-
-        📍 Miejsce rozpoczęcia
-
-    </h3>
-
-
-    <div
-        id="startLocation"
-        class="location-box">
-
-        Nie wybrano miejsca rozpoczęcia.
+        <select id="budget">
+            <option value="0">Bezpłatnie</option>
+            <option value="30">Do 30 zł</option>
+            <option value="60">Do 60 zł</option>
+            <option value="100" selected>Do 100 zł</option>
+            <option value="999">Bez ograniczeń</option>
+        </select>
 
     </div>
 
 
-    <button
-        class="primary-button"
-        type="button"
-        onclick="chooseStartLocation()">
+    <!-- ===== ATRAKCJE ===== -->
 
-        📍 Użyj mojej lokalizacji
+    <div class="card">
 
-    </button>
+        <h2 class="section-title">Atrakcje Włocławka i okolic</h2>
+
+        <div class="attraction">
+
+            <div class="photo">⛪</div>
+
+            <div class="info">
+                <h3>Bazylika Katedralna</h3>
+                <p>Gotycka katedra Wniebowzięcia Najświętszej Maryi Panny.</p>
+
+                <div class="tags">
+                    <span class="tag">historia</span>
+                    <span class="tag">20 min</span>
+                    <span class="tag">bezpłatnie</span>
+                </div>
+
+                <button class="add-btn"
+                    onclick="addPlace('Bazylika Katedralna',20,0)">
+                    + Dodaj do planu
+                </button>
+            </div>
+
+        </div>
 
 
-    <div class="info-box">
+        <div class="attraction">
 
-        Twoja lokalizacja będzie wykorzystana
-        jako punkt rozpoczęcia trasy.
+            <div class="photo">⛪</div>
+
+            <div class="info">
+                <h3>Kościół św. Jana Chrzciciela</h3>
+                <p>Jeden z najstarszych zabytków sakralnych Włocławka.</p>
+
+                <div class="tags">
+                    <span class="tag">zabytek</span>
+                    <span class="tag">15 min</span>
+                    <span class="tag">bezpłatnie</span>
+                </div>
+
+                <button class="add-btn"
+                    onclick="addPlace('Kościół św. Jana Chrzciciela',15,0)">
+                    + Dodaj do planu
+                </button>
+            </div>
+
+        </div>
+
+
+        <div class="attraction">
+
+            <div class="photo">🌊</div>
+
+            <div class="info">
+                <h3>Bulwary nad Wisłą</h3>
+                <p>Spacer nad Wisłą i miejsce odpoczynku z widokiem na rzekę.</p>
+
+                <div class="tags">
+                    <span class="tag">spacer</span>
+                    <span class="tag">30 min</span>
+                    <span class="tag">bezpłatnie</span>
+                </div>
+
+                <button class="add-btn"
+                    onclick="addPlace('Bulwary nad Wisłą',30,0)">
+                    + Dodaj do planu
+                </button>
+            </div>
+
+        </div>
+
+
+        <div class="attraction">
+
+            <div class="photo">🏞️</div>
+
+            <div class="info">
+                <h3>Punkt widokowy na Zawiślu</h3>
+                <p>Miejsce z ciekawym widokiem na Wisłę i Włocławek.</p>
+
+                <div class="tags">
+                    <span class="tag">widok</span>
+                    <span class="tag">25 min</span>
+                    <span class="tag">bezpłatnie</span>
+                </div>
+
+                <button class="add-btn"
+                    onclick="addPlace('Punkt widokowy na Zawiślu',25,0)">
+                    + Dodaj do planu
+                </button>
+            </div>
+
+        </div>
+
+
+        <div class="attraction">
+
+            <div class="photo">🏛️</div>
+
+            <div class="info">
+                <h3>Stary Rynek</h3>
+                <p>Historyczne centrum Włocławka i miejsce na krótki odpoczynek.</p>
+
+                <div class="tags">
+                    <span class="tag">centrum</span>
+                    <span class="tag">30 min</span>
+                    <span class="tag">bezpłatnie</span>
+                </div>
+
+                <button class="add-btn"
+                    onclick="addPlace('Stary Rynek',30,0)">
+                    + Dodaj do planu
+                </button>
+            </div>
+
+        </div>
+
+
+        <div class="attraction">
+
+            <div class="photo">🌳</div>
+
+            <div class="info">
+                <h3>Gostynińsko-Włocławski Park Krajobrazowy</h3>
+                <p>Przyroda, lasy, jeziora i miejsca na spokojny spacer poza miastem.</p>
+
+                <div class="tags">
+                    <span class="tag">natura</span>
+                    <span class="tag">60 min</span>
+                    <span class="tag">bezpłatnie</span>
+                </div>
+
+                <button class="add-btn"
+                    onclick="addPlace('Gostynińsko-Włocławski Park Krajobrazowy',60,0)">
+                    + Dodaj do planu
+                </button>
+            </div>
+
+        </div>
 
     </div>
 
-</div>
 
+    <!-- ===== WYBRANY PLAN ===== -->
 
-<!-- =================================================
-     CZAS
-     ================================================= -->
+    <div class="card">
 
-<div class="card">
+        <h2 class="section-title">Twoja trasa</h2>
 
-    <h3 class="card-title">
+        <div id="route">
 
-        ⏱️ Ile masz czasu?
+            <div class="empty">
+                Dodaj atrakcje, aby stworzyć własną trasę.
+            </div>
 
-    </h3>
-
-
-    <div class="time-buttons">
-
-
-        <button
-            class="time-button"
-            onclick="selectPlanTime('1 godzina', this)">
-
-            1 godz.
-
-        </button>
-
-
-        <button
-            class="time-button"
-            onclick="selectPlanTime('2 godziny', this)">
-
-            2 godz.
-
-        </button>
-
-
-        <button
-            class="time-button"
-            onclick="selectPlanTime('3 godziny', this)">
-
-            3 godz.
-
-        </button>
-
-
-        <button
-            class="time-button"
-            onclick="selectPlanTime('4 godziny', this)">
-
-            4 godz.
-
-        </button>
-
-
-        <button
-            class="time-button"
-            onclick="selectPlanTime('5 godzin', this)">
-
-            5 godz.
-
-        </button>
-
-
-        <button
-            class="time-button"
-            onclick="selectPlanTime('Cały dzień', this)">
-
-            Cały dzień
-
-        </button>
-
+        </div>
 
     </div>
 
 
-    <div
-        id="planTime"
-        class="selected-time">
+    <!-- ===== AKCJE ===== -->
 
-        Nie wybrano czasu.
+    <div class="card">
 
-    </div>
-
-</div>
-
-
-<!-- =================================================
-     ATRAKCJE
-     ================================================= -->
-
-<h2 class="section-title">
-
-    ⭐ Wybierz miejsca
-
-</h2>
-
-
-<!-- ZAMEK -->
-
-<div class="attraction">
-
-
-    <div class="attraction-picture">
-        🏰
-    </div>
-
-
-    <div class="attraction-content">
-
-        <h3>
-            Zamek
-        </h3>
-
-
-        <p>
-            Poznaj historię jednego
-            z najciekawszych zabytków.
-        </p>
-
-
-        <p class="details">
-
-            📍 około 1,2 km
-            &nbsp; • &nbsp;
-            ⏱️ około 60 min
-
-        </p>
-
-
-        <button
-            class="add-button"
-            onclick="togglePlace(
-                this,
-                'Zamek',
-                52.2297,
-                21.0122,
-                '60 min',
-                '1,2 km'
-            )">
-
-            ＋ Dodaj do mojego zwiedzania
-
+        <button class="main-button" onclick="startTour()">
+            ▶ Rozpocznij zwiedzanie
         </button>
 
-    </div>
-
-</div>
-
-
-<!-- KATEDRA -->
-
-<div class="attraction">
-
-
-    <div class="attraction-picture">
-        ⛪
-    </div>
-
-
-    <div class="attraction-content">
-
-        <h3>
-            Katedra
-        </h3>
-
-
-        <p>
-            Odkryj historię i najważniejsze
-            ciekawostki tego miejsca.
-        </p>
-
-
-        <p class="details">
-
-            📍 około 2,4 km
-            &nbsp; • &nbsp;
-            ⏱️ około 45 min
-
-        </p>
-
-
-        <button
-            class="add-button"
-            onclick="togglePlace(
-                this,
-                'Katedra',
-                52.2318,
-                21.0067,
-                '45 min',
-                '2,4 km'
-            )">
-
-            ＋ Dodaj do mojego zwiedzania
-
+        <button class="main-button secondary" onclick="clearPlan()">
+            Wyczyść plan
         </button>
 
     </div>
 
-</div>
 
-
-<!-- STARE MIASTO -->
-
-<div class="attraction">
-
-
-    <div class="attraction-picture">
-        🏛️
+    <div class="footer">
+        TurystaGo • Twój osobisty przewodnik GPS
     </div>
-
-
-    <div class="attraction-content">
-
-        <h3>
-            Stare Miasto
-        </h3>
-
-
-        <p>
-            Spacer po najciekawszych miejscach
-            historycznego centrum.
-        </p>
-
-
-        <p class="details">
-
-            📍 około 3,1 km
-            &nbsp; • &nbsp;
-            ⏱️ około 90 min
-
-        </p>
-
-
-        <button
-            class="add-button"
-            onclick="togglePlace(
-                this,
-                'Stare Miasto',
-                52.2351,
-                21.0085,
-                '90 min',
-                '3,1 km'
-            )">
-
-            ＋ Dodaj do mojego zwiedzania
-
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =================================================
-     PODSUMOWANIE
-     ================================================= -->
-
-<div class="summary">
-
-
-    <h2>
-
-        Twój plan
-
-    </h2>
-
-
-    <div class="summary-count">
-
-        Wybrane miejsca:
-
-        <strong id="liczba">
-            0
-        </strong>
-
-    </div>
-
-
-    <span id="lista">
-
-        Nie wybrano jeszcze żadnego miejsca.
-
-    </span>
-
-
-    <button
-        class="primary-button"
-        onclick="createMyPlan()">
-
-        🟢 UTWÓRZ MÓJ PLAN
-
-    </button>
-
-
-    <button
-        class="clear-button"
-        onclick="clearMyPlan()">
-
-        Wyczyść plan
-
-    </button>
-
-
-</div>
-
 
 </div>
 
 
 <script>
 
-/* =====================================================
-   DANE
-   ===================================================== */
-
-let planStartLocation = null;
-
-let planStartCoordinates = null;
-
-let planTime = null;
-
-let planPlaces = [];
-
-
-/* =====================================================
-   START – GPS
-   ===================================================== */
-
-function chooseStartLocation() {
-
-    if (!navigator.geolocation) {
-
-        alert(
-            "Twoje urządzenie nie obsługuje GPS."
-        );
-
-        return;
-    }
-
-
-    navigator.geolocation.getCurrentPosition(
-
-        function(position) {
-
-
-            planStartLocation =
-                "Moja aktualna lokalizacja";
-
-
-            planStartCoordinates = {
-
-                lat:
-                    position.coords.latitude,
-
-                lng:
-                    position.coords.longitude
-
-            };
-
-
-            document.getElementById(
-                "startLocation"
-            ).innerHTML =
-
-                "📍 <strong>Start:</strong> " +
-
-                "Moja aktualna lokalizacja" +
-
-                "<br>" +
-
-                "<small>" +
-
-                "GPS: " +
-
-                position.coords.latitude
-                    .toFixed(5) +
-
-                ", " +
-
-                position.coords.longitude
-                    .toFixed(5) +
-
-                "</small>";
-
-        },
-
-
-        function() {
-
-            alert(
-                "Nie udało się pobrać lokalizacji. " +
-                "Sprawdź, czy GPS jest włączony."
-            );
-
-        }
-
-    );
-
-}
-
-
-/* =====================================================
-   CZAS
-   ===================================================== */
-
-function selectPlanTime(
-    time,
-    button
-) {
-
-    planTime = time;
-
-
-    document
-        .querySelectorAll(
-            ".time-button"
-        )
-        .forEach(
-            function(item) {
-
-                item.classList.remove(
-                    "selected"
-                );
-
-            }
-        );
-
-
-    button.classList.add(
-        "selected"
-    );
-
-
-    document.getElementById(
-        "planTime"
-    ).innerHTML =
-
-        "⏱️ <strong>Wybrany czas:</strong> " +
-        time;
-
-}
-
-
-/* =====================================================
-   ATRAKCJE
-   ===================================================== */
-
-function togglePlace(
-    button,
-    name,
-    lat,
-    lng,
-    time,
-    distance
-) {
-
-
-    const index =
-        planPlaces.findIndex(
-            function(place) {
-
-                return place.name === name;
-
-            }
-        );
-
-
-    if (index !== -1) {
-
-
-        planPlaces.splice(
-            index,
-            1
-        );
-
-
-        button.innerHTML =
-            "＋ Dodaj do mojego zwiedzania";
-
-
-        button.classList.remove(
-            "added"
-        );
-
-
-    } else {
-
-
-        planPlaces.push({
-
-            name: name,
-
-            lat: lat,
-
-            lng: lng,
-
-            time: time,
-
-            distance: distance
-
-        });
-
-
-        button.innerHTML =
-            "✓ Dodano do zwiedzania";
-
-
-        button.classList.add(
-            "added"
-        );
-
-    }
-
+let plan = [];
+
+function addPlace(name, time, cost) {
+
+    plan.push({
+        name: name,
+        time: time,
+        cost: cost
+    });
 
     updatePlan();
 
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
 }
 
 
-/* =====================================================
-   AKTUALIZACJA
-   ===================================================== */
+function removePlace(index) {
+
+    plan.splice(index, 1);
+
+    updatePlan();
+}
+
 
 function updatePlan() {
 
+    const route = document.getElementById("route");
 
-    document.getElementById(
-        "liczba"
-    ).innerText =
-        planPlaces.length;
+    if (plan.length === 0) {
 
+        route.innerHTML =
+            '<div class="empty">Dodaj atrakcje, aby stworzyć własną trasę.</div>';
 
-    const lista =
-        document.getElementById(
-            "lista"
-        );
+    } else {
 
+        route.innerHTML = "";
 
-    if (
-        planPlaces.length === 0
-    ) {
+        plan.forEach((place, index) => {
 
-        lista.innerText =
-            "Nie wybrano jeszcze żadnego miejsca.";
+            const item = document.createElement("div");
 
-        return;
+            item.className = "route-item";
+
+            item.innerHTML = `
+                <button class="remove"
+                    onclick="removePlace(${index})">✕</button>
+
+                <h3>${index + 1}. ${place.name}</h3>
+
+                <p>
+                    Zwiedzanie: ${place.time} min
+                    ${place.cost > 0 ? " • " + place.cost + " zł" : " • bezpłatnie"}
+                </p>
+            `;
+
+            route.appendChild(item);
+
+        });
     }
 
 
-    lista.innerHTML =
-        planPlaces
-            .map(
-                function(place, index) {
+    let totalTime = 0;
+    let totalCost = 0;
 
-                    return (
+    plan.forEach(place => {
+        totalTime += place.time;
+        totalCost += place.cost;
+    });
 
-                        (index + 1) +
-                        ". " +
-                        place.name
 
-                    );
+    document.getElementById("count").textContent =
+        plan.length;
 
-                }
-            )
-            .join(" • ");
+    document.getElementById("time").textContent =
+        totalTime + " min";
 
+    document.getElementById("cost").textContent =
+        totalCost + " zł";
 }
 
 
-/* =====================================================
-   UTWÓRZ MÓJ PLAN
-   ===================================================== */
+function clearPlan() {
 
-function createMyPlan() {
+    if (plan.length === 0) {
+        return;
+    }
+
+    if (confirm("Czy na pewno chcesz wyczyścić cały plan?")) {
+
+        plan = [];
+
+        updatePlan();
+    }
+}
 
 
-    if (!planStartLocation) {
+function startTour() {
+
+    if (plan.length === 0) {
 
         alert(
-            "Najpierw wybierz miejsce rozpoczęcia."
+            "Najpierw dodaj przynajmniej jedną atrakcję do swojego planu."
         );
 
         return;
     }
 
 
-    if (!planTime) {
+    let lista = "";
 
-        alert(
-            "Najpierw wybierz czas zwiedzania."
-        );
+    plan.forEach((place, index) => {
 
-        return;
-    }
+        lista +=
+            (index + 1) + ". " +
+            place.name +
+            "\n";
 
-
-    if (
-        planPlaces.length === 0
-    ) {
-
-        alert(
-            "Dodaj przynajmniej jedną atrakcję."
-        );
-
-        return;
-    }
+    });
 
 
-    const plan = {
-
-        start:
-            planStartLocation,
-
-        startCoordinates:
-            planStartCoordinates,
-
-        time:
-            planTime,
-
-        places:
-            planPlaces
-
-    };
-
-
-    localStorage.setItem(
-
-        "turystagoPlan",
-
-        JSON.stringify(plan)
-
+    alert(
+        "TurystaGo rozpoczyna przygotowanie zwiedzania!\n\n" +
+        "Twoja trasa:\n\n" +
+        lista +
+        "\n\nW następnej wersji połączymy ten plan z mapą i GPS."
     );
-
-
-    /*
-     * Przechodzimy do ekranu mapy.
-     */
-
-    window.location.href =
-        "index.html?showMap=1";
-
-}
-
-
-/* =====================================================
-   WYCZYŚĆ PLAN
-   ===================================================== */
-
-function clearMyPlan() {
-
-
-    planStartLocation = null;
-
-    planStartCoordinates = null;
-
-    planTime = null;
-
-    planPlaces = [];
-
-
-    localStorage.removeItem(
-        "turystagoPlan"
-    );
-
-
-    document.getElementById(
-        "startLocation"
-    ).innerHTML =
-        "Nie wybrano miejsca rozpoczęcia.";
-
-
-    document.getElementById(
-        "planTime"
-    ).innerHTML =
-        "Nie wybrano czasu.";
-
-
-    document
-        .querySelectorAll(
-            ".time-button"
-        )
-        .forEach(
-            function(button) {
-
-                button.classList.remove(
-                    "selected"
-                );
-
-            }
-        );
-
-
-    document
-        .querySelectorAll(
-            ".add-button"
-        )
-        .forEach(
-            function(button) {
-
-                button.innerHTML =
-                    "＋ Dodaj do mojego zwiedzania";
-
-
-                button.classList.remove(
-                    "added"
-                );
-
-            }
-        );
-
-
-    updatePlan();
-
-}
-
-
-/* =====================================================
-   POWRÓT
-   ===================================================== */
-
-function goBack() {
-
-    window.location.href =
-        "index.html";
-
 }
 
 </script>
 
-
 </body>
-
 </html>
