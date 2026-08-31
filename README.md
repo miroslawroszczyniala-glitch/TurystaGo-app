@@ -13,7 +13,7 @@ organizacja grup i miejsc zbiórki,
 przygotowanie podróży,
 bezpieczeństwo i SOS,
 budżet i waluty,
-informacje o lotach i bagażu,
+polecanie znajomemu, komunikacja
 album podróży.
 
 Projekt w trakcie tworzenia.
