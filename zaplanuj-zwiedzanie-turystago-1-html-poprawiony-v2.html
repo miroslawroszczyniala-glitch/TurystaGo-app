@@ -286,7 +286,9 @@ function home(){location.href='index.html'}
 function openSettings(){document.getElementById('settings').classList.add('show')}
 function closeSettings(){document.getElementById('settings').classList.remove('show')}
 function saveSettings(){closeSettings();toast('Ustawienia zapisane.')}
-function openAncestors(){if(localStorage.getItem('turystagoPremium')!=='1'){openPremium();toast('Śladami przodków jest funkcją Premium.');return}document.getElementById('ancestors').classList.add('show')}
+function openAncestors(){
+    window.location.href = 'sladami-przodkow.html';
+}
 function closeAncestors(){document.getElementById('ancestors').classList.remove('show')}
 function addAncestor(){let n=document.getElementById('ancestorName').value.trim(),c=document.getElementById('ancestorCity').value.trim();if(!n){toast('Wpisz nazwisko.');return}localStorage.setItem('turystagoAncestor',JSON.stringify({name:n,city:c,type:document.getElementById('ancestorType').value}));document.getElementById('ancestorStatus').textContent='🌳 '+n+(c?' — '+c:'');closeAncestors();toast('Nazwisko zapisane dla tego planu.')}
 document.getElementById('budget').addEventListener('change',render);
