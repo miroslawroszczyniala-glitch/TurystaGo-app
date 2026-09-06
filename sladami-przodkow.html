@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TurystaGo – Śladami przodków</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#111;font-family:Arial,sans-serif;color:#10294a}
+.app{width:min(430px,100%);min-height:100vh;margin:auto;background:linear-gradient(#dff4ff,#f7fcfe 360px,#eef7fb);overflow:hidden}
+.header{padding:17px 16px 14px;background:linear-gradient(145deg,#bce8ff,#f2fbff);border-radius:0 0 30px 30px;box-shadow:0 4px 15px #183b5520}
+.top{display:flex;align-items:center;justify-content:space-between}
+.icon{width:42px;height:42px;border:0;border-radius:14px;background:#ffffffdd;color:#10294a;font-size:25px}
+.logo{font-size:35px;font-weight:900;letter-spacing:-2px}.logo b{color:#63c900}
+.subtitle{text-align:center;font-size:14px;margin-top:6px}
+.art{height:72px;margin:8px -16px 0;background:linear-gradient(155deg,transparent 43%,#79b4cf 44% 47%,transparent 48%) 0 10px/100px 60px repeat-x,linear-gradient(200deg,transparent 43%,#7ab77d 44% 48%,transparent 49%) 0 18px/120px 60px repeat-x}
+.title{text-align:center;font-size:22px;font-weight:900;margin:3px 0}.sub{text-align:center;color:#64748b;font-size:13px}
+.content{padding:12px 16px 105px}
+.card{background:#fff;border:1px solid #dfe9ee;border-radius:22px;padding:14px;margin-bottom:12px;box-shadow:0 5px 16px #183b5518}
+h2{font-size:16px;margin:0 0 10px}label{font-size:11px;font-weight:800;color:#64748b;display:block;margin-bottom:5px}
+input,select{width:100%;border:2px solid #dce7ed;border-radius:14px;padding:11px;background:#fff;color:#10294a;font-weight:700}
+.row{display:flex;gap:8px}.loc{width:48px;border:0;border-radius:14px;background:#63c900;color:#fff;font-size:21px}
+.btn{border:0;border-radius:13px;padding:11px 12px;font-size:11px;font-weight:900;cursor:pointer}
+.green{background:#63c900;color:#fff}.blue{background:#168eea;color:#fff}.light{background:#edf2f5;color:#10294a}
+.hero{border:2px solid #b9d9f5;background:linear-gradient(135deg,#fff,#f2f9ff)}
+.searchbox{background:#f8fbfc;border:1px solid #dce7ed;border-radius:17px;padding:11px}
+.result{border:1px solid #dfe9ee;border-radius:17px;padding:12px;margin-top:9px;background:#fff}
+.resulthead{display:flex;gap:10px;align-items:center}.rIcon{width:43px;height:43px;border-radius:14px;background:#eaf8dc;display:flex;align-items:center;justify-content:center;font-size:23px;flex:none}
+.rname{font-size:13px;font-weight:900}.meta{font-size:10px;color:#64748b;margin-top:4px}
+.partial{margin-top:10px;background:#f7fafb;border-radius:13px;padding:9px;font-size:11px;line-height:1.5}
+.locked{margin-top:9px;border:1px dashed #cbd5e1;background:#f8fafc;border-radius:13px;padding:10px;font-size:11px;cursor:pointer}
+.locked b{color:#168eea}.premium{border:2px solid #ffe19a;background:linear-gradient(135deg,#fffef7,#fff8df)}
+.badge{display:inline-block;background:#ffc400;color:#10294a;border-radius:9px;padding:4px 7px;font-size:9px;font-weight:900}
+.notice{background:#fff8df;border-left:5px solid #ffc400;border-radius:13px;padding:10px;font-size:11px;line-height:1.45}
+.empty{text-align:center;color:#64748b;font-size:11px;padding:12px}
+.saved{border:2px solid #cdebb7;background:#f7fff1}
+.bottom{position:fixed;bottom:0;width:min(430px,100%);height:78px;background:#fffffff5;border-radius:27px 27px 0 0;box-shadow:0 -5px 20px #183b5520;display:grid;grid-template-columns:repeat(5,1fr);z-index:10;padding-bottom:5px}
+.nav{border:0;background:none;font-size:10px;font-weight:800;color:#10294a}.nav span{display:block;font-size:23px}.active{color:#4fa900}
+.center{width:62px;height:62px;border-radius:50%;border:5px solid white;background:#63c900;color:white;font-size:25px;margin:auto;display:flex;align-items:center;justify-content:center}
+.toast{position:fixed;z-index:60;bottom:88px;left:50%;transform:translate(-50%,20px);opacity:0;background:#10294a;color:white;border-radius:14px;padding:11px 15px;width:min(390px,90%);font-size:12px;font-weight:700;transition:.25s;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.modal{display:none;position:fixed;z-index:50;inset:0;background:#10294a66;align-items:flex-end}.modal.show{display:flex}
+.modalbox{background:white;width:min(430px,100%);border-radius:28px 28px 0 0;padding:18px;max-height:88vh;overflow:auto}
+.close{float:right;border:0;border-radius:50%;width:35px;height:35px;font-size:20px}
+.profileItem{background:#f8fbfc;border:1px solid #e1eaee;border-radius:15px;padding:11px;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="header">
+  <div class="top">
+    <button class="icon" onclick="toast('Menu TurystaGo')">☰</button>
+    <div class="logo">Turysta<b>G</b><b>O</b></div>
+    <button class="icon" onclick="toast('Powiadomienia TurystaGo')">♧</button>
+  </div>
+  <div class="subtitle">Twój osobisty przewodnik GPS</div>
+  <div class="art"></div>
+  <div class="title">ŚLADAMI PRZODKÓW</div>
+  <div class="sub">Odkrywaj rodzinne nazwiska i miejsca</div>
+</header>
+
+<main class="content">
+
+<section class="card hero">
+  <h2>🌳 Tropienie rodzinnych śladów</h2>
+  <p style="font-size:11px;line-height:1.5;margin-top:0">
+    Wpisz nazwisko, które chcesz odnaleźć podczas podróży. TurystaGo może wyszukiwać
+    informacje o miejscach związanych z tym nazwiskiem.
+  </p>
+  <div class="searchbox">
+    <label>NAZWISKO DO TROPIENIA</label>
+    <input id="surname" placeholder="np. Roszczyniała" autocomplete="family-name">
+    <div style="height:8px"></div>
+    <label>MIEJSCOWOŚĆ / REGION — OPCJONALNIE</label>
+    <input id="region" placeholder="np. Włocławek, Kujawy">
+    <button class="btn green" style="width:100%;margin-top:10px" onclick="searchSurname()">🔎 ROZPOCZNIJ TROPIENIE</button>
+  </div>
+</section>
+
+<section id="savedCard" class="card saved" style="display:none">
+  <h2>💾 Zapisane w Mój profil</h2>
+  <div id="savedText" style="font-size:11px"></div>
+  <button class="btn light" style="width:100%;margin-top:9px" onclick="openProfile()">👤 OTWÓRZ MÓJ PROFIL</button>
+</section>
+
+<section class="card">
+  <h2>📜 Wyniki wyszukiwania</h2>
+  <div id="results" class="empty">Wpisz nazwisko i rozpocznij tropienie.</div>
+</section>
+
+<section class="card premium">
+  <div style="display:flex;align-items:center;gap:10px">
+    <div style="font-size:27px">⭐</div>
+    <div><b>WIĘCEJ INFORMACJI — PREMIUM</b>
+      <div style="font-size:10px;color:#64748b;margin-top:3px">Odkryj pełne rodzinne ślady</div>
+    </div>
+  </div>
+  <p style="font-size:11px;line-height:1.5">
+    Bezpłatnie zobaczysz podstawowe, częściowe informacje. Szczegółowe dane,
+    dodatkowe miejsca i rozszerzone wyniki są dostępne po przejściu do Premium.
+  </p>
+  <button class="btn green" style="width:100%" onclick="premiumPrompt()">⭐ PRZEJDŹ DO PREMIUM</button>
+</section>
+
+<section class="card">
+  <h2>🌳 Własne drzewo genealogiczne</h2>
+  <p style="font-size:11px;line-height:1.5">
+    Chcesz stworzyć własne drzewo? Możesz bezpłatnie przygotować drzewo genealogiczne
+    i zapisać je do pliku do późniejszego przeniesienia danych.
+  </p>
+  <div class="row">
+    <button class="btn light" style="flex:1" onclick="toast('Moduł własnego drzewa genealogicznego zostanie podłączony.')">🌳 TWÓRZ BEZPŁATNIE</button>
+    <button class="btn blue" style="flex:1" onclick="exportTree()">💾 ZAPISZ DO PLIKU</button>
+  </div>
+</section>
+
+</main>
+
+<nav class="bottom">
+  <button class="nav" onclick="home()"><span>⌂</span>Start</button>
+  <button class="nav active"><span>♧</span>Ślady</button>
+  <button class="nav" onclick="toast('Nawigacja TurystaGo')"><div class="center">➤</div>Nawiguj</button>
+  <button class="nav" onclick="toast('Ulubione')"><span>♡</span>Ulubione</button>
+  <button class="nav" onclick="openProfile()"><span>♙</span>Mój profil</button>
+</nav>
+
+<div id="toast" class="toast"></div>
+
+<div id="premiumModal" class="modal" onclick="if(event.target===this)closePremium()">
+  <div class="modalbox">
+    <button class="close" onclick="closePremium()">×</button>
+    <h2>⭐ Przejdź do Premium</h2>
+    <div class="notice">
+      <b>Ta informacja jest zablokowana.</b><br>
+      W bezpłatnej wersji TurystaGo pokazuje tylko częściowe informacje o znalezionym śladzie.
+      Pełne dane wymagają aktywnego Premium.
+    </div>
+    <div class="profileItem"><b>W Premium otrzymasz m.in.:</b>
+      <div style="font-size:11px;line-height:1.6;margin-top:6px">
+        • rozszerzone informacje o nazwisku<br>
+        • więcej miejsc związanych z rodziną<br>
+        • szczegółowe daty i powiązania<br>
+        • możliwość dokładniejszego tropienia podczas podróży
+      </div>
+    </div>
+    <button class="btn green" style="width:100%;margin-top:10px" onclick="activatePremium()">⭐ AKTYWUJ PREMIUM</button>
+    <div style="font-size:9px;color:#64748b;text-align:center;margin-top:7px">
+      Płatność zostanie podłączona do właściwego systemu Premium.
+    </div>
+  </div>
+</div>
+
+<div id="profileModal" class="modal" onclick="if(event.target===this)closeProfile()">
+  <div class="modalbox">
+    <button class="close" onclick="closeProfile()">×</button>
+    <h2>👤 Mój profil</h2>
+    <p style="font-size:11px;color:#64748b">Twoje zapisane ślady rodzinne.</p>
+    <div id="profileContent"></div>
+  </div>
+</div>
+
+<script>
+function toast(t){
+  const x=document.getElementById('toast');
+  x.textContent=t;x.classList.add('show');
+  clearTimeout(window.tt);
+  window.tt=setTimeout(()=>x.classList.remove('show'),2800);
+}
+function home(){location.href='index.html'}
+
+function isPremium(){
+  return localStorage.getItem('turystagoPremium')==='1';
+}
+
+function searchSurname(){
+  const surname=document.getElementById('surname').value.trim();
+  const region=document.getElementById('region').value.trim();
+  if(!surname){toast('Wpisz nazwisko do tropienia.');return;}
+
+  const safeSurname=surname.replace(/[<>&"]/g,'');
+  const safeRegion=(region||'Polska').replace(/[<>&"]/g,'');
+
+  /*
+   * DEMO: ten ekran pokazuje przykładowy sposób prezentacji wyników.
+   * Prawdziwe wyszukiwanie wymaga podłączenia bazy danych/API genealogicznego.
+   */
+  const results=[
+    {icon:'📍',title:'Możliwy ślad miejscowości',meta:safeRegion,
+     text:'Nazwisko „'+safeSurname+'” może być powiązane z tym regionem. Dostępne są podstawowe informacje o lokalizacji.'},
+    {icon:'⛪',title:'Możliwy ślad parafialny',meta:'Informacja częściowa',
+     text:'Wynik wskazuje możliwość występowania dokumentów lub zapisów związanych z tym nazwiskiem.'},
+    {icon:'📜',title:'Ślad historyczny nazwiska',meta:'Informacja częściowa',
+     text:'TurystaGo znalazło potencjalny materiał do dalszego sprawdzenia.'}
+  ];
+
+  document.getElementById('results').innerHTML=results.map((r,i)=>`
+    <div class="result">
+      <div class="resulthead">
+        <div class="rIcon">${r.icon}</div>
+        <div><div class="rname">${r.title}</div><div class="meta">${r.meta}</div></div>
+      </div>
+      <div class="partial">${r.text}</div>
+      <div class="locked" onclick="showLocked(${i})">
+        🔒 <b>POKAŻ WIĘCEJ DANYCH</b><br>
+        <span style="font-size:10px;color:#64748b">Szczegóły dostępne w Premium</span>
+      </div>
+    </div>`).join('');
+
+  saveSurname(safeSurname,safeRegion);
+  toast('Znaleziono częściowe informacje dla: '+safeSurname);
+}
+
+function saveSurname(surname,region){
+  const item={surname,region,date:new Date().toISOString()};
+  localStorage.setItem('turystagoAncestor',JSON.stringify(item));
+  document.getElementById('savedCard').style.display='block';
+  document.getElementById('savedText').innerHTML=
+    '<b>🌳 '+surname+'</b><div style="font-size:10px;color:#64748b;margin-top:4px">'+region+
+    '</div><div style="font-size:10px;color:#64748b;margin-top:4px">Nazwisko zapisane w Twoim profilu.</div>';
+}
+
+function showLocked(){
+  if(!isPremium()){
+    document.getElementById('premiumModal').classList.add('show');
+    toast('Pełne informacje są dostępne w Premium.');
+    return;
+  }
+  toast('Pełne dane zostaną pobrane po podłączeniu bazy genealogicznej.');
+}
+
+function premiumPrompt(){
+  document.getElementById('premiumModal').classList.add('show');
+}
+function closePremium(){document.getElementById('premiumModal').classList.remove('show')}
+function activatePremium(){
+  localStorage.setItem('turystagoPremium','1');
+  closePremium();
+  toast('Premium aktywowane w wersji demonstracyjnej.');
+}
+
+function openProfile(){
+  const box=document.getElementById('profileContent');
+  let a=null;
+  try{a=JSON.parse(localStorage.getItem('turystagoAncestor')||'null')}catch(e){}
+  if(!a){
+    box.innerHTML='<div class="empty">Nie masz jeszcze zapisanych śladów rodzinnych.</div>';
+  }else{
+    box.innerHTML=`
+      <div class="profileItem">
+        <b>🌳 ${a.surname}</b>
+        <div style="font-size:10px;color:#64748b;margin-top:5px">📍 ${a.region||'Polska'}</div>
+        <button class="btn green" style="width:100%;margin-top:9px" onclick="loadSaved()">🔎 OTWÓRZ TROPIENIE</button>
+      </div>`;
+  }
+  document.getElementById('profileModal').classList.add('show');
+}
+function closeProfile(){document.getElementById('profileModal').classList.remove('show')}
+function loadSaved(){
+  let a=JSON.parse(localStorage.getItem('turystagoAncestor')||'null');
+  if(!a)return;
+  document.getElementById('surname').value=a.surname||'';
+  document.getElementById('region').value=a.region||'';
+  closeProfile();searchSurname();
+}
+function exportTree(){
+  const data={type:'TurystaGo – Ślady przodków',ancestor:JSON.parse(localStorage.getItem('turystagoAncestor')||'null'),exported:new Date().toISOString()};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='turystago-slady-przodkow.json';a.click();URL.revokeObjectURL(url);
+  toast('Zapisano plik danych.');
+}
+
+(function init(){
+  try{
+    const a=JSON.parse(localStorage.getItem('turystagoAncestor')||'null');
+    if(a&&a.surname){
+      document.getElementById('surname').value=a.surname;
+      document.getElementById('region').value=a.region||'';
+      document.getElementById('savedCard').style.display='block';
+      document.getElementById('savedText').innerHTML='<b>🌳 '+a.surname+'</b><div style="font-size:10px;color:#64748b;margin-top:4px">'+(a.region||'Polska')+'</div>';
+    }
+  }catch(e){}
+})();
+</script>
+</div>
+</body>
+</html>
