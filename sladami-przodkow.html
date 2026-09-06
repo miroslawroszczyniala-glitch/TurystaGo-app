@@ -270,6 +270,214 @@ function exportTree(){
   toast('Zapisano plik danych.');
 }
 
+  // ===============================
+// ŚLADAMI PRZODKÓW – TURYSTAGO
+// ===============================
+
+function isAncestorPremium(){
+    return localStorage.getItem('turystagoPremium') === '1';
+}
+
+// Ustalenie zakresu wyszukiwania
+function setAncestorSearchRange(){
+    const range = document.getElementById('ancestorRange');
+
+    if(!range) return;
+
+    const value = range.value;
+
+    localStorage.setItem('turystagoAncestorRange', value);
+
+    if(typeof toast === 'function'){
+        toast('Zakres wyszukiwania zapisany.');
+    }
+}
+
+// Wyszukiwanie śladów
+function searchAncestors(){
+    const surname = document.getElementById('ancestorSurname')?.value.trim() || '';
+    const place = document.getElementById('ancestorPlace')?.value.trim() || '';
+    const range = document.getElementById('ancestorRange')?.value || '50';
+
+    if(!surname && !place){
+        if(typeof toast === 'function'){
+            toast('Podaj nazwisko lub miejscowość.');
+        }
+        return;
+    }
+
+    const result = {
+        id: Date.now(),
+        surname: surname,
+        place: place,
+        range: range,
+        date: new Date().toISOString()
+    };
+
+    localStorage.setItem(
+        'turystagoAncestorLastSearch',
+        JSON.stringify(result)
+    );
+
+    showAncestorBasicResult(result);
+}
+
+// Podstawowe informacje – dostępne przed Premium
+function showAncestorBasicResult(result){
+
+    const box = document.getElementById('ancestorResults');
+
+    if(!box) return;
+
+    box.innerHTML = `
+        <div class="ancestor-result">
+            <h3>Możliwy ślad przodków</h3>
+
+            ${result.surname
+                ? `<p><strong>Nazwisko:</strong> ${result.surname}</p>`
+                : ''}
+
+            ${result.place
+                ? `<p><strong>Miejscowość:</strong> ${result.place}</p>`
+                : ''}
+
+            <p><strong>Zakres:</strong> ${result.range} km</p>
+
+            <p>
+                Znaleziono potencjalne miejsca i osoby
+                wymagające dalszej weryfikacji.
+            </p>
+
+            <button onclick="saveAncestorTrace()">
+                ZAPISZ ŚLAD
+            </button>
+
+            <button onclick="openAncestorDetails(${result.id})">
+                ODKRYJ WIĘCEJ
+            </button>
+        </div>
+    `;
+}
+
+// Zapis wyniku
+function saveAncestorTrace(){
+
+    const result = localStorage.getItem(
+        'turystagoAncestorLastSearch'
+    );
+
+    if(!result){
+        if(typeof toast === 'function'){
+            toast('Brak wyniku do zapisania.');
+        }
+        return;
+    }
+
+    let saved = JSON.parse(
+        localStorage.getItem('turystagoAncestorSaved') || '[]'
+    );
+
+    const item = JSON.parse(result);
+
+    if(!saved.some(x => x.id === item.id)){
+        saved.push(item);
+    }
+
+    localStorage.setItem(
+        'turystagoAncestorSaved',
+        JSON.stringify(saved)
+    );
+
+    if(typeof toast === 'function'){
+        toast('Ślad został zapisany.');
+    }
+}
+
+// Szczegóły – Premium
+function openAncestorDetails(id){
+
+    if(!isAncestorPremium()){
+
+        if(typeof openPremium === 'function'){
+            openPremium();
+        }
+
+        if(typeof toast === 'function'){
+            toast(
+                'Pełne informacje o śladzie są dostępne w Premium.'
+            );
+        }
+
+        return;
+    }
+
+    showFullAncestorTrace(id);
+}
+
+// Pełny ślad dla Premium
+function showFullAncestorTrace(id){
+
+    const box = document.getElementById('ancestorResults');
+
+    if(!box) return;
+
+    box.innerHTML = `
+        <div class="ancestor-result ancestor-premium">
+
+            <h3>PEŁNY ŚLAD PRZODKA</h3>
+
+            <p><strong>Status:</strong> Premium</p>
+
+            <p>
+                Dostępne są rozszerzone informacje dotyczące
+                odnalezionego śladu.
+            </p>
+
+            <div class="ancestor-premium-functions">
+
+                <button onclick="showAncestorSources(${id})">
+                    ŹRÓDŁA
+                </button>
+
+                <button onclick="showAncestorConnections(${id})">
+                    POWIĄZANIA RODZINNE
+                </button>
+
+                <button onclick="showAncestorMap(${id})">
+                    POKAŻ NA MAPIE
+                </button>
+
+                <button onclick="showAncestorGenerations(${id})">
+                    KOLEJNE POKOLENIA
+                </button>
+
+            </div>
+
+        </div>
+    `;
+}
+
+// Funkcje Premium
+function showAncestorSources(id){
+    if(!isAncestorPremium()) return;
+    toast('Źródła śladu zostaną wyświetlone.');
+}
+
+function showAncestorConnections(id){
+    if(!isAncestorPremium()) return;
+    toast('Powiązania rodzinne zostaną wyświetlone.');
+}
+
+function showAncestorMap(id){
+    if(!isAncestorPremium()) return;
+    toast('Mapa śladów przodków zostanie otwarta.');
+}
+
+function showAncestorGenerations(id){
+    if(!isAncestorPremium()) return;
+    toast('Zostaną wyszukane kolejne pokolenia.');
+}
+
 (function init(){
   try{
     const a=JSON.parse(localStorage.getItem('turystagoAncestor')||'null');
