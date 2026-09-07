@@ -29,25 +29,8 @@
 <main class="content">
 
 <section class="card">
-<h2>🌍 Wybierz kraj i miejsce</h2>
+<h2>🌍 wpisz pierwsze litery kraju i wybierz z listy</h2>
 <label>KRAJ</label>
-<select id="country" onchange="countryChange()">
-  <option>Polska</option><option>Niemcy</option><option>Czechy</option><option>Austria</option><option>Włochy</option>
-  <option value="inne">Inny kraj…</option>
-</select>
-
-  function countryChange() {
-  const country = document.getElementById("country").value;
-  const otherCountry = document.getElementById("otherCountry");
-
-  if (country === "inne") {
-    otherCountry.style.display = "block";
-    otherCountry.focus();
-  } else {
-    otherCountry.style.display = "none";
-    otherCountry.value = "";
-  }
-}
 
 <input 
   type="text" 
@@ -57,12 +40,9 @@
 >
   
 <div style="height:8px"></div>
-<label>MIASTO / MIEJSCE</label>
+<label>wpisz pierwsze litery miaasta i wybierz z listy</label>
 <div class="row">
-<select id="city" onchange="cityChange()">
-  <option>Włocławek</option><option>Toruń</option><option>Ciechocinek</option><option>Płock</option>
-  <option value="inne">Wpisz inne miasto…</option>
-</select>
+
 <button class="loc" onclick="gps()">⌖</button>
 </div>
 <input id="custom" placeholder="Wpisz miasto…" style="display:none;margin-top:8px">
@@ -71,8 +51,8 @@
 <div class="box"><label>LICZBA DNI</label><select id="days" onchange="daysChange()">
 <option value="1">1 — bezpłatnie</option>
 <option value="2">2 — bezpłatnie</option>
-<option value="3">3 — Zwykły</option>
-<option value="4">4 — Zwykły</option>
+<option value="3">3 — Plan wygodny</option>
+<option value="4">4 — Plan wygodny</option>
 <option value="5">5 i więcej — Premium</option>
 </select></div>
 <div class="box">
