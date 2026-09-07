@@ -36,6 +36,19 @@
   <option value="inne">Inny kraj…</option>
 </select>
 
+  function countryChange() {
+  const country = document.getElementById("country").value;
+  const otherCountry = document.getElementById("otherCountry");
+
+  if (country === "inne") {
+    otherCountry.style.display = "block";
+    otherCountry.focus();
+  } else {
+    otherCountry.style.display = "none";
+    otherCountry.value = "";
+  }
+}
+
 <input 
   type="text" 
   id="otherCountry" 
