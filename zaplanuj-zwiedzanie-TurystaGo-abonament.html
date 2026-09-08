@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TurystaGo – Zaplanuj zwiedzanie</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef2f5;color:#10213d;font-family:Arial,sans-serif}
+.app{max-width:1024px;margin:auto;background:#fff;min-height:100vh}
+.hero{height:300px;background:linear-gradient(#dff3ff,#fff);display:flex;align-items:center;justify-content:center;font-size:46px;font-weight:900}
+.hero b{color:#45a900}.card{margin:-5px 24px 25px;background:#fff;border-radius:28px;box-shadow:0 8px 28px #10213d22;padding:25px}
+.head{display:flex;justify-content:space-between;gap:12px;align-items:center}.brand{display:flex;gap:14px;align-items:center}.pin{font-size:42px;color:#8b2de2}
+h1{font-size:29px;margin:0}h2{font-size:21px;margin:0 0 14px}p{margin:5px 0}
+button,input,select{font:inherit}.myplans,.btn{border-radius:16px;padding:12px 18px;font-weight:800;cursor:pointer}
+.myplans{background:#fff;border:1px solid #ddd}.myplans:first-letter{color:#45a900}
+section{padding:22px 0;border-top:1px solid #edf0f3}section:first-of-type{border-top:0}
+label{display:block;font-weight:800;margin:10px 0 6px}input,select{width:100%;min-height:50px;border:1.5px solid #d5dce5;border-radius:15px;padding:11px 14px;background:#fff;color:#10213d}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.btn{border:0;min-height:48px}.full{width:100%;margin-top:12px}.primary,.green{background:#45a900;color:#fff}.secondary{background:#f7f8fa;color:#10213d;border:1px solid #ddd}
+.check{display:flex;align-items:center;gap:10px}.check input{width:22px;min-height:22px;accent-color:#45a900}
+.notice{display:none;margin-top:12px;padding:13px;border-radius:14px;background:#edf9e9;color:#2f7f00;font-weight:800}
+.dropdown{width:100%;text-align:left;background:#fff;border:1px solid #ddd}.useful{display:none}.item{padding:14px 0;border-top:1px solid #eee}.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:9px}.mode{padding:9px;border:1px solid #ddd;border-radius:12px;background:#fff;font-weight:700}.mode.active{border-color:#45a900;background:#edf9e9}
+.summary{background:#f8fafb;border:1px solid #e8ecf1;border-radius:20px;padding:17px}.ancestor{background:#fffaf0;border:1px solid #ffd88c;border-radius:20px}.ancestor h2{color:#d98200}
+.actions{display:grid;grid-template-columns:1fr 1.35fr 1.25fr;gap:10px}
+@media(max-width:600px){.hero{height:220px;font-size:34px}.card{margin:0 10px 15px;padding:18px 15px}.grid,.actions{grid-template-columns:1fr}.modes{grid-template-columns:1fr 1fr 1fr}h1{font-size:21px}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="hero">Turysta<b>Go</b></div>
+<main class="card">
+<div class="head">
+<div class="brand"><div class="pin">📍</div><div><h1>ZAPLANUJ ZWIEDZANIE</h1><p>Stwórz swój plan krok po kroku</p></div></div>
+<button class="myplans" onclick="myPlans()">★ Moje plany</button>
+</div>
+
+<section><h2>1. Trasa</h2>
+<label>Miejsce rozpoczęcia</label><input id="start" placeholder="np. Włocławek">
+<label>Miejsce docelowe</label><input id="end" placeholder="np. Bory Tucholskie">
+<button class="btn secondary full" onclick="addPoint()">＋ DODAJ PUNKT</button><div id="points"></div>
+<div class="grid">
+<div><label>Data wyjazdu</label><input id="dateOut" type="date"></div>
+<div><label>Godzina wyjazdu</label><input id="timeOut" type="time"></div>
+<div><label>Data powrotu</label><input id="dateBack" type="date"></div>
+<div><label>Godzina powrotu</label><input id="timeBack" type="time"></div>
+</div></section>
+
+<section><h2>2. Uczestnicy</h2>
+<div class="grid">
+<div><label>Liczba osób dorosłych</label><input id="adults" type="number" min="0" value="2"></div>
+<div><label>Liczba dzieci</label><input id="children" type="number" min="0" value="0"></div>
+</div>
+<label>Wiek dzieci</label><input id="ages" placeholder="np. 4, 7, 12">
+</section>
+
+<section><h2>3. Odkryj po drodze</h2>
+<label class="check"><input id="interesting" type="checkbox"> Ciekawe miejsca</label>
+<label class="check"><input id="famous" type="checkbox"> Sławni związani z miejscem</label>
+<button class="btn primary full" onclick="saved()">✓ ZAPISZ USTAWIENIA</button>
+<div id="notice" class="notice">Ustawienia zapisano.</div></section>
+
+<section><h2>4. Przydatne</h2>
+<button class="btn dropdown" onclick="toggleUseful()">＋ PRZYDATNE <span style="float:right">▼</span></button>
+<div id="useful" class="useful"></div></section>
+
+<section><h2>5. Budżet</h2>
+<div class="grid">
+<div><label>Transport</label><input id="transport" type="number" min="0"></div>
+<div><label>Bilety</label><input id="tickets" type="number" min="0"></div>
+<div><label>Jedzenie</label><input id="food" type="number" min="0"></div>
+<div><label>Nocleg</label><input id="lodging" type="number" min="0"></div>
+</div></section>
+
+<section><h2>6. Tempo podróży</h2>
+<select id="tempo"><option>Szybko – najważniejsze punkty</option><option selected>Normalnie – zwiedzanie + odpoczynek</option><option>Spokojnie – dużo miejsc i czasu na zwiedzanie</option></select></section>
+
+<section><h2>7. Przypomnienia</h2><label class="check"><input id="reminders" type="checkbox"> Włącz przypomnienia podczas podróży</label></section>
+
+<section><div class="summary"><h2>Podsumowanie planu</h2><div id="summary">Uzupełnij dane, a następnie zapisz podróż.</div></div></section>
+
+<section class="ancestor"><h2>Śladami przodków</h2><button class="btn full" onclick="ancestor()">ŚLADAMI PRZODKÓW</button><div id="ancestorNotice" class="notice"></div></section>
+
+<section class="actions">
+<button class="btn secondary" onclick="history.back()">‹ WSTECZ</button>
+<button class="btn primary" onclick="saveTrip()">✓ ZAPISZ PODRÓŻ</button>
+<button class="btn green" onclick="startTrip()">▶ ROZPOCZNIJ PODRÓŻ</button>
+</section>
+</main></div>
+
+<script>
+const usefulNames=["🚻 WC","☕ Miejsca odpoczynku","🅿️ Parkingi","⛽ Stacje paliw","🍴 Gastronomia","💊 Apteki / pomoc","🔧 Serwis samochodowy","📍 Inne przydatne miejsca"];
+const usefulState={};
+
+function buildUseful(){
+ const box=document.getElementById("useful");
+ usefulNames.forEach((name,i)=>{
+  usefulState[i]={mode:""};
+  const d=document.createElement("div");d.className="item";
+  d.innerHTML="<b>"+name+"</b><div class='modes'>"+
+  "<button class='mode' onclick='chooseMode("+i+",this,"all")'>Cała trasa</button>"+
+  "<button class='mode' onclick='chooseMode("+i+",this,"from")'>Od wybranego miejsca</button>"+
+  "<button class='mode' onclick='chooseMode("+i+",this,"now")'>Od teraz</button></div>"+
+  "<div id='sub"+i+"' style='display:none'><div class='grid'><input id='km"+i+"' type='number' placeholder='Odległość od startu (km)'><select id='freq"+i+"'><option>co 5 km</option><option>co 10 km</option><option>co 20 km</option></select></div></div>";
+  box.appendChild(d);
+ });
+}
+function chooseMode(i,b,m){
+ usefulState[i].mode=m;b.parentNode.querySelectorAll(".mode").forEach(x=>x.classList.remove("active"));b.classList.add("active");
+ document.getElementById("sub"+i).style.display=m==="from"?"block":"none";
+}
+function toggleUseful(){let x=document.getElementById("useful");x.style.display=x.style.display==="block"?"none":"block"}
+function addPoint(){let w=document.getElementById("points"),n=w.children.length+1,d=document.createElement("div");d.innerHTML="<label>Punkt pośredni "+n+"</label><input class='point' placeholder='np. Toruń'>";w.appendChild(d)}
+function saved(){let n=document.getElementById("notice");n.style.display="block";setTimeout(()=>n.style.display="none",1800)}
+function tripDays(){
+ if(!dateOut.value||!dateBack.value)return null;
+ return Math.floor((new Date(dateBack.value)-new Date(dateOut.value))/86400000)+1;
+}
+/* USTALONA REGUŁA: czas 1–2 dni START, 3–4 WYGODNY, >4 PREMIUM.
+   Liczba osób: do 30 wymaga WYGODNY, >30 PREMIUM. Wygrywa wyższy poziom. */
+function requiredPlan(){
+ const d=tripDays(), people=(+adults.value||0)+(+children.value||0);
+ if((d!==null&&d>4)||people>30)return "PREMIUM";
+ if((d!==null&&d>2)||people>0)return "WYGODNY";
+ return "START – bezpłatny";
+}
+function total(){return["transport","tickets","food","lodging"].reduce((s,id)=>s+(+document.getElementById(id).value||0),0)}
+function collect(){return{
+ start:start.value,end:end.value,dateOut:dateOut.value,timeOut:timeOut.value,dateBack:dateBack.value,timeBack:timeBack.value,
+ adults:adults.value,children:children.value,ages:ages.value,interesting:interesting.checked,famous:famous.checked,
+ tempo:tempo.value,reminders:reminders.checked,budget:total(),requiredPlan:requiredPlan(),savedAt:new Date().toISOString()
+}}
+function updateSummary(){
+ const x=collect();
+ summary.innerHTML="<p><b>Trasa:</b> "+(x.start||"—")+" → "+(x.end||"—")+"</p>"+
+ "<p><b>Uczestnicy:</b> "+x.adults+" dorosłych, "+x.children+" dzieci"+(x.ages?" (wiek: "+x.ages+")":"")+"</p>"+
+ "<p><b>Wymagany poziom aktywacji:</b> "+x.requiredPlan+"</p>"+
+ "<p><b>Budżet:</b> "+x.budget.toFixed(2)+" zł</p>";
+}
+function saveTrip(){
+ const x=collect();localStorage.setItem("turystago_moja_podroz",JSON.stringify(x));
+ alert("PODRÓŻ ZAPISANA ✓\n\nPlan możesz zapisać bez abonamentu. Aktywne rozpoczęcie podróży wymaga odpowiedniego abonamentu.");
+}
+function startTrip(){
+ const x=collect();
+ const paid=localStorage.getItem("turystago_abonament_aktywny")==="true";
+ if(!paid){
+  alert("PLAN JEST GOTOWY ✓\n\nAby uruchomić aktywną podróż i prowadzenie GPS, wykup odpowiedni abonament: "+x.requiredPlan+".\n\nSamo planowanie i zapisanie podróży pozostaje dostępne bez abonamentu.");
+  return;
+ }
+ localStorage.setItem("turystago_aktywna_podroz",JSON.stringify(x));
+ alert("PODRÓŻ URUCHOMIONA ✓\n\nTurystaGo może rozpocząć aktywne prowadzenie GPS.");
+}
+function myPlans(){alert(localStorage.getItem("turystago_moja_podroz")?"Masz zapisany plan w „Moje podróże”.":"Nie masz jeszcze zapisanej podróży.")}
+function ancestor(){
+ const n=prompt("Wpisz nazwisko przodka, którego TurystaGo ma tropić:");
+ if(n){ancestorNotice.textContent="ODNALAZŁEM ŚLAD TWOICH PRZODKÓW — "+n;ancestorNotice.style.display="block"}
+}
+document.querySelectorAll("input,select").forEach(e=>e.addEventListener("input",updateSummary));
+buildUseful();updateSummary();
+</script>
+</body></html>
