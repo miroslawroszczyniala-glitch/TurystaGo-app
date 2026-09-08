@@ -22,6 +22,7 @@
   </div>
   <div class="subtitle">Twój osobisty przewodnik GPS</div>
   <div class="art"></div>
+  
   <div class="title">ZAPLANUJ ZWIEDZANIE</div>
   <div class="sub">Stwórz własną trasę i odkrywaj więcej</div>
 </header>
@@ -31,12 +32,20 @@
 <section class="card">
 <h2>🌍 wpisz pierwsze litery kraju i wybierz z listy</h2>
 <label>KRAJ</label>
+<label>KRAJ</label>
+<input
+  type="text"
+  id="countryInput"
+  placeholder="Wpisz kraj..."
+  autocomplete="off"
+>
 
-<input 
-  type="text" 
-  id="otherCountry" 
-  placeholder="Wpisz nazwę kraju"
-  style="display:none;"
+<label>MIASTO</label>
+<input
+  type="text"
+  id="cityInput"
+  placeholder="Wpisz miasto..."
+  autocomplete="off"
 >
   
 <div style="height:8px"></div>
@@ -316,4 +325,6 @@ function openProfile(){var el=document.getElementById('profileModal');if(el)el.s
 function closeProfile(){var el=document.getElementById('profileModal');if(el)el.style.display='none';}
 </script>
 
+<script src="wyszukiwarka-miejsc.js"></script>
+  
 </body></html>
