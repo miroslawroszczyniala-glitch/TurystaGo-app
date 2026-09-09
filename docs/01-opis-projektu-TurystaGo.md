@@ -1,4 +1,4 @@
-# 1. TurystaGo – opis projektu
+# 1. TurystaGo – opis projektu ver.2.0
 
 ## 1. Informacje o projekcie
 
