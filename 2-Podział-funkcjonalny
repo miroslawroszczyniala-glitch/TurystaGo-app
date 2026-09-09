@@ -1,0 +1,63 @@
+Podział funkcjonalny
+Możemy teraz potraktować TurystaGo jako kilka głównych modułów:
+1. START
+index.html
+logo
+rozpoczęcie zwiedzania
+najbliższe atrakcje
+główne przyciski
+2. PLANOWANIE
+zaplanuj-zwiedzanie.html
+państwo
+miasto
+termin
+liczba dni
+uczestnicy
+sposób podróżowania
+kategorie atrakcji
+zapisanie podróży
+3. PODRÓŻ
+moj-plan.html
+moje-plany.html
+rozpocznij-zwiedzanie.html
+GPS
+mapa
+prowadzenie
+narracja
+4. ATRAKCJE
+baza atrakcji
+kategorie i podkategorie
+„Odkryj po drodze”
+„Bliskie atrakcje”
+filtry
+5. ŚLADY PRZODKÓW
+wyszukiwanie
+podstawowe bezpłatne wyniki
+rozszerzone informacje Premium
+zapis w profilu
+6. UŻYTKOWNIK
+Mój profil
+moje plany
+moje miejsca
+moje odkrycia przodków
+album
+7. GRUPY
+grupy
+uczestnicy
+komunikator
+wspólne podróże
+8. ABONAMENT
+START — bezpłatny
+WYGODNY — 19,99 zł / 30 dni
+PREMIUM — 49,99 zł / 90 dni
+bonusy
+Poleć znajomemu
+zgłaszanie ciekawych miejsc
+9. ADMINISTRATOR
+użytkownicy
+atrakcje
+treści
+płatności
+statystyki
+system
+uprawnienia administratorów
