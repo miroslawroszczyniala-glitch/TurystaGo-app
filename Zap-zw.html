@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>TurystaGo – Zaplanuj zwiedzanie</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #eef6fa;
+      color: #17324d;
+    }
+
+    header {
+      background: linear-gradient(135deg, #dff5ff, #ffffff);
+      padding: 20px 15px;
+      text-align: center;
+      border-bottom: 2px solid #c8e7f5;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 27px;
+    }
+
+    header p {
+      margin: 8px 0 0;
+      color: #557080;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
+      padding: 15px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+
+    .group-header {
+      width: 100%;
+      border: none;
+      background: white;
+      padding: 18px;
+      text-align: left;
+      font-size: 18px;
+      font-weight: bold;
+      color: #17324d;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .group-header:hover {
+      background: #f5fbfe;
+    }
+
+    .group-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .arrow {
+      font-size: 18px;
+      transition: transform 0.2s;
+    }
+
+    .group.open .arrow {
+      transform: rotate(180deg);
+    }
+
+    .subgroups {
+      display: none;
+      padding: 0 15px 15px;
+      border-top: 1px solid #e6eef2;
+    }
+
+    .group.open .subgroups {
+      display: block;
+    }
+
+    .subgroup {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 8px;
+      border-bottom: 1px solid #edf2f4;
+      cursor: pointer;
+    }
+
+    .subgroup:last-child {
+      border-bottom: none;
+    }
+
+    .subgroup input {
+      width: 20px;
+      height: 20px;
+      accent-color: #1683c4;
+    }
+
+    .subgroup-icon {
+      font-size: 22px;
+    }
+
+    .subgroup-name {
+      flex: 1;
+      font-size: 16px;
+    }
+
+    .tools {
+      display: flex;
+      gap: 8px;
+      padding: 12px 15px;
+      flex-wrap: wrap;
+    }
+
+    .small-button {
+      border: none;
+      border-radius: 9px;
+      padding: 9px 12px;
+      background: #e6f4fb;
+      color: #17628a;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .main-button {
+      width: 100%;
+      border: none;
+      border-radius: 13px;
+      padding: 15px;
+      background: #1683c4;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+
+    .main-button:hover {
+      background: #0f679b;
+    }
+
+    .selected-info {
+      background: #e8f6ec;
+      border: 1px solid #c9e8d1;
+      border-radius: 13px;
+      padding: 13px;
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+
+    #wyniki {
+      margin-top: 20px;
+    }
+
+    .wynik {
+      background: white;
+      border-radius: 17px;
+      padding: 17px;
+      margin-bottom: 14px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.10);
+    }
+
+    .wynik h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .wynik p {
+      margin: 8px 0;
+      line-height: 1.5;
+    }
+
+    .meta {
+      line-height: 1.8;
+      font-size: 14px;
+      color: #506675;
+    }
+
+    .add-button {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: #27a35a;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .add-button.dodano {
+      background: #777;
+    }
+
+    .empty {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      color: #687984;
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <h1>🌍 TurystaGo</h1>
+
+  <p>🗺️ Zaplanuj zwiedzanie</p>
+
+</header>
+
+
+<div class="container">
+
+
+  <div class="card">
+
+    <div class="tools">
+
+      <button class="small-button"
+              onclick="zaznaczWszystkie()">
+        ☑ ZAZNACZ WSZYSTKIE
+      </button>
+
+      <button class="small-button"
+              onclick="wyczyscWszystkie()">
+        ☐ WYCZYŚĆ
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div id="grupy"></div>
+
+
+  <div class="selected-info">
+
+    Wybrano podgrup:
+    <strong id="licznik">0</strong>
+
+  </div>
+
+
+  <button class="main-button"
+          onclick="pokazAtrakcje()">
+
+    🔎 POKAŻ ATRAKCJE
+
+  </button>
+
+
+  <div id="wyniki"></div>
+
+
+</div>
+
+
+<!-- =====================================================
+     NAJPIERW ŁADUJEMY BAZĘ ATRAKCJI
+     ===================================================== -->
+
+<script src="atrakcje.js"></script>
+
+
+<script>
+
+/* =====================================================
+   WYŚWIETLENIE GRUP GŁÓWNYCH I PODGRUP
+   ===================================================== */
+
+const kontenerGrup = document.getElementById("grupy");
+
+
+grupyAtrakcji.forEach(function(grupa) {
+
+  const grupaElement = document.createElement("div");
+
+  grupaElement.className = "card group";
+
+
+  let podgrupyHTML = "";
+
+
+  grupa.podgrupy.forEach(function(podgrupa) {
+
+    podgrupyHTML += `
+
+      <label class="subgroup">
+
+        <input
+          type="checkbox"
+          class="podgrupa-checkbox"
+          value="${podgrupa.id}"
+          onchange="aktualizujLicznik()"
+        >
+
+        <span class="subgroup-icon">
+          ${podgrupa.ikona}
+        </span>
+
+        <span class="subgroup-name">
+          ${podgrupa.nazwa}
+        </span>
+
+      </label>
+
+    `;
+
+  });
+
+
+  grupaElement.innerHTML = `
+
+    <button
+      class="group-header"
+      onclick="otworzGrupe(this)"
+    >
+
+      <span class="group-title">
+
+        <span>${grupa.ikona}</span>
+
+        <span>${grupa.nazwa}</span>
+
+      </span>
+
+      <span class="arrow">▼</span>
+
+    </button>
+
+
+    <div class="subgroups">
+
+      ${podgrupyHTML}
+
+    </div>
+
+  `;
+
+
+  kontenerGrup.appendChild(grupaElement);
+
+});
+
+
+/* =====================================================
+   OTWIERANIE GRUPY
+   ===================================================== */
+
+function otworzGrupe(button) {
+
+  const grupa = button.parentElement;
+
+  grupa.classList.toggle("open");
+
+}
+
+
+/* =====================================================
+   LICZNIK ZAZNACZONYCH PODGRUP
+   ===================================================== */
+
+function aktualizujLicznik() {
+
+  const zaznaczone =
+    document.querySelectorAll(
+      ".podgrupa-checkbox:checked"
+    );
+
+  document.getElementById("licznik").textContent =
+    zaznaczone.length;
+
+}
+
+
+/* =====================================================
+   ZAZNACZ WSZYSTKIE
+   ===================================================== */
+
+function zaznaczWszystkie() {
+
+  document
+    .querySelectorAll(".podgrupa-checkbox")
+    .forEach(function(checkbox) {
+
+      checkbox.checked = true;
+
+    });
+
+  aktualizujLicznik();
+
+}
+
+
+/* =====================================================
+   WYCZYŚĆ
+   ===================================================== */
+
+function wyczyscWszystkie() {
+
+  document
+    .querySelectorAll(".podgrupa-checkbox")
+    .forEach(function(checkbox) {
+
+      checkbox.checked = false;
+
+    });
+
+  aktualizujLicznik();
+
+}
+
+
+/* =====================================================
+   POKAŻ ATRAKCJE
+   ===================================================== */
+
+function pokazAtrakcje() {
+
+  const zaznaczone = Array.from(
+
+    document.querySelectorAll(
+      ".podgrupa-checkbox:checked"
+    )
+
+  ).map(function(checkbox) {
+
+    return checkbox.value;
+
+  });
+
+
+  const wyniki =
+    document.getElementById("wyniki");
+
+
+  if (zaznaczone.length === 0) {
+
+    wyniki.innerHTML = `
+
+      <div class="empty">
+
+        ☝ Najpierw zaznacz przynajmniej
+        jedną podgrupę atrakcji.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const znalezione = atrakcje.filter(function(atrakcja) {
+
+    return zaznaczone.includes(
+      atrakcja.podgrupa
+    );
+
+  });
+
+
+  if (znalezione.length === 0) {
+
+    wyniki.innerHTML = `
+
+      <div class="empty">
+
+        🔎 Nie znaleziono jeszcze konkretnych
+        atrakcji w wybranych podgrupach.
+
+        <br><br>
+
+        Baza będzie sukcesywnie uzupełniana.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  wyniki.innerHTML = "";
+
+
+  znalezione.forEach(function(atrakcja) {
+
+    const karta =
+      document.createElement("div");
+
+    karta.className = "wynik";
+
+
+    karta.innerHTML = `
+
+      <h3>
+        ${atrakcja.ikona}
+        ${atrakcja.nazwa}
+      </h3>
+
+      <p>
+        ${atrakcja.opisPelny}
+      </p>
+
+      <div class="meta">
+
+        ⭐ Ocena: ${atrakcja.ocena}<br>
+
+        ⏱️ Czas: ${atrakcja.czasZwiedzania} min<br>
+
+        💰 Cena: ${atrakcja.cena} zł<br>
+
+        💳 Budżet: ${atrakcja.budzet}<br>
+
+        👨‍👩‍👧 Wiek: ${atrakcja.wiekOd}+<br>
+
+        📍 ${atrakcja.miasto}, ${atrakcja.kraj}
+
+      </div>
+
+
+      <button
+        class="add-button"
+        id="button-${atrakcja.id}"
+        onclick="dodajDoPlanu('${atrakcja.id}')"
+      >
+
+        ➕ DODAJ DO MOJEGO PLANU
+
+      </button>
+
+    `;
+
+
+    wyniki.appendChild(karta);
+
+  });
+
+
+  uzupelnijStatusDodanych();
+
+}
+
+
+/* =====================================================
+   DODAJ DO MOJEGO PLANU
+   ===================================================== */
+
+function dodajDoPlanu(id) {
+
+  const atrakcja =
+    atrakcje.find(function(item) {
+
+      return item.id === id;
+
+    });
+
+
+  if (!atrakcja) {
+    return;
+  }
+
+
+  let mojPlan =
+    JSON.parse(
+      localStorage.getItem("turystago_moj_plan")
+    ) || [];
+
+
+  const juzJest =
+    mojPlan.some(function(item) {
+
+      return item.id === id;
+
+    });
+
+
+  if (juzJest) {
+
+    alert(
+      "Ta atrakcja jest już w Twoim planie."
+    );
+
+    return;
+
+  }
+
+
+  mojPlan.push(atrakcja);
+
+
+  localStorage.setItem(
+    "turystago_moj_plan",
+    JSON.stringify(mojPlan)
+  );
+
+
+  const button =
+    document.getElementById(
+      "button-" + id
+    );
+
+
+  if (button) {
+
+    button.textContent =
+      "✓ DODANO DO MOJEGO PLANU";
+
+    button.classList.add("dodano");
+
+  }
+
+}
+
+
+/* =====================================================
+   ODTWORZENIE STATUSU DODANYCH ATRAKCJI
+   ===================================================== */
+
+function uzupelnijStatusDodanych() {
+
+  const mojPlan =
+    JSON.parse(
+      localStorage.getItem("turystago_moj_plan")
+    ) || [];
+
+
+  mojPlan.forEach(function(atrakcja) {
+
+    const button =
+      document.getElementById(
+        "button-" + atrakcja.id
+      );
+
+
+    if (button) {
+
+      button.textContent =
+        "✓ DODANO DO MOJEGO PLANU";
+
+      button.classList.add("dodano");
+
+    }
+
+  });
+
+}
+
+</script>
+
+
+</body>
+</html>
