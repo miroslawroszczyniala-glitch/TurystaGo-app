@@ -1,1 +1,16 @@
-
+Kolejność pracy
+Nie zaczynałbym teraz od pisania kolejnych przypadkowych plików HTML.
+Etap 1 — struktura projektu ← jesteśmy tutaj
+Etap 2 — wspólny style.css
+Etap 3 — wspólne elementy aplikacji: nagłówek, logo, stopka, przyciski, nawigacja
+Etap 4 — wspólne dane: państwa, miasta, atrakcje, kategorie
+Etap 5 — index.html
+Etap 6 — planowanie podróży
+Etap 7 — Mój plan / Moje plany
+Etap 8 — mapa + darmowy GPS
+Etap 9 — atrakcje i „Odkryj po drodze”
+Etap 10 — profil, grupy, album, SOS
+Etap 11 — Ślady przodków
+Etap 12 — abonamenty i płatności
+Etap 13 — panel administratora
+Etap 14 — test całej aplikacji
