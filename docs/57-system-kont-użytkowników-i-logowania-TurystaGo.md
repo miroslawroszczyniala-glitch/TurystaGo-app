@@ -41,3 +41,22 @@
 20. Rozwój systemu kont – rozwiązanie powinno umożliwiać dodawanie kolejnych rodzajów kont i funkcji wraz z rozwojem TurystaGo.
 
 Cel modułu: zapewnienie użytkownikowi własnego, bezpiecznego miejsca w TurystaGo, w którym przechowywane są jego trasy, ulubione miejsca, historia zwiedzania, zdjęcia oraz ustawienia aplikacji.
+# 13. Powiązanie z punktem 57
+
+Punkt 57 – System kont użytkowników i logowania powinien uwzględniać:
+
+```text
+KONTO
+│
+├── PODRÓŻNIK
+│
+├── ORGANIZATOR
+│
+└── ADMINISTRATOR
+      │
+      ├── pełny dostęp
+      │
+      └── ograniczone uprawnienia
+```
+
+Typ konta i uprawnienia powinny być przechowywane w systemie kont użytkowników.
