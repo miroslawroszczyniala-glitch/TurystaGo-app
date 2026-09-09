@@ -61,3 +61,55 @@
 30. Zasada porządku – każdy moduł powinien mieć jasno określone zadanie, aby w przyszłości łatwo można było znaleźć, zmienić lub rozbudować konkretną funkcję.
 
 Cel modułu: stworzenie uporządkowanej struktury technicznej TurystaGo, która pozwoli nam stopniowo przechodzić od dokumentacji do rzeczywistego kodu aplikacji.
+# 14. Powiązanie z punktem 63
+
+Struktura aplikacji powinna uwzględniać oddzielny moduł administracyjny:
+
+```text
+TurystaGo/
+│
+├── index.html
+│
+├── admin/
+│   ├── index.html
+│   ├── dashboard.html
+│   ├── users.html
+│   ├── attractions.html
+│   ├── categories.html
+│   ├── countries.html
+│   ├── cities.html
+│   ├── reports.html
+│   ├── reviews.html
+│   ├── subscriptions.html
+│   ├── statistics.html
+│   ├── notifications.html
+│   ├── languages.html
+│   ├── settings.html
+│   └── logs.html
+│
+├── admin/
+│   ├── css/
+│   │   └── admin.css
+│   │
+│   └── js/
+│       ├── admin.js
+│       ├── auth.js
+│       ├── users.js
+│       ├── attractions.js
+│       ├── reports.js
+│       ├── reviews.js
+│       └── statistics.js
+│
+├── src/
+├── components/
+├── screens/
+├── services/
+├── data/
+├── assets/
+├── audio/
+├── css/
+├── tests/
+└── docs/
+```
+
+Docelowa struktura może zostać jeszcze doprecyzowana podczas projektowania backendu i bazy danych.
