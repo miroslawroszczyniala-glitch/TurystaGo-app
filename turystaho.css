@@ -1,0 +1,554 @@
+<style>
+
+/* =========================================
+   PODSTAWOWE
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: #111;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* =========================================
+   GŁÓWNA APLIKACJA
+   ========================================= */
+
+.app {
+
+    position: relative;
+
+    width: min(100vw, 430px);
+
+    height: 100vh;
+
+    max-height: 920px;
+
+    overflow: hidden;
+
+    background: white;
+}
+
+
+/* =========================================
+   ORYGINALNA STRONA STARTOWA
+   ========================================= */
+
+.start-image {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: fill;
+
+    z-index: 1;
+}
+
+
+/* =========================================
+   PRZEZROCZYSTE PRZYCISKI
+   ========================================= */
+
+.button {
+
+    position: absolute;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    z-index: 5;
+}
+
+.button:active {
+
+    background:
+        rgba(99,194,11,0.15);
+
+    border-radius: 20px;
+}
+
+
+/* =========================================
+   GÓRNE PRZYCISKI
+   ========================================= */
+
+.menu {
+
+    left: 3%;
+    top: 6%;
+
+    width: 11%;
+    height: 6%;
+}
+
+.notifications {
+
+    right: 3%;
+    top: 6%;
+
+    width: 11%;
+    height: 6%;
+}
+
+
+/* =========================================
+   ROZPOCZNIJ
+   ========================================= */
+
+.start {
+
+    left: 4%;
+    top: 37.5%;
+
+    width: 92%;
+    height: 8%;
+}
+
+
+/* =========================================
+   KAFELKI
+   ========================================= */
+
+.plan {
+
+    left: 4%;
+    top: 46%;
+
+    width: 22%;
+    height: 11.5%;
+}
+
+.attractions {
+
+    left: 27%;
+    top: 46%;
+
+    width: 22%;
+    height: 11.5%;
+}
+
+.audio {
+
+    left: 50%;
+    top: 46%;
+
+    width: 22%;
+    height: 11.5%;
+}
+
+.sos {
+
+    left: 73%;
+    top: 46%;
+
+    width: 23%;
+    height: 11.5%;
+}
+
+
+.groups {
+
+    left: 4%;
+    top: 58%;
+
+    width: 22%;
+    height: 11.5%;
+}
+
+.album {
+
+    left: 27%;
+    top: 58%;
+
+    width: 22%;
+    height: 11.5%;
+}
+
+.recommend {
+
+    left: 50%;
+    top: 58%;
+
+    width: 22%;
+    height: 11.5%;
+}
+
+.more {
+
+    left: 73%;
+    top: 58%;
+
+    width: 23%;
+    height: 11.5%;
+}
+
+
+/* =========================================
+   DALSZE ELEMENTY
+   ========================================= */
+
+.nearest {
+
+    left: 4%;
+    top: 70.5%;
+
+    width: 92%;
+    height: 11%;
+}
+
+.meeting {
+
+    left: 4%;
+    top: 83%;
+
+    width: 92%;
+    height: 7%;
+}
+
+
+/* =========================================
+   DOLNE MENU
+   ========================================= */
+
+.nav-start {
+
+    left: 0;
+    bottom: 0;
+
+    width: 20%;
+    height: 10%;
+}
+
+.nav-map {
+
+    left: 20%;
+    bottom: 0;
+
+    width: 20%;
+    height: 10%;
+}
+
+.nav-navigate {
+
+    left: 39%;
+    bottom: 0;
+
+    width: 22%;
+    height: 12%;
+}
+
+.nav-favourites {
+
+    left: 60%;
+    bottom: 0;
+
+    width: 20%;
+    height: 10%;
+}
+
+.nav-profile {
+
+    right: 0;
+    bottom: 0;
+
+    width: 20%;
+    height: 10%;
+}
+
+
+/* =========================================
+   EKRANY
+   ========================================= */
+
+.screen {
+
+    display: none;
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 20;
+
+    background: #f7fafb;
+
+    overflow-y: auto;
+}
+
+
+/* =========================================
+   NAGŁÓWEK EKRANU
+   ========================================= */
+
+.screen-header {
+
+    height: 82px;
+
+    background: white;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 15px;
+
+    box-shadow:
+        0 2px 10px rgba(0,0,0,0.15);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 10;
+}
+
+.back {
+
+    border: none;
+
+    background: none;
+
+    font-size: 40px;
+
+    width: 50px;
+
+    cursor: pointer;
+
+    color: #10233e;
+}
+
+.screen-title {
+
+    font-size: 21px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   TREŚĆ
+   ========================================= */
+
+.screen-content {
+
+    padding: 20px;
+}
+
+.card {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 18px;
+
+    margin-bottom: 15px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,0.12);
+}
+
+.card h2 {
+
+    margin-top: 0;
+
+    color: #4d9e10;
+}
+
+.card p {
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   PRZYCISKI
+   ========================================= */
+
+.action {
+
+    width: 100%;
+
+    padding: 15px;
+
+    margin-top: 10px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: #63c20b;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   EKRAN PLANU
+   ========================================= */
+
+#plan-screen {
+
+    background: #f7fbff;
+}
+
+
+/* =========================================
+   EKRAN MAPY
+   ========================================= */
+
+#map-screen {
+
+    background: #f7fafb;
+}
+
+#tourist-map {
+
+    width: 100%;
+
+    height: 55vh;
+
+    min-height: 350px;
+}
+
+.route-information {
+
+    padding: 18px;
+
+    background: white;
+}
+
+.route-information h3 {
+
+    margin-top: 0;
+
+    color: #176b87;
+}
+
+.route-information li {
+
+    padding: 7px 0;
+}
+
+.tourist-button {
+
+    width: 100%;
+
+    border: none;
+
+    border-radius: 14px;
+
+    padding: 15px;
+
+    margin-top: 10px;
+
+    background: #249447;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.map-back {
+
+    border: none;
+
+    background: white;
+
+    color: #176b87;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    padding: 10px 15px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   MAPA – NAGŁÓWEK
+   ========================================= */
+
+.map-header {
+
+    height: 65px;
+
+    background: white;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 10px;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.12);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+}
+
+.map-header h2 {
+
+    margin: 0;
+
+    font-size: 19px;
+
+    color: #176b87;
+}
+
+
+/* =========================================
+   STATUS GPS
+   ========================================= */
+
+.gps-status {
+
+    padding: 14px;
+
+    background: #eaf7df;
+
+    color: #43870a;
+
+    border-radius: 12px;
+
+    font-weight: bold;
+}
+
+</style>
